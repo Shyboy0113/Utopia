@@ -8,15 +8,21 @@ public class Draw_Circle : MonoBehaviour
     int width = 1920; // Set the desired width.
     int height = 1080; // Set the desired height.
 
+    int pixel_correction = 1; //캔버스 크기의 배율. 값이 높을수록 크기가 작아진다
+
     Texture2D texture;
 
     Vector2 previousMousePosition = Vector2.zero;
 
     void Start()
     {
+        width /= pixel_correction;
+        height /= pixel_correction;
+
         texture = new Texture2D(width, height);
         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), Vector2.one * 0.5f);
         GetComponent<SpriteRenderer>().sprite = sprite;
+
     }
 
     // Update is called once per frame
@@ -26,7 +32,13 @@ public class Draw_Circle : MonoBehaviour
         {
             Draw();
         }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveTextureAsPNG();
+        }
     }
+    
+
     void DrawLine(int x0, int y0, int x1, int y1, Color color)
     {
         int dx = Mathf.Abs(x1 - x0);
