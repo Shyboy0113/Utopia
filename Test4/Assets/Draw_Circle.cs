@@ -5,22 +5,25 @@ using System.IO; //save파일 저장
 
 public class Draw_Circle : MonoBehaviour
 {
-    int width = 1920; // Set the desired width.
-    int height = 1080; // Set the desired height.
+    int screenWidth = 1920; // Set the desired width.
+    int screenHeight = 1080; // Set the desired height.
 
-    int pixel_correction = 1; //캔버스 크기의 배율. 값이 높을수록 크기가 작아진다
+    int canvasWidth;
+    int canvasHeight;
+    
+    int pixel_correction = 4; //캔버스 크기의 배율. 값이 높을수록 크기가 작아진다
 
     Texture2D texture;
 
-    Vector2 previousMousePosition = Vector2.zero;
+    Vector2 previousMousePosition;
 
     void Start()
     {
-        width /= pixel_correction;
-        height /= pixel_correction;
+        canvasWidth = screenWidth / pixel_correction;
+        canvasHeight = screenHeight / pixel_correction;
 
-        texture = new Texture2D(width, height);
-        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), Vector2.one * 0.5f);
+        texture = new Texture2D(canvasWidth, canvasHeight);
+        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, canvasWidth, canvasHeight), Vector2.one * 0.5f);
         GetComponent<SpriteRenderer>().sprite = sprite;
 
     }
@@ -28,6 +31,11 @@ public class Draw_Circle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(GetCanvasMousePosition());
+        if (Input.GetMouseButtonDown(0))
+        {
+            previousMousePosition = GetCanvasMousePosition();
+        }
         if (Input.GetMouseButton(0))
         {
             Draw();
@@ -70,8 +78,8 @@ public class Draw_Circle : MonoBehaviour
 
     void Draw()
     {
-        Vector2 mousePosition = Input.mousePosition;
-        int x = (int)mousePosition.x;
+        Vector2 mousePosition = GetCanvasMousePosition();
+        int x =(int)mousePosition.x;
         int y = (int)mousePosition.y;
 
         // Adjust the x and y values based on the desired drawing area, if needed.
@@ -113,4 +121,21 @@ public class Draw_Circle : MonoBehaviour
         Debug.Log("Magic circle saved as PNG: " + fileName);
     }
 
+    /// <summary>
+    /// 마우스 좌표를 캔버스에 최적화 하여 Vector2로 반환합니다.
+    /// </summary>
+    /// <returns></returns>
+    Vector2 GetCanvasMousePosition()
+    {
+        var originalPosition = Input.mousePosition;
+
+        int startX = (screenWidth - canvasWidth) / 2;
+        int startY = (screenHeight - canvasHeight) / 2;
+
+        var result = new Vector2(originalPosition.x - startX, originalPosition.y - startY);
+        result.x = Mathf.Clamp(result.x, 0, canvasWidth);
+        result.y = Mathf.Clamp(result.y, 0, canvasHeight);
+
+        return result;
+    }
 }
