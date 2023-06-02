@@ -5,6 +5,7 @@ using System.IO; //save파일 저장
 
 public class Draw_Circle : MonoBehaviour
 {
+
     int screenWidth = 1920; // Set the desired width.
     int screenHeight = 1080; // Set the desired height.
 
