@@ -13,6 +13,7 @@ public class Move_Shadow : MonoBehaviour
 
         // Set the boss's position
         transform.position = oppositePosition;
+        Debug.Log("그림자 이동 완료");
     }
 
     private Vector3 CalculateOppositePosition()
