@@ -13,11 +13,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             lock (lockObject)
             {
-                if (_instance == null)
+                if (!_instance)
                 {
                     _instance = FindObjectOfType<T>();
 
-                    if (_instance == null)
+                    if (!_instance)
                     {
                         GameObject singletonObject = new GameObject(typeof(T).Name);
                         _instance = singletonObject.AddComponent<T>();

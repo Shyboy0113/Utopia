@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public int Melancholy_value;
-    public int Good_value;
-    public int Evil_value;
+    public float Melancholy_value;
+    public float Good_value;
+    public float Evil_value;
 
-    public int Hp_value;
-    public int Mp_value;
+    public float Hp_value;
+    public float Mp_value;
     
     void Awake()
     {
