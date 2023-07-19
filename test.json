@@ -1,0 +1,17 @@
+{
+  
+  "name": "Oz",
+  "gender" : "Female",
+  "age" : 20,
+  "skills" : [
+    
+    "fire",
+    "ice",
+    "ground",
+    "flower",
+    "dark",
+    "light"
+    
+  ]
+  
+}
