@@ -12,7 +12,7 @@ public class Move : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
