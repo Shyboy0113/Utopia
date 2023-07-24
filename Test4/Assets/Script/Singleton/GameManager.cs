@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -14,8 +15,27 @@ public class GameManager : Singleton<GameManager>
         score = 0;
     }
 
-    public void IncreaseScore(int points)
+    public void ResumeGame()
     {
-        score += points;
+        
     }
+    
+    
+    public void RestartGame()
+    {
+        
+    }
+
+    public void GotoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    
+    
+    
 }

@@ -6,7 +6,7 @@ public class Move_Shadow : MonoBehaviour
 {
     public Transform character; // Reference to the character's transform
 
-    private void FixedUpdate()
+    private void Update()
     {
         // Calculate the position for the boss
         Vector3 oppositePosition = CalculateOppositePosition();
