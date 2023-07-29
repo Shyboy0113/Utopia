@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponInventoryManager : Singleton<WeaponInventoryManager>
+public class InventoryManager : Singleton<InventoryManager>
 {
-    public List<WeaponData> weaponInventory = new List<WeaponData>();
+    public List<Weapon> weaponInventory = new List<Weapon>();
     private int currentWeaponIndex = 0;
     
     // Add methods for adding, removing, or checking weapons in the inventory
     // For simplicity, we'll just implement a basic method to add a weapon for this example:
-    public void AddWeaponToInventory(WeaponData weapon)
+    public void AddWeaponToInventory(WeaponData weaponData)
     {
-        weaponInventory.Add(weapon);
+        Weapon newWeapon = new GameObject("NewWeapon").AddComponent<Weapon>();
+        newWeapon.weaponData = weaponData;
+        
+        newWeapon.InitializeWeaponDurability();
+        weaponInventory.Add(newWeapon);
     }
     
-    public void RemoveWeaponFromInventory(WeaponData weapon)
+    public void RemoveWeaponFromInventory(Weapon weapon)
     {
         weaponInventory.Remove(weapon);
     }
     
-    public WeaponData GetCurrentWeapon()
+    public Weapon GetCurrentWeapon()
     {
         // Check if the currentWeaponIndex is within the bounds of the weaponInventory
         if (currentWeaponIndex >= 0 && currentWeaponIndex < weaponInventory.Count)

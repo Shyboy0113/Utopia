@@ -12,12 +12,14 @@ public class PlayerShooting : MonoBehaviour
     
     public GameObject bulletPrefab; // Reference to the bullet prefab
 
-    private WeaponInventoryManager inventoryManager;
-    private WeaponData currentWeapon; // Store the currently equipped weapon
-
+    private InventoryManager inventoryManager;
+    private Weapon currentWeapon; // Store the currently equipped weapon
+    private WeaponData currentWeaponData;
+    
     private void Start()
     {
-        inventoryManager = WeaponInventoryManager.Instance;
+        inventoryManager = InventoryManager.Instance;
+        currentWeaponData = currentWeapon.GetComponent<WeaponData>();
     }
 
     private void Update()
@@ -69,7 +71,7 @@ public class PlayerShooting : MonoBehaviour
         rigid_bullet.AddForce(Vector3.right*10,ForceMode2D.Impulse);
         
         Bullet bulletScript = _bullet.GetComponent<Bullet>();
-        bulletScript.SetBulletProperties(currentWeapon.attackPower, currentWeapon.attribute);
+        bulletScript.SetBulletProperties(currentWeaponData.attackPower, currentWeaponData.attribute);
         
         
         Destroy(_bullet,2f);
