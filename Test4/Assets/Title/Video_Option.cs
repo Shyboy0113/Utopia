@@ -1,32 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Video_Option : MonoBehaviour
 {
     public GameObject videoOptionsPanel;
-    [SerializeField] private Dropdown resolutionDropdown;
-    [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown windowModeDropdown; // New Dropdown for window mode selection
 
     private Resolution[] resolutions;
     private Resolution selectedResolution;
-    private bool isFullScreen;
-
+    
     private void Start()
     {
         videoOptionsPanel.SetActive(false); // Hide the video options panel on start
-        LoadPlayerPrefs();
+        InitializeResolution();
         InitializeResolutionDropdown();
     }
 
-    private void LoadPlayerPrefs()
+    private void Update()
     {
-        isFullScreen = (PlayerPrefs.GetInt("FullScreen", 1) == 1);
-        Screen.fullScreen = isFullScreen;
-        fullscreenToggle.isOn = isFullScreen;
+        if (Input.GetKeyDown(KeyCode.Escape)) CloseVideoOptions();
     }
 
+    public void InitializeResolution() // https://giseung.tistory.com/19
+    {
+        int setWidth = 1920; // 사용자 설정 너비
+        int setHeight = 1080; // 사용자 설정 높이
+
+        int deviceWidth = Screen.width; // 기기 너비 저장
+        int deviceHeight = Screen.height; // 기기 높이 저장
+
+        Screen.SetResolution(setWidth, (int)(((float)deviceHeight / deviceWidth) * setWidth), Screen.fullScreenMode); // SetResolution 함수 제대로 사용하기
+
+        if ((float)setWidth / setHeight < (float)deviceWidth / deviceHeight) // 기기의 해상도 비가 더 큰 경우
+        {
+            float newWidth = ((float)setWidth / setHeight) / ((float)deviceWidth / deviceHeight); // 새로운 너비
+            Camera.main.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f); // 새로운 Rect 적용
+        }
+        else // 게임의 해상도 비가 더 큰 경우
+        {
+            float newHeight = ((float)deviceWidth / deviceHeight) / ((float)setWidth / setHeight); // 새로운 높이
+            Camera.main.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight); // 새로운 Rect 적용
+        }
+    }
+    
     private void InitializeResolutionDropdown()
     {
         resolutions = Screen.resolutions;
@@ -55,22 +76,31 @@ public class Video_Option : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
-
-        selectedResolution = Screen.currentResolution;
     }
+    public void SetFullScreen(int screenIndex)
+    {
+        switch (screenIndex)
+        {
+            case 0: //창모드
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+            case 1: //테두리 없음
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 2: // 전체화면
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
 
-    public void SetResolution(int resolutionIndex)
+        }
+
+        windowModeDropdown.value = screenIndex;
+        windowModeDropdown.RefreshShownValue();
+    }
+    public void Set_NewResolution(int resolutionIndex)
     {
         selectedResolution = resolutions[resolutionIndex];
+        Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreenMode);
     }
-
-    public void SetFullScreen(bool isFullScreen)
-    {
-        this.isFullScreen = isFullScreen;
-        Screen.fullScreen = isFullScreen;
-        PlayerPrefs.SetInt("FullScreen", isFullScreen ? 1 : 0);
-    }
-
     public void OpenVideoOptions()
     {
         videoOptionsPanel.SetActive(true);
@@ -81,31 +111,4 @@ public class Video_Option : MonoBehaviour
         videoOptionsPanel.SetActive(false);
     }
 
-
-    public void CancelResolutionChange()
-    {
-        CloseVideoOptions();
-        // Optionally, you can reset the dropdown selection to match the current resolution if the user cancels.
-    }
-
-    public void ApplyResolutionChange()
-    {
-        if (SelectedResolutionDiffersFromCurrent())
-        {
-            ApplySelectedResolution();
-        }
-
-        CloseVideoOptions();
-    }
-    
-    private bool SelectedResolutionDiffersFromCurrent()
-    {
-        return selectedResolution.width != Screen.currentResolution.width ||
-               selectedResolution.height != Screen.currentResolution.height;
-    }
-
-    private void ApplySelectedResolution()
-    {
-        Screen.SetResolution(selectedResolution.width, selectedResolution.height, isFullScreen);
-    }
 }
