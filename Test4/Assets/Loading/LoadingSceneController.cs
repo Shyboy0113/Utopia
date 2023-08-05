@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class LoadingSceneController : Singleton<LoadingSceneController>
 {
     private static string targetScene;
-
+    public float minimumDelay = 2f;
     [SerializeField] private Image progressBar;
 
     private void Start()
@@ -44,20 +44,14 @@ public class LoadingSceneController : Singleton<LoadingSceneController>
         {
             yield return null;
 
-            if (op.progress < 0.9f)
-            {
-                progressBar.fillAmount = op.progress;
-            }
-            else
-            {
                 timer += Time.unscaledDeltaTime;
-                progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
-                if (progressBar.fillAmount >= 2f)
+                progressBar.fillAmount = Mathf.Lerp(0f, 1f, timer/minimumDelay);
+                if (progressBar.fillAmount >= 1f)
                 {
                     op.allowSceneActivation = true;
                     yield break;
                 }
-            }
+            
         }
 
     }
