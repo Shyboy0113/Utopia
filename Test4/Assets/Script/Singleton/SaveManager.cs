@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Net;
+using PixelCrushers.DialogueSystem;
 
 /*
    a) 저장하는 방법    
@@ -16,6 +19,12 @@ using System.IO;
    
    */
 
+[System.Serializable]
+public class DialogueData
+{
+    public string save;
+}
+
 public class PlayerData
 {
     public string name;
@@ -28,31 +37,60 @@ public class PlayerData
 
 public class SaveManager : Singleton<SaveManager>
 {
+    public DialogueData dialogueData = new DialogueData();
+
     private PlayerData _PlayerData = new PlayerData();
+    
+    private string path;
     private string filename = "save.json";
 
-    [ContextMenu("Save")]
-    public void SaveData()
-        {
-            // '+'를 사용해도 되지만, 컴퓨터마다 +가 기능을 하지 않을 수 있으므로 안전하게 Combine을 사용함.
-            string path = Path.Combine(Application.dataPath, filename);
-            
-            //true : 사람이 보기 편한 형태로 저장.
-            string saveData = JsonUtility.ToJson(_PlayerData,true);
-            File.WriteAllText(path, saveData);
+    private void Start()
+    {
+        //Start 함수에 안적으면 non-static 오류가 뜸
+        path = Path.Combine(Application.dataPath, filename);
+    }
 
-        }
+    // '+'를 사용해도 되지만, 컴퓨터마다 +가 기능을 하지 않을 수 있으므로 안전하게 Combine을 사용함.
+    
+
+    [ContextMenu("Save")]
+    public void SaveData() 
+    {
+        dialogueData.save = PersistentDataManager.GetSaveData();
+        string data = JsonUtility.ToJson(dialogueData);
+        File.WriteAllText(path,data);
+            
+        
+        /*
+        //true : 사람이 보기 편한 형태로 저장.
+        string saveData = JsonUtility.ToJson(_PlayerData,true);
+        File.WriteAllText(path, saveData);
+        */
+    }
 
     [ContextMenu("Load")]
     public void LoadData()
-       {
-           // '+'를 사용해도 되지만, 컴퓨터마다 +가 기능을 하지 않을 수 있으므로 안전하게 Combine을 사용함.
-           string path = Path.Combine(Application.dataPath, filename);
-           
-           string loadData = File.ReadAllText(path);
-           _PlayerData = JsonUtility.FromJson<PlayerData>(loadData);
+    {
+        string data = File.ReadAllText(path);
+        dialogueData = JsonUtility.FromJson<DialogueData>(data);
+        PersistentDataManager.ApplySaveData(dialogueData.save);
 
-       }
+        /*
+        string loadData = File.ReadAllText(path);
+        _PlayerData = JsonUtility.FromJson<PlayerData>(loadData);
+        */
+    }
 
+    private void onEnable()
+    {
+        Lua.RegisterFunction("Save",this,SymbolExtensions.GetMethodInfo(()=>SaveData()));
+        Lua.RegisterFunction("Load",this,SymbolExtensions.GetMethodInfo(()=>LoadData()));
+    }
+    
+    private void onDisable()
+    {
+        Lua.UnregisterFunction("Save");
+        Lua.UnregisterFunction("Load");
+    }
         
 }

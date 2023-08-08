@@ -690,6 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d713999643e26d040b5d92e884b53494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumDelay: 2
   progressBar: {fileID: 215702629}
 --- !u!4 &2114184958
 Transform:

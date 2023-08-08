@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class LoadingSceneController : Singleton<LoadingSceneController>
 {
     private static string targetScene;
+    //로딩 딜레이 최소시간
     public float minimumDelay = 2f;
     [SerializeField] private Image progressBar;
 
