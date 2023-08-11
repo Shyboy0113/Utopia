@@ -1,0 +1,51 @@
+Dialogue System Addon for OpenAI
+Copyright © Pixel Crushers
+RELEASE NOTES
+-------------
+
+Version 1.0.5:
+[August 2, 2023]
+- Context now supports Actor Knowledge & Goals fields in addition to Description.
+- Can now incorporate Location Descriptions in context.
+- RuntimeAIConversation.StartFreeformTextInputConversation() now sends OnConversationStart message.
+- DialogueSmith uses new UnityWebRequest.PostWwwForm() in Unity 2022+.
+
+
+Version 1.0.4:
+[June 13, 2023]
+- Changed: Requires Dialogue System 2.2.38+.
+- Added: GPT-3.5 Turbo 16K support.
+- Added: Whisper (OpenAI speech to text transcription) support.
+- Added: Dialogue Smith integration.
+- Added: Runtime Choose-Your-Own-Adventure mode, with optional image and voice narration generation.
+- Improved: Added RuntimeAIConversation.freeformTextInputConversationEnded C# event.
+- Improved: Added microphone speech input option to Runtime Demo scene.
+
+
+Version 1.0.3:
+[May 19, 2023]
+- Added: Voice audio generation for runtime conversations.
+- Improved: Freeform text input runtime conversations now generate goodbye line and hide input field when near max tokens.
+- Improved: Handling of errors received from runtime API calls.
+
+
+Version 1.0.2:
+[April 28, 2023]
+- Added: Optional runtime dialogue generation using response menus, freeform text input, or barks.
+- Added: Actor portrait generation using DALL-E.
+- Added: Voiceover speech synthesis using ElevenLabs.
+- Improved: Can now involve any number of actors in generated conversations.
+- Improved: Can now specify an assistant prompt (e.g., "Keep dialogue succint. Make the mood light and fanciful").
+- Improved: Improved editor window text colors in Light skin mode.
+
+
+Version 1.0.1:
+[April 15, 2023]
+- Improved: No longer requires OpenAI for Unity UPM.
+- Improved: Better message history handling for chat models (GPT-3.5 & GPT-4).
+
+
+Version 1.0.0:
+[March 13, 2023]
+- Initial release.
+
