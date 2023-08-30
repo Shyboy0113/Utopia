@@ -52,7 +52,7 @@ namespace PixelCrushers.DialogueSystem.Demo
             originalRotation = transform.localRotation;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Vector3 wantedPosition = target.TransformPoint(0, height, -distance);
 
