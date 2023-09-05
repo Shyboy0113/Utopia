@@ -59,9 +59,12 @@ public class TutorialBossAI : MonoBehaviour
             currentGroggyValue += 0.5f;
 
             isChasing = false;
-            animator.Play("Rat_Groggy");
+            animator.Play("Boss_Groggy");
             
             Invoke("Release_Groggy",currentGroggyValue);
+            
+            //타이머로 구현한 게 아니라 Invoke로 해서 그런듯
+            
             
             if (currentGroggyValue >= groggyThreshold)
             {
@@ -111,7 +114,8 @@ public class TutorialBossAI : MonoBehaviour
     void Release_Groggy()
     {
         Debug.Log("Idle 상태로 돌아옴");
-        animator.Play("Rat_Idle");
+        animator.Play("Boss_Idle");
+        GameObject.Find("Boss").GetComponent<Activate_Gauge>().ResetFillGauge();
         isChasing = true;
     }
     

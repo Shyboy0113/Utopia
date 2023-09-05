@@ -6,7 +6,6 @@ public class ShakeAndDrop : MonoBehaviour
 {
     public float shakeDuration = 3.0f; // 흔들리는 시간
     public float shakeIntensity = 0.01f; // 흔들림 강도
-    public float fallSpeed = 10.0f; // 떨어지는 속도
 
     private bool isShaking = false;
     private Vector3 originalPosition;
@@ -22,8 +21,10 @@ public class ShakeAndDrop : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("충돌했습니다."+ collision);
-     
-        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy")) Destroy(gameObject); 
+
+        if (collision.gameObject.CompareTag("Ground")) Destroy(gameObject, 10);
+            
+        if(collision.gameObject.CompareTag("Enemy")) Destroy(gameObject); 
         
             if (collision.contacts[0].normal.y == -1.0f && !isShaking && _rigidbody.bodyType == RigidbodyType2D.Kinematic)
         {
