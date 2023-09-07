@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,14 +22,18 @@ public class TutorialBossAI : MonoBehaviour
     //Animation
     private Animator animator;
     private bool m_FacingRight = true;
+
+    private void Awake()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;
         
-        // todo : Awake 에서 미리 하는게 안전하지 않나?
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponent<Animator>();
-        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -103,7 +108,7 @@ public class TutorialBossAI : MonoBehaviour
     void Rush()
     {
         isChasing = false;
-
+        animator.Play("Boss_Rush");
         int directionToPlayer = (playerTransform.position.x > transform.position.x ? 1 : -1);
         // 보스가 주인공을 따라가던 것에서 x 값만 사용하여 좌우로 이동하도록 변경
         
