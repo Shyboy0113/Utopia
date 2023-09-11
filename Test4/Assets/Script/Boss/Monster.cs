@@ -9,7 +9,8 @@ public class Monster : MonoBehaviour
         IDLE,
         CHASE,
         ATTACK,
-        DEATH
+        DEATH,
+        GROGGY
     }
     private MonsterStateEnum _state;
 
@@ -29,6 +30,8 @@ public class Monster : MonoBehaviour
             case MonsterStateEnum.ATTACK:
                 break;
             case MonsterStateEnum.DEATH:
+                break;
+            case MonsterStateEnum.GROGGY:
                 break;
             default:
                 break;
