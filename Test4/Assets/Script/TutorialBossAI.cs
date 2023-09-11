@@ -81,7 +81,6 @@ public class TutorialBossAI : MonoBehaviour
             Debug.Log(currentGroggyValue);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && isChasing)
