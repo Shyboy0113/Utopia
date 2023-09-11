@@ -8,9 +8,9 @@ public class RedRat : Monster
         IDLE,
         CHASE,
         CHARGE,
-        DEATH,
+        RUSH,
         GROGGY,
-        RUSH
+        DEATH,
     }
 
     private RedRatStateEnum _currentState;
@@ -35,6 +35,7 @@ public class RedRat : Monster
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -46,6 +47,7 @@ public class RedRat : Monster
     private void Update()
     {
         _state.OnStateUpdate();
+        Debug.Log(_state.ToString());
         
     }
 
@@ -71,9 +73,11 @@ public class RedRat : Monster
             case RedRatStateEnum.RUSH:
                 _state = new RRState_Rush(this);
                 break;
-            case RedRatStateEnum.DEATH:
-                break;
             case RedRatStateEnum.GROGGY:
+                _state = new RRState_Groggy(this);
+                break;
+            case RedRatStateEnum.DEATH:
+                _state = new RRState_Death(this);
                 break;
             default:
                 break;
@@ -99,7 +103,7 @@ public class RedRat : Monster
     
     public bool CanSeePlayer(RedRat _redRat)
     {
-        Debug.Log("[CanSeePlayer] Distance: " + Vector3.Distance(_redRat.transform.position, _playerTransform.position));
+        //Debug.Log("[CanSeePlayer] Distance: " + Vector3.Distance(_redRat.transform.position, _playerTransform.position));
         if (Vector3.Distance(_redRat.transform.position, _playerTransform.position) < 30f)
         {
             return true;
@@ -113,7 +117,7 @@ public class RedRat : Monster
         float dist = _redRat.transform.position.x - _playerTransform.position.x;
         dist = Mathf.Abs(dist);
         
-        Debug.Log("[CanAttackPlayer] Distance: " + dist);
+        //Debug.Log("[CanAttackPlayer] Distance: " + dist);
         if (dist < 5f)
         {
             return true;
@@ -122,4 +126,12 @@ public class RedRat : Monster
         return false;
     }
 
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        //콜라이더의 이름이 Hidden_Trigger_Wall이면서, RedRat(이 스크립트를 갖고있는 개체)의 애니메이션 상태가 "Rush"라면,
+        if (collider.gameObject.name == "Hidden_Trigger Wall" && _currentState == RedRatStateEnum.RUSH)
+        {
+            ChangeState(RedRatStateEnum.GROGGY);
+        }
+    }
 }

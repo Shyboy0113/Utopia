@@ -21,16 +21,17 @@ namespace RedRatStates
             _rat.Flip();
             _rat._rigidbody.velocity = new Vector2(
                 (_rat.m_FacingRight ? 1 : -1) * _rat.chargeSpeed, 0);
-
+            
+            
             if (_rat.CanSeePlayer(_rat) is false)
             {
                 _rat.ChangeState(RedRat.RedRatStateEnum.IDLE);
             }
-
-            if (_rat.CanAttackPlayer(_rat))
+            else if (_rat.CanAttackPlayer(_rat))
             {
                 _rat.ChangeState(RedRat.RedRatStateEnum.CHARGE);
             }
+
         }
     }
 
