@@ -47,10 +47,14 @@ public class RedRat : Monster
     private void Update()
     {
         _state.OnStateUpdate();
-        Debug.Log(_state.ToString());
+        //Debug.Log(_state.ToString());
         
     }
 
+    public RedRatStateEnum GetCurrentEnumState()
+    {
+        return _currentState;
+    }
 
     public void ChangeState(RedRatStateEnum nextState)
     {
@@ -126,12 +130,37 @@ public class RedRat : Monster
         return false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collider)
+    private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log(col.gameObject.name);
+        
+        if (_currentState != RedRatStateEnum.RUSH) return;
+        
+        float bounceForce = 20f;
+        
+        GameObject _gameObject = col.gameObject;
+        
         //콜라이더의 이름이 Hidden_Trigger_Wall이면서, RedRat(이 스크립트를 갖고있는 개체)의 애니메이션 상태가 "Rush"라면,
-        if (collider.gameObject.name == "Hidden_Trigger Wall" && _currentState == RedRatStateEnum.RUSH)
+        if (_gameObject.name == "Hidden_Trigger Wall")
         {
             ChangeState(RedRatStateEnum.GROGGY);
         }
+        
+        else if (_gameObject.CompareTag("Player"))
+        {
+                int directionToPlayer = (_playerTransform.position.x > transform.position.x ? 1 : -1);
+                Vector2 diagonalForce = new Vector2(directionToPlayer, 1).normalized;
+                
+                Rigidbody2D colRigidbody = _gameObject.GetComponent<Rigidbody2D>();
+                
+                if (colRigidbody != null)
+                {
+                    // 튕겨내는 힘을 AddForce 메서드로 적용
+                    colRigidbody.AddForce(diagonalForce * bounceForce, ForceMode2D.Impulse);
+                }
+                
+        }
+
+        
     }
 }
