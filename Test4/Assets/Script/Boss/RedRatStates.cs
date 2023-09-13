@@ -142,6 +142,8 @@ namespace RedRatStates
             t = _rat.currentGroggyValue;
             if (_rat.currentGroggyValue <= 10f) _rat.currentGroggyValue += 0.5f;
             _rat.currentGroggyCount += 1;
+            
+            if(_rat.currentGroggyCount >= 10) _rat.DestroyBlock();
 
         }
          

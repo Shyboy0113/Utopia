@@ -1,8 +1,10 @@
 using System;
 using RedRatStates;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 public class RedRat : Monster
 {
+    public GameObject block; 
     public enum RedRatStateEnum
     {
         IDLE,
@@ -21,6 +23,9 @@ public class RedRat : Monster
     public float chargeSpeed = 2.0f;
     private Transform _playerTransform;
     public Rigidbody2D _rigidbody;
+    
+    //Rush
+    private bool _slowMotion = false;
 
     //Groggy
     public float currentGroggyValue = 3.0f;
@@ -46,6 +51,15 @@ public class RedRat : Monster
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            SlowMotion();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Time.timeScale = 1.0f;
+        }
+
         _state.OnStateUpdate();
         //Debug.Log(_state.ToString());
         
@@ -128,6 +142,39 @@ public class RedRat : Monster
         }
 
         return false;
+    }
+
+    public void DestroyBlock()
+    {
+        if (block is not null)
+        {
+            Invoke("DelayDestroyBlock", 5);
+        }
+    }
+
+    private void DelayDestroyBlock() => Destroy(block);
+
+    private void SlowMotion()
+    {
+        if (_slowMotion is true)
+        {
+            Time.timeScale = 0.3f;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("Player") && _currentState == RedRatStateEnum.RUSH)
+        {
+            _slowMotion = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            Time.timeScale = 1.0f;
+            _slowMotion = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
