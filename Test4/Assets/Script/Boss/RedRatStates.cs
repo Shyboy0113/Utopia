@@ -1,5 +1,9 @@
+using System.Net.Mime;
 using System.Timers;
+using TMPro.Examples;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RedRatStates
 {
@@ -108,27 +112,51 @@ namespace RedRatStates
     public class RRState_Groggy : MonsterBaseState
     {
         private RedRat _rat;
+        
+        //그로기 게이지 바 활성화
+        public Image groggyGauge_Out;
+        public Image groggyGauge;
+        
         public RRState_Groggy(Monster monster) : base(monster)
         {
             _rat = (RedRat)monster;
+            
+            // 이미지를 찾아서 할당(Monobehaviour를 상속받지 않아 생성자에서 진행해야 함)
+            // 처음부터 SetActive(False)인 상태에서는 검색도 못 함
+            groggyGauge_Out = GameObject.Find("Groggy_Gauge_Out").GetComponent<Image>();
+            groggyGauge = GameObject.Find("Groggy_Gauge_In").GetComponent<Image>();
         }
-        
+
         private float t;
         public override void OnStateEnter()
         {
             _rat.animator.Play("Boss_Groggy");
             _rat._rigidbody.velocity = new Vector3(0,0,0);
+
+            //그로기 진행 바 활성화
+            groggyGauge_Out.color = new Color(groggyGauge_Out.color.r, groggyGauge_Out.color.g, groggyGauge_Out.color.b, 1.0f);
+            groggyGauge.color = new Color(groggyGauge.color.r, groggyGauge.color.g, groggyGauge.color.b, 1.0f);
+            groggyGauge.fillAmount = 1;
             
+            //그로기 시간 증가
             t = _rat.currentGroggyValue;
             if (_rat.currentGroggyValue <= 10f) _rat.currentGroggyValue += 0.5f;
             _rat.currentGroggyCount += 1;
 
         }
-        
+         
         public override void OnStateUpdate()
         {
             t -= Time.deltaTime;
+            groggyGauge.fillAmount = t/(_rat.currentGroggyValue-0.5f);
             if(t <= 0) _rat.ChangeState(RedRat.RedRatStateEnum.IDLE);
+        }
+
+        public override void OnStateExit()
+        {
+            groggyGauge.fillAmount = 1;
+            groggyGauge_Out.color = new Color(groggyGauge_Out.color.r, groggyGauge_Out.color.g, groggyGauge_Out.color.b, 0f);
+            groggyGauge.color = new Color(groggyGauge.color.r, groggyGauge.color.g, groggyGauge.color.b, 0f);
         }
     }
     

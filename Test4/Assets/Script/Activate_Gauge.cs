@@ -21,18 +21,29 @@ public class Activate_Gauge : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && BossState.GetCurrentAnimatorStateInfo(0).IsName("Boss_Groggy"))
+        if (BossState.GetCurrentAnimatorStateInfo(0).IsName("Boss_Groggy"))
         {
             isFilling = true;
-            dialogueGauge.gameObject.SetActive(true);
         }
-
+        else
+        {
+            dialogueGauge.gameObject.SetActive(false);
+        }
+        
         if (isFilling) // 대화 키를 누르고 있는지 확인합니다.
         {
-            // 게이지를 채우는 로직을 구현합니다.
-            currentFill += Time.deltaTime / GroggyTime;
-            currentFill = Mathf.Clamp01(currentFill); // 0과 1 사이로 유지
-            dialogueGauge.fillAmount = currentFill;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                currentFill = 0f;
+                dialogueGauge.gameObject.SetActive(true);
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                // 게이지를 채우는 로직을 구현합니다.
+                currentFill += Time.deltaTime / GroggyTime;
+                currentFill = Mathf.Clamp01(currentFill); // 0과 1 사이로 유지
+                dialogueGauge.fillAmount = currentFill;
+            }
 
             // Space 키를 놓으면 게이지 초기화 및 비활성화
             if (Input.GetKeyUp(KeyCode.Space))
@@ -49,11 +60,14 @@ public class Activate_Gauge : MonoBehaviour {
                 currentFill = 0.0f; // 게이지 초기화
             }
         }
+        else
+        {
+            ResetFillGauge();
+        }
     }
 
     public void ResetFillGauge()
     {
-        isFilling = false;
         currentFill = 0.0f; // 게이지 초기화
         dialogueGauge.gameObject.SetActive(false); // 게이지 비활성화
     }

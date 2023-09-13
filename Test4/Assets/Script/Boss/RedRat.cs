@@ -40,8 +40,8 @@ public class RedRat : Monster
 
     private void Start()
     {
-        _currentState = RedRatStateEnum.CHASE;
-        _state = new RRState_Chase(this);
+        _currentState = RedRatStateEnum.IDLE;
+        _state = new RRState_Idle(this);
     }
 
     private void Update()
@@ -136,7 +136,7 @@ public class RedRat : Monster
         
         if (_currentState != RedRatStateEnum.RUSH) return;
         
-        float bounceForce = 20f;
+        float bounceForce = 30f;
         
         GameObject _gameObject = col.gameObject;
         
