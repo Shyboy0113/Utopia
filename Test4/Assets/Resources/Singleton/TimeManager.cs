@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : Singleton<TimeManager>
 {
@@ -22,8 +23,11 @@ public class TimeManager : Singleton<TimeManager>
         AMPM = 1,
         NONE = 2
     }
+
+    public Canvas watch;
+    public Text text;
     
-    //일, 시, 분 (초 단위로는 표현하지 않음)
+    //일, 시
     private int _currentDays;
     public int CurrentDays
     {
@@ -31,20 +35,23 @@ public class TimeManager : Singleton<TimeManager>
         set => _currentDays = value;
             
     }
+
+    //스토리 진행 중엔 시간 측정을 멈춤
+    private bool _isMeasuring;
+    public bool IsMeasuring
+    {
+        get => _isMeasuring;
+        set => _isMeasuring = value;
+    }
     
+    //카운터
     private int _currentHours;
-    private int _currentMinutes;
+    private float _timeCounter;
     
     //enum 상태
     public TimeOfDay currentTimeOfDay;
     public ViewType currentViewType;
     
-    //카운터
-    private float _timeCounter;
-
-    //난이도에 따른 하루 시간(기준 : 초)
-    private float _secondsPerDay; 
-
     private void Awake()
     {
         //TODO: 세이브파일에서 파싱해서 데이터 저장하는 식으로 전부 바꿔줘야 됨.
@@ -53,37 +60,43 @@ public class TimeManager : Singleton<TimeManager>
         
         //TODO: 세이브파일에서 파싱해와서 카운트까지 계산해야 함
         _timeCounter = 0.0f;
+        _currentHours = 0;
         CurrentDays = 0; //이건 프로퍼티라 여기서 넣은 값이 바로 set됨
 
     }
 
     private void Start()
     {
-        // 난이도(분) x 60초 카운트
-        _secondsPerDay = DifficultyManager.Instance.standardOfDay * 60.0f;
-        
+        _isMeasuring = true;
     }
 
     private void Update()
     {
-        //시간 표시 ( 24시간, AM/PM제, 표시 안 함)
-        ViewTime();
-        
-        //시간 측정
-        TimeCount();
-        
+        if (_isMeasuring is true)
+        {
+            //시간 표시 ( 24시간, AM/PM제, 표시 안 함)
+            ViewTime();
+            //시간 측정
+            TimeCount();
+        }
+
     }
     
     private void TimeCount(){
     
         // 시간 업데이트
         _timeCounter += Time.deltaTime;
-        
-        // 시간대 갱신
-        UpdateTimeOfDay();
+        if (_timeCounter >= 60.0f)
+        {
+            _currentHours += 1;
+            _timeCounter = 0;
+            
+            // 시간대 갱신
+            UpdateTimeOfDay();
+        }
         
         // 24시간이 지나면 다음 날로 초기화
-        if (_timeCounter >= _secondsPerDay)
+        if (_currentHours >= 24)
         {
             ChangeDayCount();
         }
@@ -103,10 +116,29 @@ public class TimeManager : Singleton<TimeManager>
         switch (currentViewType)
         {
             case ViewType.HOUR24:
+                // 24시간 형식으로 표시
+                // 예: 12:30
+                
+                text.text = $"{_currentHours} : 00" ;
+                
                 break;
+            
             case ViewType.AMPM:
+                // AM/PM 형식으로 표시
+                // 예: 12:30 AM
+                
+                if (0 <= _currentHours && _currentHours <= 11) text.text = $"AM {_currentHours} : 00";
+                else if (12 == _currentHours) text.text = text.text = $"PM {_currentHours} : 00";
+                else if(13 <=_currentHours && _currentHours <= 23) text.text = $"PM {_currentHours %12} : 00";
+                
                 break;
+            
             case ViewType.NONE:
+                // 표시하지 않음
+                // 예: 12:30
+                
+                text.text = "";
+                
                 break;
         }
     }
@@ -114,6 +146,7 @@ public class TimeManager : Singleton<TimeManager>
     public void ChangeDayCount()
     {
         _currentDays += 1;
+        _currentHours = 0;
         _timeCounter = 0.0f;
     }
 
@@ -151,7 +184,5 @@ public class TimeManager : Singleton<TimeManager>
         _timeCounter = (int)currentTimeOfDay * 60.0f;
         
     }
-
-    
     
 }

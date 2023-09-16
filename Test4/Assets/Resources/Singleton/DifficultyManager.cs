@@ -8,12 +8,10 @@ public class DifficultyManager : Singleton<DifficultyManager>
 {
     public enum Difficulty
     {
-        EASY = 48,
-        NORMAL = 36,
-        HARD = 24
+        EASY,
+        NORMAL,
+        HARD
     }
-    
-    public int standardOfDay;
     
     private Difficulty _currentDifficulty = Difficulty.NORMAL;
     public Difficulty CurrentDifficulty
@@ -22,9 +20,6 @@ public class DifficultyManager : Singleton<DifficultyManager>
         set
         {
             _currentDifficulty = value;
-            
-            //enum을 int로 명시적 형변환
-            standardOfDay = (int)_currentDifficulty;
         }
     }
 
