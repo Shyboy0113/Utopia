@@ -105,10 +105,35 @@ public class TimeManager : Singleton<TimeManager>
     
     private void UpdateTimeOfDay()
     {
-        
         // 시간대를 업데이트하는 로직을 여기에 구현
         // timeCounter를 기반으로 시간대를 설정할 수 있습니다.
         // 예: 일출, 아침, 낮, 저녁, 밤 등에 따라 currentTime 값을 설정
+
+        if (0 <= _currentHours && _currentHours < (int)TimeOfDay.DAWN)
+        {
+            
+        }
+        else if ((int)TimeOfDay.DAWN <= _currentHours && _currentHours < (int)TimeOfDay.MORNING)
+        {
+            
+        }
+        else if ((int)TimeOfDay.MORNING <= _currentHours && _currentHours < (int)TimeOfDay.DAYTIME)
+        {
+            
+        }
+        else if ((int)TimeOfDay.DAYTIME <= _currentHours && _currentHours < (int)TimeOfDay.TWILIGHT)
+        {
+            
+        }
+        else if ((int)TimeOfDay.TWILIGHT <= _currentHours && _currentHours < (int)TimeOfDay.NIGHT)
+        {
+            
+        }
+        else if ((int)TimeOfDay.NIGHT <= _currentHours && _currentHours < 24)
+        {
+            
+        }
+        
     }
 
     public void ViewTime()
@@ -153,6 +178,7 @@ public class TimeManager : Singleton<TimeManager>
     public void ChangeToDawn()
     {
         currentTimeOfDay = TimeOfDay.DAWN;
+        _currentHours = (int)TimeOfDay.DAWN;
         _timeCounter = (int)currentTimeOfDay * 60.0f;
 
     }
@@ -160,6 +186,7 @@ public class TimeManager : Singleton<TimeManager>
     public void ChangeToMorning()
     {
         currentTimeOfDay = TimeOfDay.MORNING;
+        _currentHours = (int)TimeOfDay.MORNING;
         _timeCounter = (int)currentTimeOfDay * 60.0f;
         
     }
@@ -167,6 +194,7 @@ public class TimeManager : Singleton<TimeManager>
     public void ChangeToDaytime()
     {
         currentTimeOfDay = TimeOfDay.DAYTIME;
+        _currentHours = (int)TimeOfDay.DAYTIME;
         _timeCounter = (int)currentTimeOfDay * 60.0f;
         
     }
@@ -174,6 +202,7 @@ public class TimeManager : Singleton<TimeManager>
     public void ChangeToTwilight()
     {
         currentTimeOfDay = TimeOfDay.TWILIGHT;
+        _currentHours = (int)TimeOfDay.TWILIGHT;
         _timeCounter = (int)currentTimeOfDay * 60.0f;
         
     }
@@ -181,6 +210,7 @@ public class TimeManager : Singleton<TimeManager>
     public void ChangeToNight()
     {
         currentTimeOfDay = TimeOfDay.NIGHT;
+        _currentHours = (int)TimeOfDay.NIGHT;
         _timeCounter = (int)currentTimeOfDay * 60.0f;
         
     }
