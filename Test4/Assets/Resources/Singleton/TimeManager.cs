@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ public class TimeManager : Singleton<TimeManager>
     }
 
     public Canvas watch;
-    public Text text;
+    public TextMeshProUGUI text;
     
     //일, 시
     private int _currentDays;

@@ -7,6 +7,8 @@ public class BrakeTheBlock : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("벽돌이 충돌했습니다.");
+        
         if(col.gameObject.name == "Hidden_Trigger Ground")
         {
             Destroy(col.gameObject);
@@ -14,7 +16,7 @@ public class BrakeTheBlock : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Player"))
         {
-            
+            Debug.Log("게임 오버!!");
         }
         else
         {
