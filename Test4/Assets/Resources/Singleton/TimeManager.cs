@@ -25,7 +25,9 @@ public class TimeManager : Singleton<TimeManager>
         NONE = 2
     }
 
-    public Canvas watch;
+    public Canvas Watch;
+    public Image Timer_Inline;
+    public Image Timer_Saliva;
     public TextMeshProUGUI text;
     
     //일, 시
@@ -87,6 +89,14 @@ public class TimeManager : Singleton<TimeManager>
     
         // 시간 업데이트
         _timeCounter += Time.deltaTime;
+
+        float rotationPerHour = 15.0f;
+        
+        float Saliva_Rotate = (_currentHours + (_timeCounter / 60.0f)) * rotationPerHour;
+        Debug.Log(Saliva_Rotate);
+        
+        Timer_Saliva.transform.rotation = Quaternion.Euler(0, 0, (-1) * Saliva_Rotate);
+        
         if (_timeCounter >= 60.0f)
         {
             _currentHours += 1;
@@ -112,27 +122,27 @@ public class TimeManager : Singleton<TimeManager>
 
         if (0 <= _currentHours && _currentHours < (int)TimeOfDay.DAWN)
         {
-            
+            Timer_Inline.color = Color.black;
         }
         else if ((int)TimeOfDay.DAWN <= _currentHours && _currentHours < (int)TimeOfDay.MORNING)
         {
-            
+            Timer_Inline.color = new Color(203, 166, 206);
         }
         else if ((int)TimeOfDay.MORNING <= _currentHours && _currentHours < (int)TimeOfDay.DAYTIME)
         {
-            
+            Timer_Inline.color = Color.yellow;
         }
         else if ((int)TimeOfDay.DAYTIME <= _currentHours && _currentHours < (int)TimeOfDay.TWILIGHT)
         {
-            
+            Timer_Inline.color = new Color(54, 136, 174);
         }
         else if ((int)TimeOfDay.TWILIGHT <= _currentHours && _currentHours < (int)TimeOfDay.NIGHT)
         {
-            
+            Timer_Inline.color = new Color(255, 125, 0);
         }
         else if ((int)TimeOfDay.NIGHT <= _currentHours && _currentHours < 24)
         {
-            
+            Timer_Inline.color = Color.black;
         }
         
     }
