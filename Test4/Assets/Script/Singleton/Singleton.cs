@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /*
@@ -10,8 +11,9 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static readonly object lockObject = new();
-    private static T instance;
+    private static readonly object lockObject = new object();
+    private static T instance = null;
+    private static bool IsQuitting = false;
 
     public static T Instance
     {
@@ -20,6 +22,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             // Thread safe
             lock (lockObject)
             {
+                //비활성화 시, 기존 거를 내버려두고 새로 만듦.
+                if (IsQuitting) return null;
+                
                 // 만약 객체가 저장되지 않았다면,
                 if (instance is null)
                 {
@@ -29,12 +34,19 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     // 못찾았다면 객체 생성이 안 된 것이기 때문에 Resources 폴더에서 Prefab을 가져온다.
                     if (instance is null)
                     {
-                        instance = Instantiate(Resources.Load<T>("Singleton/" + typeof(T)));
+                        instance = GameObject.Instantiate(Resources.Load<T>("Singleton/" + typeof(T).Name));
                     }
                     DontDestroyOnLoad(instance.gameObject);
                 }
             }
+            
             return instance;
         }
+    }
+
+    private void OnDisable()
+    {
+        IsQuitting = true;
+        instance = null;
     }
 }
