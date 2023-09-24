@@ -2,10 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Animations;
 
-public class Move : MonoBehaviour
+
+public class MoveManager : Singleton<MoveManager>
 {
+    
+    //Guard(경계 자세) 이벤트
+    public UnityEvent OnGuardPostureActivated;
+    public UnityEvent OnGuardPostureDeactivated;
+    
+    //캐릭터 이동
     public CharacterController2D controller;
     public Animator animator; // 애니메이터에 대한 참조 추가
     
@@ -23,6 +31,18 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            // Assuming a guard posture
+            OnGuardPostureActivated.Invoke();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            // Exiting guard posture
+            OnGuardPostureDeactivated.Invoke();
+        }
+        
         inputX = Input.GetAxisRaw("Horizontal") * speed;
 
         if (Input.GetButtonDown("Jump")) jump = true;

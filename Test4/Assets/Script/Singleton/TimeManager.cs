@@ -93,7 +93,8 @@ public class TimeManager : Singleton<TimeManager>
         float rotationPerHour = 15.0f;
         
         float Saliva_Rotate = (_currentHours + (_timeCounter / 60.0f)) * rotationPerHour;
-        Debug.Log(Saliva_Rotate);
+        
+        //Debug.Log(Saliva_Rotate);
         
         Timer_Saliva.transform.rotation = Quaternion.Euler(0, 0, (-1) * Saliva_Rotate);
         

@@ -129,7 +129,7 @@ MonoBehaviour:
   Timer_Inline: {fileID: 8020630491005771516}
   Timer_Saliva: {fileID: 8020630490669649045}
   text: {fileID: 8020630490732583501}
-  currentTimeOfDay: 0
+  currentTimeOfDay: 5
   currentViewType: 0
 --- !u!1 &8020630490669649047
 GameObject:
