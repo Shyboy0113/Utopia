@@ -6,12 +6,8 @@ using UnityEngine.Events;
 using UnityEngine.Animations;
 
 
-public class MoveManager : Singleton<MoveManager>
+public class Move : MonoBehaviour
 {
-    
-    //Guard(경계 자세) 이벤트
-    public UnityEvent OnGuardPostureActivated;
-    public UnityEvent OnGuardPostureDeactivated;
     
     //캐릭터 이동
     public CharacterController2D controller;
@@ -35,12 +31,12 @@ public class MoveManager : Singleton<MoveManager>
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             // Assuming a guard posture
-            OnGuardPostureActivated.Invoke();
+            GameManager.Instance.OnGuardPostureActivated.Invoke();
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             // Exiting guard posture
-            OnGuardPostureDeactivated.Invoke();
+            GameManager.Instance.OnGuardPostureDeactivated.Invoke();
         }
         
         inputX = Input.GetAxisRaw("Horizontal") * speed;

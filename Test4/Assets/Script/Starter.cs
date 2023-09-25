@@ -8,8 +8,7 @@ public class Starter : MonoBehaviour
     void Start()
     {
         TimeManager.Instance.ChangeToDawn();
-        UIManager.Instance.ResetAllMenu();
-        
+
     }
 
 }

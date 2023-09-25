@@ -6,10 +6,15 @@ using PixelCrushers.DialogueSystem.UnityGUI.Wrappers;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
     
+    //Guard(경계 자세) 이벤트
+    public UnityEvent OnGuardPostureActivated;
+    public UnityEvent OnGuardPostureDeactivated;
+
     //스토리 및 컷신 연출 중일 때
     public bool isStory = false;
     
@@ -52,14 +57,12 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
-        UIManager.Instance.ResetAllMenu();
+
     }
 
     public void GoToTitle()
     {
         SceneManager.LoadScene("Title");
-        UIManager.Instance.ResetAllMenu();
     }
 
     public void QuitGame()
