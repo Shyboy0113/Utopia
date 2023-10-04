@@ -12,8 +12,7 @@ public class UIManager : Singleton<UIManager>
     
     public float animationDuration = 0.1f;
     public float desiredNarrowedHeight = 100.0f;
-    
-    
+
     
     //코루틴
     private Coroutine narrowCoroutine;
@@ -21,9 +20,10 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         // Subscribe to guard posture events
-        GameManager.Instance.OnGuardPostureActivated.AddListener(NarrowUIPanels);
-        GameManager.Instance.OnGuardPostureDeactivated.AddListener(ExpandUIPanels);
+        //GameManager.Instance.OnGuardPostureActivated.AddListener(NarrowUIPanels);
+        //GameManager.Instance.OnGuardPostureDeactivated.AddListener(ExpandUIPanels);
         
+
     }
     public void ResetAllMenu()
     {

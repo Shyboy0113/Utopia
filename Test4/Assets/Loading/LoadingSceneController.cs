@@ -9,7 +9,7 @@ public class LoadingSceneController : Singleton<LoadingSceneController>
 {
     private static string targetScene;
     //로딩 딜레이 최소시간
-    public float minimumDelay = 2f;
+    public float minimumDelay = 0.5f;
     [SerializeField] private Image progressBar;
 
     private void Start()

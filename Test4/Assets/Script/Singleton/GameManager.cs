@@ -10,7 +10,12 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    
+    public static int _playerHp;
+    public static float _playerStamina;
+
+    public static float _staminaMax = 10.0f;
+    private int _staminaVector = 1;
+
     //Guard(경계 자세) 이벤트
     public UnityEvent OnGuardPostureActivated;
     public UnityEvent OnGuardPostureDeactivated;
@@ -20,7 +25,14 @@ public class GameManager : Singleton<GameManager>
     
     //일시 정지
     public bool isPause = false;
-    
+
+    private void Start()
+    {
+        _playerHp = 5;
+        _playerStamina = _staminaMax;
+        
+    }
+
     private void Update()
     {
         if (!isStory)
@@ -35,7 +47,17 @@ public class GameManager : Singleton<GameManager>
                 RestartGame();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)) _staminaVector *= -1;
+        else if (Input.GetKeyUp(KeyCode.LeftShift)) _staminaVector *= -1;
+
+        _playerStamina += _staminaVector * Time.deltaTime;
+        if (_playerStamina >= _staminaMax) _playerStamina = _staminaMax;
+        if (_playerStamina <= 0) _playerStamina = 0;
+
+
     }
+   
 
     public void PauseGame()
     {
