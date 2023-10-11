@@ -48,8 +48,8 @@ public class TimeManager : Singleton<TimeManager>
     }
     
     //카운터
-    private int _currentHours;
-    private float _timeCounter;
+    public int _currentHours;
+    public float _timeCounter;
     
     //enum 상태
     public TimeOfDay currentTimeOfDay;
@@ -71,6 +71,7 @@ public class TimeManager : Singleton<TimeManager>
     private void Start()
     {
         _isMeasuring = true;
+        Watch.gameObject.SetActive(false);
     }
 
     private void Update()
