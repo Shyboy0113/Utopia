@@ -57,6 +57,14 @@ MonoBehaviour:
       value: 037fdada-fd7a-4560-ad66-d768d0cf7b31
       type: 0
       typeString: 
+    - title: Display Name
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name ko
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -79,12 +87,12 @@ MonoBehaviour:
       value: True
       type: 2
       typeString: CustomFieldType_Boolean
-    - title: Display Name
-      value: Player
-      type: 0
-      typeString: 
     - title: Guid
       value: d70be7b1-6d7a-4337-9584-6a72f04b0ad3
+      type: 0
+      typeString: 
+    - title: Display Name
+      value: Player
       type: 0
       typeString: 
     - title: Display Name ko
@@ -113,14 +121,14 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
-    - title: Display Name
-      value: "\uB204\uB354\uAE30 \uC5EC\uC778"
-      type: 0
-      typeString: CustomFieldType_Text
     - title: Guid
       value: a53345fd-adb3-4065-b007-3c1762aae9ea
       type: 0
       typeString: 
+    - title: Display Name
+      value: "\uB204\uB354\uAE30 \uC5EC\uC778"
+      type: 0
+      typeString: CustomFieldType_Text
     - title: Display Name ko
       value: "\uB204\uB354\uAE30 \uC5EC\uC778"
       type: 4
@@ -151,6 +159,14 @@ MonoBehaviour:
       value: 4864f850-39da-4dab-8384-d0cfa54409fb
       type: 0
       typeString: 
+    - title: Display Name
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name ko
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -173,6 +189,18 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Guid
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name ko
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -195,6 +223,18 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Guid
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name ko
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -217,6 +257,18 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Guid
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name
+      value: 
+      type: 0
+      typeString: 
+    - title: Display Name ko
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
     portrait: {fileID: 0}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -271,6 +323,14 @@ MonoBehaviour:
       value: "\uC5EC\uC778\uC774 \uC88B\uC544\uD558\uB294 \uAC78 \uD655\uC778\uD588\uB2E4."
       type: 4
       typeString: CustomFieldType_Localization
+    - title: Trackable
+      value: 
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: 
+      type: 2
+      typeString: CustomFieldType_Boolean
   - id: 3
     fields:
     - title: Name
@@ -299,6 +359,10 @@ MonoBehaviour:
       value: 0
       type: 1
       typeString: CustomFieldType_Number
+    - title: 
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
   - id: 1
     fields:
     - title: Name
@@ -330,14 +394,6 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
-    - title: Trackable
-      value: True
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Track
-      value: True
-      type: 2
-      typeString: CustomFieldType_Boolean
     - title: Entry Count
       value: 0
       type: 1
@@ -348,6 +404,18 @@ MonoBehaviour:
         \uD55C\uB2E4."
       type: 4
       typeString: CustomFieldType_Localization
+    - title: Success Description ko
+      value: 
+      type: 4
+      typeString: CustomFieldType_Localization
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -455,15 +523,27 @@ MonoBehaviour:
         value: None()
         type: 0
         typeString: 
-      - title: Guid
-        value: a4996d14-d055-49a8-a741-bf1aa9156731
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: a4996d14-d055-49a8-a741-bf1aa9156731
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -535,10 +615,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 14c59e42-951e-4c70-a803-2d58e072f6d8
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -547,6 +623,14 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 14c59e42-951e-4c70-a803-2d58e072f6d8
+        type: 0
+        typeString: 
       - title: ko
         value: "\uB2E4 \uD574\uC838\uAC00\uB294 \uB204\uB354\uAE30 \uC637\uC744 \uB4A4\uC9D1\uC5B4\uC4F0\uACE0
           \uC788\uB2E4.\n\uC5BC\uAD74\uC740 \uC798 \uBCF4\uC774\uC9C0 \uC54A\uB294\uB2E4."
@@ -612,10 +696,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: b167b98e-8533-41c8-a5b5-d3b73ecea1f2
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -624,8 +704,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: b167b98e-8533-41c8-a5b5-d3b73ecea1f2
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC5B4\uBA38, \uADC0\uC5EC\uC6B4 \uC190\uB2D8\uC774 \uCC3E\uC544\uC654\uB124."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -684,10 +776,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 16944dbf-1cb0-4f48-a9b0-942ffdb0ff7d
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -696,9 +784,21 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 16944dbf-1cb0-4f48-a9b0-942ffdb0ff7d
+        type: 0
+        typeString: 
       - title: ko
         value: "\uBB54\uAC00 \uC790\uC8FC\uBCF4\uAC8C \uB420 \uAC83 \uAC19\uC740
           \uAE30\uBD84\uC774 \uB4DC\uB294\uAC78."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -756,10 +856,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: cfa9f2b9-dfec-4736-876d-fbdc262c0106
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -768,8 +864,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: cfa9f2b9-dfec-4736-876d-fbdc262c0106
+        type: 0
+        typeString: 
       - title: ko
         value: "\uAF43\uC744 \uB2E4 \uAC00\uC838\uC654\uB2C8?"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -834,10 +942,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 6c137223-1d00-43a3-80a9-0399d02d1052
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -846,8 +950,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 6c137223-1d00-43a3-80a9-0399d02d1052
+        type: 0
+        typeString: 
       - title: ko
         value: "\uB124"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -907,10 +1023,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 17f9eb0e-c241-4705-941f-f7297e72b91c
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -919,8 +1031,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 17f9eb0e-c241-4705-941f-f7297e72b91c
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC544\uB2C8\uC624"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -978,10 +1102,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 6b53c339-ffa3-40af-a8b1-dc43bb0b8c26
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -990,8 +1110,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 6b53c339-ffa3-40af-a8b1-dc43bb0b8c26
+        type: 0
+        typeString: 
       - title: ko
         value: "\uCC29\uD55C \uC544\uC774\uC5D0\uAC90 \uBCF4\uC0C1\uC744\uC918\uC57C\uACA0\uC9C0?"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1044,10 +1176,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 19e13f74-6a88-4241-a14a-ab4dbe16d536
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1056,9 +1184,21 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 19e13f74-6a88-4241-a14a-ab4dbe16d536
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC870\uAE09\uD574\uD558\uC9C0 \uC54A\uC544\uB3C4 \uAD1C\uCC2E\uB2E8\uB2E4.
           \uC5EC\uC720\uB97C \uC9C0\uB2C8\uB834."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1110,10 +1250,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 295517a4-7dea-4c65-81a0-5df3ae36153c
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1122,8 +1258,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 295517a4-7dea-4c65-81a0-5df3ae36153c
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC55E\uC73C\uB85C \uC798 \uBD80\uD0C1\uD574."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1175,10 +1323,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 9c6eca01-cf5f-403b-91e7-574d0bb2a53f
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1187,6 +1331,14 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 9c6eca01-cf5f-403b-91e7-574d0bb2a53f
+        type: 0
+        typeString: 
       - title: ko
         value: ...
         type: 4
@@ -1207,19 +1359,19 @@ MonoBehaviour:
         originDialogueID: 15
         destinationConversationID: 1
         destinationDialogueID: 16
-        isConnector: 0
+        isConnector: 1
         priority: 2
       - originConversationID: 1
         originDialogueID: 15
         destinationConversationID: 1
         destinationDialogueID: 17
-        isConnector: 0
+        isConnector: 1
         priority: 2
       - originConversationID: 1
         originDialogueID: 15
         destinationConversationID: 1
         destinationDialogueID: 18
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -1262,15 +1414,27 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 11851ec4-090a-45b9-b59a-518712464f5a
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 11851ec4-090a-45b9-b59a-518712464f5a
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -1323,15 +1487,27 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 3e03d2d6-b0a5-4aee-add6-b75008282ead
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 3e03d2d6-b0a5-4aee-add6-b75008282ead
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -1384,15 +1560,27 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 0cbc6865-e461-4079-a94d-fc86c7c6a7f2
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 0cbc6865-e461-4079-a94d-fc86c7c6a7f2
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -1446,10 +1634,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: a43a99a7-6cf8-4d52-a417-e1cbf410c3f2
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1458,6 +1642,14 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: a43a99a7-6cf8-4d52-a417-e1cbf410c3f2
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC548\uB155 \uAF2C\uB9C8\uC57C. \uBB3C\uAC74\uC744 \uC0AC\uB7EC
           \uC628\uAC70\uB2C8?"
@@ -1523,10 +1715,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 4cbae1fa-640c-4d1c-aa58-7c3bb84412e6
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1535,8 +1723,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 4cbae1fa-640c-4d1c-aa58-7c3bb84412e6
+        type: 0
+        typeString: 
       - title: ko
         value: "...\uC751? \uB0B4\uAC8C \uC904 \uC120\uBB3C\uC774 \uC788\uB2E4\uACE0?"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1595,10 +1795,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: f02d6a45-8b16-4946-9921-c405dceda6e1
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1607,9 +1803,21 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: f02d6a45-8b16-4946-9921-c405dceda6e1
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC544\uB984\uB2E4\uC6B4 \uAF43\uC774\uAD6C\uB098. \uD5A5\uAE0B\uD55C
           \uAF43\uB0B4\uC74C\uB3C4 \uC788\uACE0 \uB9D0\uC774\uC57C."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1667,10 +1875,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 29ca8721-bbed-49aa-918a-cde91932db3a
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1679,8 +1883,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 29ca8721-bbed-49aa-918a-cde91932db3a
+        type: 0
+        typeString: 
       - title: ko
         value: "\uADF8\uB0E5 \uBC1B\uAE30\uB9CC \uD558\uBA74 \uBB50\uD558\uB2C8\uAE4C..."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1739,10 +1955,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: cd705238-72c7-4a17-a84a-a22bc58a92b8
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1751,9 +1963,21 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: cd705238-72c7-4a17-a84a-a22bc58a92b8
+        type: 0
+        typeString: 
       - title: ko
         value: "...\uC544! \uADF8\uB798. \uC55E\uC73C\uB85C \uC2DC\uAC04\uC774 \uB0A0
           \uB54C\uB9C8\uB2E4 \uB0A0 \uCC3E\uC544\uC624\uB834."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1812,10 +2036,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: b9a0eac8-cd1e-48ff-b969-7a0771888a4d
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1824,9 +2044,21 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: b9a0eac8-cd1e-48ff-b969-7a0771888a4d
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC2EC\uC2EC\uD560 \uB54C \uB9D0\uB3D9\uBB34\uC815\uB3C4\uB77C\uBA74
           \uCDA9\uBD84\uD788 \uD574\uC904 \uC218 \uC788\uB2E8\uB2E4."
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1879,10 +2111,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 89188dd1-dd8d-499e-9baa-c07cab087fc5
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -1891,8 +2119,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 89188dd1-dd8d-499e-9baa-c07cab087fc5
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC548\uB155, \uAF2C\uB9C8\uC57C?"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 1
@@ -1999,10 +2239,6 @@ MonoBehaviour:
         value: None()
         type: 0
         typeString: 
-      - title: Guid
-        value: 7e0edc4b-f04d-44f0-9dbc-0cb6f0328f5c
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2011,7 +2247,19 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 7e0edc4b-f04d-44f0-9dbc-0cb6f0328f5c
+        type: 0
+        typeString: 
       - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -2070,10 +2318,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: e180886a-5d08-495f-85f1-bc9416a534bf
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2082,6 +2326,14 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: e180886a-5d08-495f-85f1-bc9416a534bf
+        type: 0
+        typeString: 
       - title: ko
         value: "\uBD89\uC740 \uAF43\uC744 \uBC1C\uACAC\uD588\uB2E4.\n\uCC44\uC9D1\uD560\uAE4C?"
         type: 4
@@ -2153,10 +2405,6 @@ MonoBehaviour:
           {{default}}'
         type: 0
         typeString: 
-      - title: Guid
-        value: f89f10fa-661d-4e1e-9c71-afab58eae84a
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2165,8 +2413,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: f89f10fa-661d-4e1e-9c71-afab58eae84a
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC608"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 2
@@ -2221,10 +2481,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: c2d8c1c4-83f2-443a-9142-fb2284f59814
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2233,8 +2489,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: c2d8c1c4-83f2-443a-9142-fb2284f59814
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC544\uB2C8\uC624"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 2
@@ -2336,15 +2604,27 @@ MonoBehaviour:
         value: None()
         type: 0
         typeString: 
-      - title: Guid
-        value: 0c7067e0-81b8-41aa-8896-71d5637c867c
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 0c7067e0-81b8-41aa-8896-71d5637c867c
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -2403,10 +2683,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 06c9800f-7a8b-48f9-87a5-a2b6d5492395
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2415,6 +2691,14 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 06c9800f-7a8b-48f9-87a5-a2b6d5492395
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC5B4\uB5BB\uAC8C \uD560\uAE4C?"
         type: 4
@@ -2484,10 +2768,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: 3ddb6af1-54ba-41f6-8c2e-1904782e056b
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2496,8 +2776,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 3ddb6af1-54ba-41f6-8c2e-1904782e056b
+        type: 0
+        typeString: 
       - title: ko
         value: "\uC800\uC7A5\uD55C\uB2E4"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2549,10 +2841,6 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
-      - title: Guid
-        value: e6a49b6b-c769-47af-892b-b0514e6b5014
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
@@ -2561,8 +2849,20 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: e6a49b6b-c769-47af-892b-b0514e6b5014
+        type: 0
+        typeString: 
       - title: ko
         value: "\uB85C\uB4DC\uD55C\uB2E4"
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
         type: 4
         typeString: CustomFieldType_Localization
       conversationID: 3
@@ -2648,7 +2948,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 2
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -2663,15 +2963,27 @@ MonoBehaviour:
         value: None()
         type: 0
         typeString: 
-      - title: Guid
-        value: 260582a4-e6a9-4758-84dc-22cf2627b051
-        type: 0
-        typeString: 
       - title: ja
         value: 
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 260582a4-e6a9-4758-84dc-22cf2627b051
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -2686,7 +2998,7 @@ MonoBehaviour:
       - originConversationID: 4
         originDialogueID: 0
         destinationConversationID: 4
-        destinationDialogueID: 1
+        destinationDialogueID: 41
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -2696,8 +3008,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8208
-        y: 185.67157
+        x: 80
+        y: 50
         width: 160
         height: 30
     - id: 1
@@ -2729,7 +3041,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: Fade(in, 1, #000000)
+        value: 
         type: 0
         typeString: CustomFieldType_Text
       - title: ja
@@ -2737,6 +3049,22 @@ MonoBehaviour:
         type: 4
         typeString: CustomFieldType_Localization
       - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
         value: 
         type: 4
         typeString: CustomFieldType_Localization
@@ -2752,7 +3080,7 @@ MonoBehaviour:
         originDialogueID: 1
         destinationConversationID: 4
         destinationDialogueID: 2
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -2761,8 +3089,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 564.7569
-        y: 232.6865
+        x: 80
+        y: 218
         width: 160
         height: 30
     - id: 2
@@ -2806,6 +3134,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -2818,7 +3162,7 @@ MonoBehaviour:
         originDialogueID: 2
         destinationConversationID: 4
         destinationDialogueID: 3
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -2827,8 +3171,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 282.68652
+        x: 80
+        y: 302
         width: 160
         height: 30
     - id: 3
@@ -2872,6 +3216,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -2884,7 +3244,7 @@ MonoBehaviour:
         originDialogueID: 3
         destinationConversationID: 4
         destinationDialogueID: 4
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -2893,8 +3253,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 331.6227
+        x: 80
+        y: 386
         width: 160
         height: 30
     - id: 4
@@ -2936,6 +3296,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -2948,7 +3324,7 @@ MonoBehaviour:
         originDialogueID: 4
         destinationConversationID: 4
         destinationDialogueID: 5
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -2957,8 +3333,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 381.62262
+        x: 80
+        y: 470
         width: 160
         height: 30
     - id: 5
@@ -2999,6 +3375,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3011,7 +3403,7 @@ MonoBehaviour:
         originDialogueID: 5
         destinationConversationID: 4
         destinationDialogueID: 6
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3020,8 +3412,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 564.75684
-        y: 433.75037
+        x: 80
+        y: 554
         width: 160
         height: 30
     - id: 6
@@ -3064,6 +3456,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3076,7 +3484,7 @@ MonoBehaviour:
         originDialogueID: 6
         destinationConversationID: 4
         destinationDialogueID: 7
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3085,8 +3493,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 482.6865
+        x: 80
+        y: 638
         width: 160
         height: 30
     - id: 7
@@ -3128,6 +3536,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3140,7 +3564,7 @@ MonoBehaviour:
         originDialogueID: 7
         destinationConversationID: 4
         destinationDialogueID: 8
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3149,8 +3573,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 532.6865
+        x: 80
+        y: 722
         width: 160
         height: 30
     - id: 8
@@ -3191,6 +3615,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3203,7 +3643,7 @@ MonoBehaviour:
         originDialogueID: 8
         destinationConversationID: 4
         destinationDialogueID: 9
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3212,8 +3652,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 593.3248
+        x: 80
+        y: 806
         width: 160
         height: 30
     - id: 9
@@ -3254,6 +3694,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3266,7 +3722,7 @@ MonoBehaviour:
         originDialogueID: 9
         destinationConversationID: 4
         destinationDialogueID: 10
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3275,8 +3731,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 643.3248
+        x: 80
+        y: 890
         width: 160
         height: 30
     - id: 10
@@ -3319,6 +3775,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3331,7 +3803,7 @@ MonoBehaviour:
         originDialogueID: 10
         destinationConversationID: 4
         destinationDialogueID: 11
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3340,8 +3812,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 693.3248
+        x: 80
+        y: 974
         width: 160
         height: 30
     - id: 11
@@ -3383,6 +3855,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3395,7 +3883,7 @@ MonoBehaviour:
         originDialogueID: 11
         destinationConversationID: 4
         destinationDialogueID: 12
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3404,8 +3892,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 746.5163
+        x: 80
+        y: 1058
         width: 160
         height: 30
     - id: 12
@@ -3448,6 +3936,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3460,7 +3964,7 @@ MonoBehaviour:
         originDialogueID: 12
         destinationConversationID: 4
         destinationDialogueID: 13
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3469,8 +3973,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 796.5163
+        x: 80
+        y: 1142
         width: 160
         height: 30
     - id: 13
@@ -3515,6 +4019,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3527,7 +4047,7 @@ MonoBehaviour:
         originDialogueID: 13
         destinationConversationID: 4
         destinationDialogueID: 14
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3536,8 +4056,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 846.5163
+        x: 80
+        y: 1226
         width: 160
         height: 30
     - id: 14
@@ -3581,6 +4101,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3593,7 +4129,7 @@ MonoBehaviour:
         originDialogueID: 14
         destinationConversationID: 4
         destinationDialogueID: 15
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3602,8 +4138,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 896.5163
+        x: 80
+        y: 1310
         width: 160
         height: 30
     - id: 15
@@ -3644,6 +4180,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3656,7 +4208,7 @@ MonoBehaviour:
         originDialogueID: 15
         destinationConversationID: 4
         destinationDialogueID: 16
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3665,8 +4217,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 946.5163
+        x: 80
+        y: 1394
         width: 160
         height: 30
     - id: 16
@@ -3709,6 +4261,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3721,7 +4289,7 @@ MonoBehaviour:
         originDialogueID: 16
         destinationConversationID: 4
         destinationDialogueID: 17
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3730,8 +4298,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 564.7898
-        y: 997.5473
+        x: 80
+        y: 1478
         width: 160
         height: 30
     - id: 17
@@ -3772,6 +4340,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3784,7 +4368,7 @@ MonoBehaviour:
         originDialogueID: 17
         destinationConversationID: 4
         destinationDialogueID: 18
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3793,8 +4377,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 1046.5164
+        x: 80
+        y: 1562
         width: 160
         height: 30
     - id: 18
@@ -3839,6 +4423,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3851,7 +4451,7 @@ MonoBehaviour:
         originDialogueID: 18
         destinationConversationID: 4
         destinationDialogueID: 19
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3860,8 +4460,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 1096.5164
+        x: 80
+        y: 1646
         width: 160
         height: 30
     - id: 19
@@ -3902,6 +4502,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3914,7 +4530,7 @@ MonoBehaviour:
         originDialogueID: 19
         destinationConversationID: 4
         destinationDialogueID: 20
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3923,8 +4539,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 1146.5164
+        x: 80
+        y: 1730
         width: 160
         height: 30
     - id: 20
@@ -3967,6 +4583,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -3979,7 +4611,7 @@ MonoBehaviour:
         originDialogueID: 20
         destinationConversationID: 4
         destinationDialogueID: 21
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -3988,8 +4620,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 1196.5164
+        x: 80
+        y: 1814
         width: 160
         height: 30
     - id: 21
@@ -4030,6 +4662,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4042,7 +4690,7 @@ MonoBehaviour:
         originDialogueID: 21
         destinationConversationID: 4
         destinationDialogueID: 22
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4051,8 +4699,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 565.8207
-        y: 1246.5164
+        x: 80
+        y: 1898
         width: 160
         height: 30
     - id: 22
@@ -4097,6 +4745,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4109,7 +4773,7 @@ MonoBehaviour:
         originDialogueID: 22
         destinationConversationID: 4
         destinationDialogueID: 23
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4118,8 +4782,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 569.9444
-        y: 1357.3411
+        x: 80
+        y: 1982
         width: 160
         height: 30
     - id: 23
@@ -4160,6 +4824,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4172,7 +4852,7 @@ MonoBehaviour:
         originDialogueID: 23
         destinationConversationID: 4
         destinationDialogueID: 24
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4181,8 +4861,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 569.9444
-        y: 1407.3411
+        x: 80
+        y: 2066
         width: 160
         height: 30
     - id: 24
@@ -4228,6 +4908,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4240,7 +4936,7 @@ MonoBehaviour:
         originDialogueID: 24
         destinationConversationID: 4
         destinationDialogueID: 25
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4249,8 +4945,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 569.9444
-        y: 1457.3411
+        x: 80
+        y: 2150
         width: 160
         height: 30
     - id: 25
@@ -4295,6 +4991,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4307,7 +5019,7 @@ MonoBehaviour:
         originDialogueID: 25
         destinationConversationID: 4
         destinationDialogueID: 26
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4316,8 +5028,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 569.9444
-        y: 1507.3411
+        x: 80
+        y: 2234
         width: 160
         height: 30
     - id: 26
@@ -4362,6 +5074,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4374,7 +5102,7 @@ MonoBehaviour:
         originDialogueID: 26
         destinationConversationID: 4
         destinationDialogueID: 27
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4383,8 +5111,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1600.958
+        x: 80
+        y: 2318
         width: 160
         height: 30
     - id: 27
@@ -4432,6 +5160,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4444,7 +5188,7 @@ MonoBehaviour:
         originDialogueID: 27
         destinationConversationID: 4
         destinationDialogueID: 28
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4453,8 +5197,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1650.958
+        x: 80
+        y: 2402
         width: 160
         height: 30
     - id: 28
@@ -4495,6 +5239,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4507,7 +5267,7 @@ MonoBehaviour:
         originDialogueID: 28
         destinationConversationID: 4
         destinationDialogueID: 29
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4516,8 +5276,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1700.958
+        x: 80
+        y: 2486
         width: 160
         height: 30
     - id: 29
@@ -4560,6 +5320,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4572,7 +5348,7 @@ MonoBehaviour:
         originDialogueID: 29
         destinationConversationID: 4
         destinationDialogueID: 30
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4581,8 +5357,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1750.958
+        x: 80
+        y: 2570
         width: 160
         height: 30
     - id: 30
@@ -4623,6 +5399,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4635,7 +5427,7 @@ MonoBehaviour:
         originDialogueID: 30
         destinationConversationID: 4
         destinationDialogueID: 31
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4644,8 +5436,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1800.958
+        x: 80
+        y: 2654
         width: 160
         height: 30
     - id: 31
@@ -4686,6 +5478,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4698,7 +5506,7 @@ MonoBehaviour:
         originDialogueID: 31
         destinationConversationID: 4
         destinationDialogueID: 32
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4707,8 +5515,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1850.958
+        x: 80
+        y: 2738
         width: 160
         height: 30
     - id: 32
@@ -4750,6 +5558,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4762,7 +5586,7 @@ MonoBehaviour:
         originDialogueID: 32
         destinationConversationID: 4
         destinationDialogueID: 33
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4771,8 +5595,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1900.958
+        x: 80
+        y: 2822
         width: 160
         height: 30
     - id: 33
@@ -4815,6 +5639,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4827,7 +5667,7 @@ MonoBehaviour:
         originDialogueID: 33
         destinationConversationID: 4
         destinationDialogueID: 34
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4836,8 +5676,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 1950.958
+        x: 80
+        y: 2906
         width: 160
         height: 30
     - id: 34
@@ -4878,6 +5718,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4890,7 +5746,7 @@ MonoBehaviour:
         originDialogueID: 34
         destinationConversationID: 4
         destinationDialogueID: 35
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4899,8 +5755,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2000.958
+        x: 80
+        y: 2990
         width: 160
         height: 30
     - id: 35
@@ -4943,6 +5799,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -4955,7 +5827,7 @@ MonoBehaviour:
         originDialogueID: 35
         destinationConversationID: 4
         destinationDialogueID: 36
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -4964,8 +5836,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2050.958
+        x: 80
+        y: 3074
         width: 160
         height: 30
     - id: 36
@@ -5008,6 +5880,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -5020,7 +5908,7 @@ MonoBehaviour:
         originDialogueID: 36
         destinationConversationID: 4
         destinationDialogueID: 37
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -5029,8 +5917,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2100.958
+        x: 80
+        y: 3158
         width: 160
         height: 30
     - id: 37
@@ -5076,6 +5964,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -5088,7 +5992,7 @@ MonoBehaviour:
         originDialogueID: 37
         destinationConversationID: 4
         destinationDialogueID: 38
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -5097,8 +6001,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2150.958
+        x: 80
+        y: 3242
         width: 160
         height: 30
     - id: 38
@@ -5142,6 +6046,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -5154,7 +6074,7 @@ MonoBehaviour:
         originDialogueID: 38
         destinationConversationID: 4
         destinationDialogueID: 39
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -5163,8 +6083,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2200.958
+        x: 80
+        y: 3326
         width: 160
         height: 30
     - id: 39
@@ -5209,6 +6129,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -5221,7 +6157,7 @@ MonoBehaviour:
         originDialogueID: 39
         destinationConversationID: 4
         destinationDialogueID: 40
-        isConnector: 0
+        isConnector: 1
         priority: 2
       conditionsString: 
       userScript: 
@@ -5230,8 +6166,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2250.958
+        x: 80
+        y: 3410
         width: 160
         height: 30
     - id: 40
@@ -5272,6 +6208,22 @@ MonoBehaviour:
         value: 
         type: 4
         typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: 
+      - title: Guid
+        value: 
+        type: 0
+        typeString: 
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -5287,13 +6239,92 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 574.1997
-        y: 2300.958
+        x: 80
+        y: 3494
+        width: 160
+        height: 30
+    - id: 41
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: Fade(in, 4, #000000)
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: ja
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Guid
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      conversationID: 4
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 4
+        originDialogueID: 41
+        destinationConversationID: 4
+        destinationDialogueID: 1
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 134
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 409.27518, y: 252.47244}
-    canvasZoom: 0.42999992
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.52
   syncInfo:
     syncActors: 0
     syncItems: 0
@@ -5303,10 +6334,16 @@ MonoBehaviour:
     syncItemsDatabase: {fileID: 0}
     syncLocationsDatabase: {fileID: 0}
     syncVariablesDatabase: {fileID: 0}
-  templateJson: '{"treatItemsAsQuests":true,"actorFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"IsPlayer","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"itemFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Is
-    Item","value":"True","type":2,"typeString":"CustomFieldType_Boolean"}],"questFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Success
+  templateJson: '{"treatItemsAsQuests":true,"actorFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"IsPlayer","value":"False","type":2,"typeString":"CustomFieldType_Boolean"},{"title":"Guid","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Display
+    Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Display
+    Name ko","value":"","type":4,"typeString":"CustomFieldType_Localization"}],"itemFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Is
+    Item","value":"True","type":2,"typeString":"CustomFieldType_Boolean"},{"title":"Number","value":"0","type":1,"typeString":"CustomFieldType_Number"}],"questFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Success
     Description","value":"","type":0,"typeString":""},{"title":"Failure Description","value":"","type":0,"typeString":""},{"title":"State","value":"unassigned","type":0,"typeString":""},{"title":"Is
-    Item","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"locationFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"variableFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Initial
+    Item","value":"False","type":2,"typeString":"CustomFieldType_Boolean"},{"title":"Entry
+    Count","value":"","type":1,"typeString":"CustomFieldType_Number"},{"title":"Description
+    ko","value":"","type":4,"typeString":"CustomFieldType_Localization"},{"title":"Success
+    Description ko","value":"","type":4,"typeString":"CustomFieldType_Localization"},{"title":"Trackable","value":"","type":2,"typeString":"CustomFieldType_Boolean"},{"title":"Track","value":"","type":2,"typeString":"CustomFieldType_Boolean"}],"locationFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"variableFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Initial
     Value","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"conversationFields":[{"title":"Title","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Actor","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"0","type":5,"typeString":"CustomFieldType_Actor"}],"dialogueEntryFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Menu
     Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Dialogue
-    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"ja","value":"","type":4,"typeString":"CustomFieldType_Localization"},{"title":"en","value":"","type":4,"typeString":"CustomFieldType_Localization"}],"actorPrimaryFieldTitles":[],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":[],"dialogueEntryPrimaryFieldTitles":[],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'
+    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"ja","value":"","type":4,"typeString":"CustomFieldType_Localization"},{"title":"en","value":"","type":4,"typeString":"CustomFieldType_Localization"},{"title":"canvasRect","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Guid","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"ko","value":"","type":4,"typeString":"CustomFieldType_Localization"},{"title":"Menu
+    Text ko","value":"","type":4,"typeString":"CustomFieldType_Localization"}],"actorPrimaryFieldTitles":[],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":[],"dialogueEntryPrimaryFieldTitles":[],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'

@@ -20,8 +20,8 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         // Subscribe to guard posture events
-        //GameManager.Instance.OnGuardPostureActivated.AddListener(NarrowUIPanels);
-        //GameManager.Instance.OnGuardPostureDeactivated.AddListener(ExpandUIPanels);
+        GameManager.Instance.OnGuardPostureActivated.AddListener(NarrowUIPanels);
+        GameManager.Instance.OnGuardPostureDeactivated.AddListener(ExpandUIPanels);
         
 
     }
