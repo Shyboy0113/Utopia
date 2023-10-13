@@ -39,7 +39,8 @@ public class GameManager : Singleton<GameManager>
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PauseGame();
+                if( isPause is false)PauseGame();
+                else ResumeGame();
 
             }
             else if (Input.GetKeyDown(KeyCode.R))

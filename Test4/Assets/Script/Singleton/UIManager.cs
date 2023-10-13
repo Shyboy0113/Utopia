@@ -27,12 +27,12 @@ public class UIManager : Singleton<UIManager>
     }
     public void ResetAllMenu()
     {
-        PauseMenu.gameObject.SetActive(false);
+        if (PauseMenu is not null) PauseMenu.gameObject.SetActive(false);
     }
 
     public void ActivatePauseMenu(bool pauseState)
     {
-        PauseMenu.gameObject.SetActive(pauseState);
+        if (PauseMenu is not null) PauseMenu.gameObject.SetActive(pauseState);
     }
     
     public void NarrowUIPanels()
@@ -65,8 +65,8 @@ public class UIManager : Singleton<UIManager>
         Vector2 initialPosition_Top = topPanel.anchoredPosition;
         Vector2 initialPosition_Bottom = bottomPanel.anchoredPosition;
         
-        Vector2 targetPosition_Top = new Vector2(initialPosition_Top.x, 270f );
-        Vector2 targetPosition_Bottom = new Vector2(initialPosition_Bottom.x, -270f );
+        Vector2 targetPosition_Top = new Vector2(initialPosition_Top.x, 540f );
+        Vector2 targetPosition_Bottom = new Vector2(initialPosition_Bottom.x, -540f );
         
         while (timer < duration)
         {
@@ -91,7 +91,7 @@ public class UIManager : Singleton<UIManager>
         Vector2 initialPosition_Bottom = bottomPanel.anchoredPosition;
         
         Vector2 targetPosition_Top = new Vector2(initialPosition_Top.x, 540f );
-        Vector2 targetPosition_Bottom = new Vector2(initialPosition_Bottom.x, -540f );
+        Vector2 targetPosition_Bottom = new Vector2(initialPosition_Bottom.x, -810f );
         
         while (timer < duration)
         {
