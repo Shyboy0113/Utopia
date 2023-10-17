@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
     public static int _playerHp;
     public static float _playerStamina;
 
-    public static float _staminaMax = 2.0f;
+    public static float _staminaMax = 3.0f;
     private float _staminaVector = 1f;
 
     //Guard(경계 자세) 이벤트

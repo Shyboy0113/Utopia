@@ -13,7 +13,7 @@ public class PostProcessingController : MonoBehaviour
     private Coroutine currentCoroutine;
 
     private float currentIntensity = 0f;
-    private float _duration = 0.2f;
+    private float _duration = 0.1f;
     
     private void Start()
     {
