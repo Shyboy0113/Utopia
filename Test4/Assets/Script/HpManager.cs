@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +11,23 @@ public class HpManager : MonoBehaviour
     
     public Image staminaGauge;
 
+    private RectTransform _gaugeTransform;
+    private Transform _playerTransform;
+
+    private Vector3 screenPos;
     void Start()
     {
         GameManager._playerHp = 5; // 시작할 때의 체력 설정
         UpdateHearts();
+        
+        _gaugeTransform = staminaGauge.GetComponent<RectTransform>();
+        
+        
+        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        if (_playerTransform is null)
+            _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        
+        screenPos = Camera.main.WorldToScreenPoint(_playerTransform.position);
     }
 
     void Update()
@@ -21,6 +35,24 @@ public class HpManager : MonoBehaviour
         if(heartImages.Count != GameManager._playerHp) UpdateHearts();
         
         staminaGauge.fillAmount = GameManager._playerStamina / GameManager._staminaMax;
+        
+        screenPos = Camera.main.WorldToScreenPoint(_playerTransform.position);
+        _gaugeTransform.position = screenPos + new Vector3(50,50,0);
+        
+        if (staminaGauge.fillAmount >= 0.95)
+        {
+            Color newColor = staminaGauge.color;  // Store the color in a variable
+            newColor.a = 0f;  // Modify the alpha value
+            staminaGauge.color = newColor;  // Assign the modified color back
+            Debug.Log("Setting Alpha to 0");
+        }
+        else
+        {
+            Color newColor = staminaGauge.color;  // Store the color in a variable
+            newColor.a = 1f;  // Modify the alpha value
+            staminaGauge.color = newColor;  // Assign the modified color back
+            Debug.Log("Setting Alpha to 1");
+        }
     }
 
     private void UpdateHearts()

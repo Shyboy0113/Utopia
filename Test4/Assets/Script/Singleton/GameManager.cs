@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     public static float _playerStamina;
 
     public static float _staminaMax = 2.0f;
-    private int _staminaVector = 1;
+    private float _staminaVector = 1f;
 
     //Guard(경계 자세) 이벤트
     public UnityEvent OnGuardPostureActivated;
@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if( isPause is false)PauseGame();
+                if( isPause is false )PauseGame();
                 else ResumeGame();
 
             }
@@ -49,15 +49,30 @@ public class GameManager : Singleton<GameManager>
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) _staminaVector *= -1;
-        else if (Input.GetKeyUp(KeyCode.LeftShift)) _staminaVector *= -1;
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _staminaVector *= -5f;
+            Time.timeScale = 0.2f;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _staminaVector = 1.0f;
+            Time.timeScale = 1.0f;
+        }
 
         _playerStamina += _staminaVector * Time.deltaTime;
         if (_playerStamina >= _staminaMax) _playerStamina = _staminaMax;
-        if (_playerStamina <= 0) _playerStamina = 0;
+        if (_playerStamina <= 0) {
+            _playerStamina = 0;
+        }
 
         Debug.Log(_playerStamina);
 
+    }
+    
+    public void ChangeStoryState()
+    {
+        isStory = !isStory;
     }
    
 
