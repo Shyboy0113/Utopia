@@ -486,7 +486,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1839735485 &436578365
@@ -12548,7 +12548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5800213213809559979, guid: 7ae6e4524d3fb0a40b045689287227bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5800213213809559979, guid: 7ae6e4524d3fb0a40b045689287227bf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12661,15 +12661,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 888888447708242839, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888888447708242839, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888888447708242839, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888888447708242840, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
       propertyPath: m_RootOrder
@@ -13081,6 +13081,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5800213213809559979, guid: 7ae6e4524d3fb0a40b045689287227bf, type: 3}
   m_PrefabInstance: {fileID: 518202530}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1776112072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 888888447708242837, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+  m_PrefabInstance: {fileID: 771247081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1776112079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776112072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 32
+  m_RefResolutionX: 1980
+  m_RefResolutionY: 1020
+  m_UpscaleRT: 0
+  m_PixelSnapping: 1
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &1791697287
 GameObject:
   m_ObjectHideFlags: 0
