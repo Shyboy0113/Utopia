@@ -41,6 +41,8 @@ public class PostProcessingController : MonoBehaviour
 
     private void DisablePostProcessing()
     {
+        
+        
         if (currentCoroutine != null)
         {
             // If the narrow coroutine is already running, stop it
@@ -53,6 +55,9 @@ public class PostProcessingController : MonoBehaviour
 
     private IEnumerator NarrowVignette(float duration)
     {
+        
+        Debug.Log("DisablePostProcessing called");
+        
         float timer = 0f;
         Vignette vignette;
 
@@ -75,6 +80,9 @@ public class PostProcessingController : MonoBehaviour
 
     private IEnumerator ExpandVignette(float duration)
     {
+        
+        Debug.Log("DisablePostProcessing called");
+        
         float timer = 0f;
         Vignette vignette;
 

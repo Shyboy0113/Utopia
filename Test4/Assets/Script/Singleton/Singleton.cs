@@ -12,6 +12,7 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static readonly object lockObject = new();
+    
     private static T instance;
 
     public static T Instance
@@ -38,4 +39,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return instance;
         }
     }
+    
+    private void OnDestroy()
+    {
+        instance = null;
+    }
+   
+
 }

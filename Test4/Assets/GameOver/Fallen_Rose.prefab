@@ -67,8 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uCC0C\uC775-\n\n\uBB34\uC5B8\uAC00 \uB9DD\uAC00\uC9C0\uB294 \uC18C\uB9AC\uAC00
-    \uB4E4\uB838\uB2E4.\n\uB098\uB294 \uD3C9\uC0DD \uC774 \uC18C\uB9AC\uB97C \uC78A\uC9C0
-    \uBABB\uD558\uACA0\uC9C0."
+    \uB4E4\uB838\uB2E4.\n\uC774 \uC18C\uB9AC\uB97C \uC808\uB300 \uC78A\uC9C0 \uBABB\uD560\uAC70\uC57C."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 657152a79c818a74fbe1ca47c0d62b10, type: 2}
   m_sharedMaterial: {fileID: 6901337991085508406, guid: 657152a79c818a74fbe1ca47c0d62b10, type: 2}

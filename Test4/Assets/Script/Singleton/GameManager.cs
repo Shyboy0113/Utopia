@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using PixelCrushers.DialogueSystem.UnityGUI.Wrappers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +9,10 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static int _playerHp;
-    public static float _playerStamina;
+    public int _playerHp;
+    public float _playerStamina;
 
-    public static float _staminaMax = 3.0f;
+    public float _staminaMax = 3.0f;
     private float _staminaVector = 1f;
 
     //Guard(경계 자세) 이벤트
@@ -65,8 +64,6 @@ public class GameManager : Singleton<GameManager>
         if (_playerStamina <= 0) {
             _playerStamina = 0;
         }
-
-        Debug.Log(_playerStamina);
 
     }
     

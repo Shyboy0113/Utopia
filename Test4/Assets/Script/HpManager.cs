@@ -17,7 +17,7 @@ public class HpManager : MonoBehaviour
     private Vector3 screenPos;
     void Start()
     {
-        GameManager._playerHp = 5; // 시작할 때의 체력 설정
+        GameManager.Instance._playerHp = 5; // 시작할 때의 체력 설정
         UpdateHearts();
         
         _gaugeTransform = staminaGauge.GetComponent<RectTransform>();
@@ -32,9 +32,9 @@ public class HpManager : MonoBehaviour
 
     void Update()
     {
-        if(heartImages.Count != GameManager._playerHp) UpdateHearts();
+        if(heartImages.Count != GameManager.Instance._playerHp) UpdateHearts();
         
-        staminaGauge.fillAmount = GameManager._playerStamina / GameManager._staminaMax;
+        staminaGauge.fillAmount = GameManager.Instance._playerStamina / GameManager.Instance._staminaMax;
         
         screenPos = Camera.main.WorldToScreenPoint(_playerTransform.position);
         _gaugeTransform.position = screenPos + new Vector3(50,50,0);
@@ -65,7 +65,7 @@ public class HpManager : MonoBehaviour
         heartImages.Clear();
 
         // 새로운 체력에 맞게 하트 이미지들 생성
-        for (int i = 0; i < GameManager._playerHp; i++)
+        for (int i = 0; i < GameManager.Instance._playerHp; i++)
         {
             // 각 하트의 위치를 옆으로 이동
             float xOffset = i * 100f; // 각 하트 간의 간격을 조절
