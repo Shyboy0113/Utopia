@@ -3,9 +3,10 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
+
 	[SerializeField] private float m_JumpForce = 500f;
 
-	[SerializeField] private float correction_value = 2.0f;
+	[SerializeField] private float correction_value = 1.5f;
 	// Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
@@ -43,6 +44,12 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
+	}
+
+	void Start()
+	{
+		GameManager.Instance.OnGuardPostureActivated.AddListener(IncreaseJump);
+		GameManager.Instance.OnGuardPostureDeactivated.AddListener(DecreaseJump);
 	}
 
 	private void FixedUpdate()
@@ -134,7 +141,7 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
+		if (m_Grounded && jump && !crouch)
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
@@ -153,4 +160,15 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+	public void IncreaseJump()
+	{
+		correction_value = 2.0f;
+	}
+
+	public void DecreaseJump()
+	{
+		correction_value = 1.5f;
+	}
+	
 }

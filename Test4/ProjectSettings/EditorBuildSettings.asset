@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: d4725a55abe4cb2408cfe00ea105d0b7
   - enabled: 1
-    path: Assets/Scenes/Intro.unity
+    path: Assets/Scenes/Tutorial.unity
     guid: b49643b49fdc59e45b4e7848f5edced2
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 7be7dfec175eb8e43a18c4d164efaf72
+  - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: e147992acad316f47a3ad35bf4d26563
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: bfb63474ce1691849b47825afd4d44e0, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 02d39f821c128074689ef687d31b236d, type: 2}

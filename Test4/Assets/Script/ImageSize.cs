@@ -33,7 +33,8 @@ public class ImageSize : MonoBehaviour
         // Update image properties
 
         //sprite.transform.position = new Vector3(playerXPos, sprite.transform.position.y, sprite.transform.position.z);
-        sprite.transform.position += new Vector3(-yPosChange, yPosChange * 0.01f, 0);
+        sprite.transform.position = new Vector3(player.transform.position.x * 0.75f, sprite.transform.position.y, sprite.transform.position.z);
+        sprite.transform.position += new Vector3(0, yPosChange * 0.01f, 0);
         sprite.transform.localScale = new Vector3(scaleMultiplier, scaleMultiplier, 1);
         
     }

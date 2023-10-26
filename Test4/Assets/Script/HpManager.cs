@@ -39,7 +39,7 @@ public class HpManager : MonoBehaviour
         screenPos = Camera.main.WorldToScreenPoint(_playerTransform.position);
         _gaugeTransform.position = screenPos + new Vector3(50,50,0);
         
-        if (staminaGauge.fillAmount >= 0.95)
+        if (staminaGauge.fillAmount >= 0.999999999f)
         {
             Color newColor = staminaGauge.color;  // Store the color in a variable
             newColor.a = 0f;  // Modify the alpha value

@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     public int _playerHp;
     public float _playerStamina;
 
-    public float _staminaMax = 3.0f;
+    public float _staminaMax = 5.0f;
     private float _staminaVector = 1f;
 
     //Guard(경계 자세) 이벤트
@@ -46,17 +46,19 @@ public class GameManager : Singleton<GameManager>
             {
                 RestartGame();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            _staminaVector *= -5f;
-            Time.timeScale = 0.2f;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            _staminaVector = 1.0f;
-            Time.timeScale = 1.0f;
+            
+            
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _staminaVector *= -5f;
+                Time.timeScale = 0.2f;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                _staminaVector = 1.0f;
+                Time.timeScale = 1.0f;
+            }
+        
         }
 
         _playerStamina += _staminaVector * Time.deltaTime;

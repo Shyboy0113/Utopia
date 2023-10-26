@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoadingSceneController : Singleton<LoadingSceneController>
+public class LoadingSceneController : MonoBehaviour
 {
     private static string targetScene;
     //로딩 딜레이 최소시간
-    public float minimumDelay = 0.5f;
+    public float minimumDelay = 5.0f;
     [SerializeField] private Image progressBar;
 
     private void Start()
