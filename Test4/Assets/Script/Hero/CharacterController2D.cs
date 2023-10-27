@@ -4,6 +4,8 @@ using UnityEngine.Events;
 public class CharacterController2D : MonoBehaviour
 {
 
+	public Animator animator;
+	
 	[SerializeField] private float m_JumpForce = 500f;
 
 	[SerializeField] private float correction_value = 1.5f;
@@ -50,6 +52,7 @@ public class CharacterController2D : MonoBehaviour
 	{
 		GameManager.Instance.OnGuardPostureActivated.AddListener(IncreaseJump);
 		GameManager.Instance.OnGuardPostureDeactivated.AddListener(DecreaseJump);
+		animator = GetComponent<Animator>();
 	}
 
 	private void FixedUpdate()
@@ -77,16 +80,27 @@ public class CharacterController2D : MonoBehaviour
 		return m_Rigidbody2D.velocity.y;
 	}
 
+	public float GetHorizontalVelocity()
+	{
+		return m_Rigidbody2D.velocity.x;
+	}
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-		// If crouching, check to see if the character can stand up
+
+		if (crouch)
+			if(!Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+			{
+				crouch = false;
+				MoveCharacter.crouch = false;
+			}
 		if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
 				crouch = true;
+				MoveCharacter.crouch = true;
 			}
 		}
 
@@ -109,7 +123,8 @@ public class CharacterController2D : MonoBehaviour
 				// Disable one of the colliders when crouching
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
-			} else
+			}
+			else
 			{
 				// Enable the collider when not crouching
 				if (m_CrouchDisableCollider != null)
@@ -147,6 +162,7 @@ public class CharacterController2D : MonoBehaviour
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce*correction_value));
 		}
+		
 	}
 
 
