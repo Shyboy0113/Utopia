@@ -85,22 +85,21 @@ public class CharacterController2D : MonoBehaviour
 		return m_Rigidbody2D.velocity.x;
 	}
 
+	public bool IsReachedCeiling()
+	{
+		return Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround);
+	}
+
 	public void Move(float move, bool crouch, bool jump)
 	{
 
-		if (crouch)
-			if(!Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-			{
-				crouch = false;
-				MoveCharacter.crouch = false;
-			}
+		
 		if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
 				crouch = true;
-				MoveCharacter.crouch = true;
 			}
 		}
 

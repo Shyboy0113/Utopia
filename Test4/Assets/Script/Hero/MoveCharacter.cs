@@ -20,6 +20,7 @@ public class MoveCharacter : MonoBehaviour
     private bool jump = false;
     public static bool crouch = false;
     private bool isGuard = false;
+    private bool isGroggy = false;
 
     private void Start()
     {
@@ -29,36 +30,46 @@ public class MoveCharacter : MonoBehaviour
 
     private void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (!isGroggy)
         {
-            // Assuming a guard posture
-            GameManager.Instance.OnGuardPostureActivated.Invoke();
-            isGuard = true;
 
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            // Exiting guard posture
-            GameManager.Instance.OnGuardPostureDeactivated.Invoke();
-            isGuard = false;
-        }
-        
-        inputX = Input.GetAxisRaw("Horizontal") * speed;
-
-        if (Input.GetButtonDown("Jump")) jump = true;
-        
-        if (Input.GetButtonDown("Crouch"))
-        {
-            // Only set crouch to true if the character is grounded
-            if (controller.m_Grounded)
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                crouch = true;
+                // Assuming a guard posture
+                GameManager.Instance.OnGuardPostureActivated.Invoke();
+                isGuard = true;
+
             }
-        }
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                // Exiting guard posture
+                GameManager.Instance.OnGuardPostureDeactivated.Invoke();
+                isGuard = false;
+            }
+
+            inputX = Input.GetAxisRaw("Horizontal") * speed;
+
+            if (Input.GetButtonDown("Jump")) jump = true;
+
+            if (Input.GetButton("Crouch"))
+            {
+                // Only set crouch to true if the character is grounded
+                if (controller.m_Grounded)
+                {
+                    crouch = true;
+                }
+            }
+            else
+            {
+                if (controller.IsReachedCeiling() is false)
+                {
+                    crouch = false;
+                }
+                else
+                {
+                    crouch = true;
+                }
+            }
         }
 
     }
@@ -93,7 +104,9 @@ public class MoveCharacter : MonoBehaviour
 
         // 점프 상태를 결정
         animator.SetBool("IsJumping", !isGrounded && !isFalling);
-
+        
+        animator.SetBool("IsMoving", !crouch && isMoving);
+        
         // 웅크리는 상태를 Animator에 전달
         animator.SetBool("IsCrouching", crouch);
         animator.SetBool("IsCrouchMoving", crouch && isMoving);

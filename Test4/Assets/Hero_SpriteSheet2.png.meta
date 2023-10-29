@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb6d28e9abb74ef4f8c547c336c62e9b
-      internalID: 999435473
+      spriteID: e3bc03289c8135b4b999a066441660f5
+      internalID: -1899344996
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59cabda3ea3ff30449f1b4996c8bdc11
-      internalID: -59521731
+      spriteID: 300477f4505208f409c6b1076357f998
+      internalID: 1331318420
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7153aaddb6ef8ab48954d7d633ce3153
-      internalID: -1165864373
+      spriteID: 400c79865252533449100e1ae56b1baa
+      internalID: 1498046955
       vertices: []
       indices: 
       edges: []
@@ -171,8 +171,8 @@ TextureImporter:
       name: Hero_SpriteSheet2_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 192
+        x: 0
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -182,8 +182,260 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b597f291dd4693047ba9ae8d46726aff
-      internalID: -298230163
+      spriteID: b928665895def554b9f2a6a87c40cb9e
+      internalID: 555859350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47761ebf97638054a94eb1c26f25eaf0
+      internalID: 944927217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d797c09e88bd57f448504b0a027e0d7d
+      internalID: 782695141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b887009782ed4b942aca0208e5d86b2f
+      internalID: 1838009435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fd7f72204d99824b8fc22474955a16d
+      internalID: -555414175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40896085374635442a61fa58cb7ce1a2
+      internalID: -1026131111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d179e7ad9603ec14d8662bf761e8b66a
+      internalID: -706237265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea0cea6fed3684a4ea9831f00c899b14
+      internalID: 2007808718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f3b8a0df986db346a5b8734d9bad382
+      internalID: 1817297814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04b79d4d42d6a9d488e4f4ddb1471637
+      internalID: 1993504247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ab699c46b0e16141837e6b98d93c984
+      internalID: 1763099297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_14
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ae8bd8651b93424594789afe4e55873
+      internalID: -2127740618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_SpriteSheet2_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b4d5c375938bf4ab3d54da815eccdd
+      internalID: 1013913730
       vertices: []
       indices: 
       edges: []
@@ -199,10 +451,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hero_SpriteSheet2_0: 999435473
-      Hero_SpriteSheet2_1: -59521731
-      Hero_SpriteSheet2_2: -1165864373
-      Hero_SpriteSheet2_3: -298230163
+      Hero_SpriteSheet2_0: -1899344996
+      Hero_SpriteSheet2_1: 1331318420
+      Hero_SpriteSheet2_10: 2007808718
+      Hero_SpriteSheet2_11: 1817297814
+      Hero_SpriteSheet2_12: 1993504247
+      Hero_SpriteSheet2_13: 1763099297
+      Hero_SpriteSheet2_14: -2127740618
+      Hero_SpriteSheet2_15: 1013913730
+      Hero_SpriteSheet2_2: 1498046955
+      Hero_SpriteSheet2_3: 555859350
+      Hero_SpriteSheet2_4: 944927217
+      Hero_SpriteSheet2_5: 782695141
+      Hero_SpriteSheet2_6: 1838009435
+      Hero_SpriteSheet2_7: -555414175
+      Hero_SpriteSheet2_8: -1026131111
+      Hero_SpriteSheet2_9: -706237265
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
