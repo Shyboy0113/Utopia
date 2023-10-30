@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,11 @@ public class Set_Perspective : MonoBehaviour
     float fov = 60f;
     float near = 0.3f;
     float far = 1000f;
+    
 
-    void Awake()
+    private void Start()
     {
+        
         InitializeCamera();
     }
 

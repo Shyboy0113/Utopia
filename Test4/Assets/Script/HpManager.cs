@@ -10,7 +10,8 @@ public class HpManager : MonoBehaviour
     private List<Image> heartImages = new List<Image>();
     
     public Image staminaGauge;
-
+    public Camera camera;
+    
     private RectTransform _gaugeTransform;
     private Transform _playerTransform;
 
@@ -22,21 +23,38 @@ public class HpManager : MonoBehaviour
         
         _gaugeTransform = staminaGauge.GetComponent<RectTransform>();
         
-        
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         if (_playerTransform is null)
             _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        
-        screenPos = Camera.main.WorldToScreenPoint(_playerTransform.position);
+
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        screenPos = camera.WorldToScreenPoint(_playerTransform.position);
     }
 
     void Update()
     {
-        if(heartImages.Count != GameManager.Instance._playerHp) UpdateHearts();
-        
+        if (heartImages.Count != GameManager.Instance._playerHp) UpdateHearts();
+
         staminaGauge.fillAmount = GameManager.Instance._playerStamina / GameManager.Instance._staminaMax;
+
+        if (camera is null)
+        {
+            camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+            if (camera is null)
+                camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        }
+
+        if(_playerTransform is null){
+            _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+            if (_playerTransform is null)
+                _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
+
+        if (_playerTransform != null)
+            screenPos = camera.WorldToScreenPoint(_playerTransform.position);
         
-        screenPos = Camera.main.WorldToScreenPoint(_playerTransform.position);
+        
         _gaugeTransform.position = screenPos + new Vector3(50,50,0);
         
         if (staminaGauge.fillAmount >= 0.999999999f)

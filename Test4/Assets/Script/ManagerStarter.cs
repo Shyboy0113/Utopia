@@ -16,8 +16,8 @@ public class ManagerStarter : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(player);
-        DontDestroyOnLoad(mainCamera);
+        //DontDestroyOnLoad(player);
+        //DontDestroyOnLoad(mainCamera);
         
     }
 
@@ -29,5 +29,10 @@ public class ManagerStarter : MonoBehaviour
     {
         GameManager.Instance.isStory = false;
     }
-    
+
+    private void OnDestroy()
+    {
+        //Destroy(player);
+        //Destroy(mainCamera);
+    }
 }

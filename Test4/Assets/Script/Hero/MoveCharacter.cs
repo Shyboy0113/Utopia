@@ -19,8 +19,9 @@ public class MoveCharacter : MonoBehaviour
     
     private bool jump = false;
     public static bool crouch = false;
+    public static bool isGroggy = false;
+    
     private bool isGuard = false;
-    private bool isGroggy = false;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class MoveCharacter : MonoBehaviour
 
     private void Update()
     {
-        if (!isGroggy)
+        if (!isGroggy && !GameManager.Instance.isStory)
         {
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -76,11 +77,31 @@ public class MoveCharacter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(inputX * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+        if (!isGroggy)
+        {
+            controller.Move(inputX * Time.fixedDeltaTime, crouch, jump);
+            jump = false;
+            // 애니메이션 조절
+            UpdateAnimator();
+        }
+    }
+
+    public IEnumerator StartGroggy(float duration)
+    {
+        isGroggy = true;
+        isGuard = false;
+        GameManager.Instance.OnGuardPostureDeactivated.Invoke();
         
-        // 애니메이션 조절
-        UpdateAnimator();
+        animator.SetBool("IsGuard", false);
+        animator.Play("Player_Groggy");
+
+        yield return new WaitForSeconds(duration);
+
+        // After the specified duration, set isGroggy to false and play idle animation
+        
+        isGroggy = false;
+        yield return null;
+        
     }
 
     // 애니메이션을 조절하는 함수

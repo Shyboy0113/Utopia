@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC778\uAC04 \uACE0\uAE30\uB97C \uC694\uB9AC\uD558\uB294 \uBC29\uBC95\n1.
-    \uAC89\uC5D0 \uB450\uB974\uACE0 \uC788\uB294 \uC637\uC744 \uC804\uBD80 \uBC97\uACA8\uB0B8\uB2E4.
-    \n2. \uAC00\uC8FD\uACFC \uC794\uD138\uC744 \uBAA8\uB450 \uC81C\uAC70\uD55C\uB2E4.\n3.
-    \uC0AC\uD6C4 \uACBD\uC9C1\uC774 \uB05D\uB09C \uD6C4 \uB9DB\uC788\uAC8C \uBA39\uC5B4\uC900\uB2E4."
+  m_text: "\uC778\uAC04 \uACE0\uAE30 \uC694\uB9AC\uBC95\n\n\n1. \uC637\uC744 \uC804\uBD80
+    \uBC97\uACA8\uB0B8\uB2E4. \n2. \uAC00\uC8FD\uACFC \uC794\uD138\uC744 \uBAA8\uB450
+    \uC81C\uAC70\uD55C\uB2E4.\n3. \uC0DD\uC73C\uB85C \uBA39\uB294\uAC8C \uC81C\uC77C
+    \uB9DB\uC788\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 657152a79c818a74fbe1ca47c0d62b10, type: 2}
   m_sharedMaterial: {fileID: 6901337991085508406, guid: 657152a79c818a74fbe1ca47c0d62b10, type: 2}
