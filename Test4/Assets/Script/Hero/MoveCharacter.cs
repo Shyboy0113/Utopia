@@ -92,13 +92,14 @@ public class MoveCharacter : MonoBehaviour
         isGuard = false;
         GameManager.Instance.OnGuardPostureDeactivated.Invoke();
         
+        animator.SetBool("IsGroggy", true);
         animator.SetBool("IsGuard", false);
-        animator.Play("Player_Groggy");
 
         yield return new WaitForSeconds(duration);
 
         // After the specified duration, set isGroggy to false and play idle animation
         
+        animator.SetBool("IsGroggy", false);
         isGroggy = false;
         yield return null;
         

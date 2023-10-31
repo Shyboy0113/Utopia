@@ -60,7 +60,7 @@ public class GameManager : Singleton<GameManager>
                 }
             }
 
-         }
+        }
 
         _playerStamina += _staminaVector * Time.deltaTime;
         if (_playerStamina >= _staminaMax) _playerStamina = _staminaMax;
