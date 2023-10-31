@@ -74,7 +74,9 @@ public class GameManager : Singleton<GameManager>
             {
                 moveCharacter.StartCoroutine(moveCharacter.StartGroggy(3f));
             }
-            
+
+            _playerStamina = 0.01f;
+
         }
 
     }

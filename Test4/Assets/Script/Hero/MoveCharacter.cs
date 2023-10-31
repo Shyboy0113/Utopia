@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using PixelCrushers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Animations;
@@ -31,6 +32,8 @@ public class MoveCharacter : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log("IsGroggy is " + isGroggy);
+        
         if (!isGroggy && !GameManager.Instance.isStory)
         {
 
@@ -84,6 +87,10 @@ public class MoveCharacter : MonoBehaviour
             // 애니메이션 조절
             UpdateAnimator();
         }
+        else
+        {
+            controller.Move(0f,false,false);
+        }
     }
 
     public IEnumerator StartGroggy(float duration)
@@ -101,6 +108,7 @@ public class MoveCharacter : MonoBehaviour
         
         animator.SetBool("IsGroggy", false);
         isGroggy = false;
+        
         yield return null;
         
     }
@@ -137,4 +145,9 @@ public class MoveCharacter : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        isGroggy = false;
+        crouch = false;
+    }
 }

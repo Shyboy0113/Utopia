@@ -62,14 +62,14 @@ public class HpManager : MonoBehaviour
             Color newColor = staminaGauge.color;  // Store the color in a variable
             newColor.a = 0f;  // Modify the alpha value
             staminaGauge.color = newColor;  // Assign the modified color back
-            Debug.Log("Setting Alpha to 0");
+            //Debug.Log("Setting Alpha to 0");
         }
         else
         {
             Color newColor = staminaGauge.color;  // Store the color in a variable
             newColor.a = 1f;  // Modify the alpha value
             staminaGauge.color = newColor;  // Assign the modified color back
-            Debug.Log("Setting Alpha to 1");
+            //Debug.Log("Setting Alpha to 1");
         }
     }
 
