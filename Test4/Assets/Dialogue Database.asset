@@ -7742,8 +7742,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\uC7A0\uAE50 \uC870\uB294 \uC0AC\uC774\uC5D0 \uBAA9\uC774 \uAEBE\uC5EC\uBC84\uB838\uC9C0
-          \uBB50\uB2C8. \uD639\uC2DC \uBC14\uB85C\uC7A1\uC544\uC8FC\uC9C0 \uC54A\uC73C\uB828?"
+        value: "\uC548\uB155 \uAF2C\uB9C8\uC57C.\n\uC7A0\uAE50 \uC870\uB294 \uC0AC\uC774\uC5D0
+          \uBAA9\uC774 \uAEBE\uC5EC\uBC84\uB838\uC9C0 \uBB50\uB2C8.\n\uD639\uC2DC
+          \uB124\uAC00 \uBC14\uB85C \uC7A1\uC544\uC8FC\uC9C0 \uC54A\uC73C\uB828?"
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -7954,8 +7955,8 @@ MonoBehaviour:
       userScript: "Variable[\"Evil_Gage\"] = Variable[\"Evil_Gage\"] - 1;\nShowAlert(\"\\\"\uBAA9\uC744
         \uB108\uBB34 \uC138\uAC8C \uAC77\uC5B4\uCC3C\uB294\uC9C0, \uAC00\uB85C\uB4F1
         \uC544\uC800\uC528\uC758 \uBAB8\uC774 \uD138\uC369 \uC4F0\uB7EC\uC9C0\uACE0
-        \uB9D0\uC558\uB2E4.\n \uC544\uC800\uC528\uB294 \uBAB8\uC744 \uC77C\uC73C\uCF1C\uC138\uC6B0\uAE30
-        \uC704\uD574 \uBC14\uB465\uAC70\uB9AC\uACE0 \uC788\uB2E4. \");\n"
+        \uB9D0\uC558\uB2E4.\n\uB531\uD788 \uADF8\uC758 \uBAB8\uC5D0 \uBBF8\uB3D9\uC774
+        \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uB294\uB2E4.\");\n"
       onExecute:
         m_PersistentCalls:
           m_Calls: []
