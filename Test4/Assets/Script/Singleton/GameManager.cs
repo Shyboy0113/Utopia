@@ -43,7 +43,7 @@ public class GameManager : Singleton<GameManager>
             }
             else if (Input.GetKeyDown(KeyCode.R))
             {
-                RestartGame();
+                //RestartGame();
             }
 
             if (!isPause){
@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
                 moveCharacter.StartCoroutine(moveCharacter.StartGroggy(3f));
             }
 
-            _playerStamina = 0.01f;
+            _playerStamina = 0.00000000001f;
 
         }
 
