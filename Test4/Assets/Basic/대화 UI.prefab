@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 11424752}
   - component: {fileID: 11483934}
   - component: {fileID: 11466480}
+  - component: {fileID: 7334328425906998438}
   m_Layer: 5
   m_Name: NPC Subtitle Panel
   m_TagString: Untagged
@@ -939,6 +940,49 @@ MonoBehaviour:
   m_hasFocus: 1
   m_isFocusing: 1
   m_actorOverridingPanel: {fileID: 0}
+--- !u!114 &7334328425906998438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1360375efe462cd4ab520d1661206035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightToLeft: 0
+  charactersPerSecond: 50
+  audioClip: {fileID: 0}
+  alternateAudioClips: []
+  audioSource: {fileID: 0}
+  usePlayOneShot: 0
+  interruptAudioClip: 0
+  stopAudioOnSilentCharacters: 0
+  stopAudioOnPauseCodes: 0
+  silentCharacters: 
+  fullPauseCharacters: 
+  quarterPauseCharacters: 
+  fullPauseDuration: 1
+  quarterPauseDuration: 0.25
+  removeDuplicateTypewriterEffects: 1
+  playOnEnable: 1
+  waitOneFrameBeforeStarting: 0
+  stopOnConversationEnd: 0
+  autoScrollSettings:
+    autoScrollEnabled: 0
+    scrollRect: {fileID: 0}
+    scrollbarEnabler: {fileID: 0}
+  onBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacter:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &114694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,7 +1474,7 @@ GameObject:
   - component: {fileID: 22218530}
   - component: {fileID: 11473704}
   - component: {fileID: 11430224}
-  - component: {fileID: 11410188}
+  - component: {fileID: 8661387272898915654}
   - component: {fileID: 5905853971486538775}
   m_Layer: 5
   m_Name: Subtitle Text
@@ -1502,7 +1546,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &11410188
+--- !u!114 &8661387272898915654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1511,12 +1555,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 131822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf59e9c601bf0354baa2d3daac7d491e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1360375efe462cd4ab520d1661206035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rightToLeft: 0
-  charactersPerSecond: 5
-  audioClip: {fileID: 0}
+  charactersPerSecond: 50
+  audioClip: {fileID: 8300000, guid: b9cd352d6e3cfe14ab48fbd8ce0ef2f3, type: 3}
   alternateAudioClips: []
   audioSource: {fileID: 0}
   usePlayOneShot: 0
@@ -1529,14 +1573,13 @@ MonoBehaviour:
   fullPauseDuration: 1
   quarterPauseDuration: 0.25
   removeDuplicateTypewriterEffects: 1
-  playOnEnable: 0
+  playOnEnable: 1
   waitOneFrameBeforeStarting: 0
   stopOnConversationEnd: 0
   autoScrollSettings:
     autoScrollEnabled: 0
     scrollRect: {fileID: 0}
     scrollbarEnabler: {fileID: 0}
-    sizerText: {fileID: 0}
   onBegin:
     m_PersistentCalls:
       m_Calls: []
@@ -3282,7 +3325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 11424526}
-  typewriterEffect: {fileID: 11484188}
+  typewriterEffect: {fileID: 0}
   hideContinueButtonOnContinue: 0
   continueSubtitlePanel: 1
   continueAlertPanel: 1
@@ -4575,7 +4618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 11424526}
-  typewriterEffect: {fileID: 11410188}
+  typewriterEffect: {fileID: 0}
   hideContinueButtonOnContinue: 0
   continueSubtitlePanel: 1
   continueAlertPanel: 1
@@ -5351,7 +5394,7 @@ GameObject:
   - component: {fileID: 22296534}
   - component: {fileID: 11435868}
   - component: {fileID: 11400246}
-  - component: {fileID: 11484188}
+  - component: {fileID: 1879947665252182986}
   - component: {fileID: 8390188060127389877}
   m_Layer: 5
   m_Name: Subtitle Text
@@ -5423,7 +5466,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &11484188
+--- !u!114 &1879947665252182986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5432,7 +5475,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 199834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf59e9c601bf0354baa2d3daac7d491e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1360375efe462cd4ab520d1661206035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rightToLeft: 0
@@ -5450,14 +5493,13 @@ MonoBehaviour:
   fullPauseDuration: 1
   quarterPauseDuration: 0.25
   removeDuplicateTypewriterEffects: 1
-  playOnEnable: 0
+  playOnEnable: 1
   waitOneFrameBeforeStarting: 0
   stopOnConversationEnd: 0
   autoScrollSettings:
     autoScrollEnabled: 0
     scrollRect: {fileID: 0}
     scrollbarEnabler: {fileID: 0}
-    sizerText: {fileID: 0}
   onBegin:
     m_PersistentCalls:
       m_Calls: []
