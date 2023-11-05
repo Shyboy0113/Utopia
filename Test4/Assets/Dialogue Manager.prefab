@@ -198,7 +198,7 @@ MonoBehaviour:
       showPCSubtitlesDuringLine: 1
       allowPCSubtitleReminders: 0
       skipPCSubtitleAfterResponseMenu: 1
-      subtitleCharsPerSecond: 5
+      subtitleCharsPerSecond: 30
       minSubtitleSeconds: 5
       continueButton: 2
       requireContinueOnLastLine: 1
@@ -298,7 +298,13 @@ MonoBehaviour:
   inputDevice: 1
   joystickKeyCodesToCheck: 4a0100004b0100004c01000051010000
   joystickButtonsToCheck: []
-  joystickAxesToCheck: []
+  joystickAxesToCheck:
+  - JoystickAxis1
+  - JoystickAxis2
+  - JoystickAxis3
+  - JoystickAxis4
+  - JoystickAxis6
+  - JoystickAxis7
   joystickAxisThreshold: 0.5
   keyButtonsToCheck: []
   keyCodesToCheck: 20000000

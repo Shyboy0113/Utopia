@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,7 +103,1309 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_9
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a2feded430a40439bed0d7ba314dcb
+      internalID: -601663484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_10
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30950c3fe94f6df458089f87eff8ecef
+      internalID: 1228461982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_11
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95527c0a91a8bed4eb483e2fd0c8d5e1
+      internalID: 1184054695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_12
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5241e2a63e7fc14a84496234babe180
+      internalID: -2079896921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_13
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44324ef12043f784d9bf05721dcd58e5
+      internalID: 1018341974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_14
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165d707aed6552b4596bddcfc2f4cf96
+      internalID: 89233462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_27
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 162
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2af27af7abe57654cac6b6075870d757
+      internalID: 933192121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_28
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 162
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39ff1c78d9b36449ae3ce1deb106676
+      internalID: 342853012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_29
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 162
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17f4c0ff4b7cfb646ab8a452c92423c7
+      internalID: -62750805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_30
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 162
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88b0c7c4bf4824469af3a5f2b476a20
+      internalID: -986354799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_31
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 162
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0083f41fa3fdcfb4094763207abd4807
+      internalID: -1770976163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_32
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 162
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7b05b3996700a5428f12ce62bf75448
+      internalID: 723879710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_37
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 140
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e6aaec0fbb734488b1bb3a13262769
+      internalID: -1728761832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_38
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 157
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e3d7ac6ce1a1db4081ddedc1bf7dfa9
+      internalID: 379041955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_46
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 140
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 962cfaa03cd3cf04083616c0eadac66a
+      internalID: -1484014424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_47
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 140
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0934bdc0a2678c142a972df6f5cbe74d
+      internalID: 271130383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_48
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 140
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eced28c21eecfc44929d343ac5f59b6
+      internalID: 1223989516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_49
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 140
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21b687edc410c140b575ed2c2ef446a
+      internalID: 1572272110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_50
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 140
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547200ea9d45c95499cacf51e88a0b64
+      internalID: 480203491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_60
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0cd8a019a245244891f759d6e1047bb
+      internalID: -635276627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_61
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b95d798d94dcb9245b600be41f978b01
+      internalID: -306603810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_62
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672981dee11b2be4f9e2f34dc8fb9d06
+      internalID: -778955009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_63
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba777f49870363745bd49e2ff9407aa3
+      internalID: -1171212199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_64
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547ad3658f3b2924ebb64ac2549e164f
+      internalID: -1700880102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_65
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e5e97d7be2e6645a07c76c6a7638a2
+      internalID: 2001575244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_76
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 96
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 147f050c8a0ad6d44a2398ffd54a974a
+      internalID: -621808484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_77
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 96
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5c3f2c239ba54241897c855f012bbe7
+      internalID: 938173558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_78
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 96
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36deceb4cb5714e4e987d261252fc36c
+      internalID: 1678143679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_79
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 96
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f4103c2f299a7149b0f73aba6e8f519
+      internalID: 1475906325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_80
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 96
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 566eb0631cde4924388e4b9357ca566a
+      internalID: 1735325938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_81
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 96
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a7c9581305ee474a8f3af29bf21b3e9
+      internalID: -1527720134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_86
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 74
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5142618a835a1bb4ba348982f43ea293
+      internalID: -1418435095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_87
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 91
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e102bd26997cd6469b5d4508f079a56
+      internalID: 1045868698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_93
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 74
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 634e7ccfcd0e3f542a90d347091a283d
+      internalID: -174790936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_94
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 74
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6030714b4ab24ca4e8d2f26734a4307c
+      internalID: -530157249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_95
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 74
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0261f36cd6a5996478a8626125b0f644
+      internalID: -2073684540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_96
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 74
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dce8e63c75ac27449d15d3c31daff4d
+      internalID: 787764915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_97
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 74
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8856785e1b21e24fa21b56403440ff8
+      internalID: 2077408302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_108
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c06628cf2de4cc4298d46e5e8680fdb
+      internalID: 1274194300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_109
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b1c268afe05b6143861723d9654a76e
+      internalID: 1405404476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_110
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b76813e31c122b468729f26780095e7
+      internalID: 420611359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_111
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c14629b1da26d274d81c9f4c793c7727
+      internalID: -426325673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_112
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1147a831c4d96ca408e1661ede5b5f1b
+      internalID: -734905260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_113
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0caa4fd2f5e57e54ab8723e0476c6a8f
+      internalID: -1570704159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_114
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaaadc1506fea86479a6be354ebe2a44
+      internalID: 1641127409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_115
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 52
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a50e617e1f14604fa7c3ddd2faf6205
+      internalID: -1401532208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_124
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf2dd0d5bd5ce34b8104cc7f056390a
+      internalID: 1341174191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_125
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d0c7bd01d6d58f4abad991fbc96b860
+      internalID: 1088686137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_126
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3847d60909756e14b8d781de869f8c25
+      internalID: 2136940584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_127
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d759066b5aee4844a656db15bbc24cb
+      internalID: 96225649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_128
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a739beccef449944a6446833f1fd862
+      internalID: -1782630397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_129
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b219ecc329d2246aafcc0add8c61c3
+      internalID: -152041906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_130
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506aae10c4082784bb6f23ef74bb895e
+      internalID: 131403693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_131
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 30
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92ffdd27eb75ea94ab8044bdd0f986ad
+      internalID: 1482395804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_137
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8af4160ab8d570439d5c181d4647037
+      internalID: -447294221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_140
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0301f13117fadc44fbe5e6d87d95993d
+      internalID: -1128001443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_141
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b752aface398c644ae32bc697a1b3a3
+      internalID: -981043975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_142
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c34f4b5b8d99374bb592d0e388cbd9f
+      internalID: 829808749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_143
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c96526540a3e51942a62daf754d1cb15
+      internalID: -1138920669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_144
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b6d25d2f26e281459bb6cc0b7c4015d
+      internalID: 1240136957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_145
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d61d4b8bf4334f343ae0b8a177cea0e6
+      internalID: 1586303166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: detective_tileset_hero_background_transparent_146
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 8
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 407446c41e7c89348b291ad4c81104aa
+      internalID: 142858969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +1416,154 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      detective_tileset_hero_background_transparent_0: -1464163202
+      detective_tileset_hero_background_transparent_1: -1854450802
+      detective_tileset_hero_background_transparent_10: 1228461982
+      detective_tileset_hero_background_transparent_100: 194727368
+      detective_tileset_hero_background_transparent_101: -1625895261
+      detective_tileset_hero_background_transparent_102: -18344933
+      detective_tileset_hero_background_transparent_103: 610234544
+      detective_tileset_hero_background_transparent_104: -1511590511
+      detective_tileset_hero_background_transparent_105: 4215046
+      detective_tileset_hero_background_transparent_106: 1376137157
+      detective_tileset_hero_background_transparent_107: 1531922424
+      detective_tileset_hero_background_transparent_108: 1274194300
+      detective_tileset_hero_background_transparent_109: 1405404476
+      detective_tileset_hero_background_transparent_11: 1184054695
+      detective_tileset_hero_background_transparent_110: 420611359
+      detective_tileset_hero_background_transparent_111: -426325673
+      detective_tileset_hero_background_transparent_112: -734905260
+      detective_tileset_hero_background_transparent_113: -1570704159
+      detective_tileset_hero_background_transparent_114: 1641127409
+      detective_tileset_hero_background_transparent_115: -1401532208
+      detective_tileset_hero_background_transparent_116: 959405498
+      detective_tileset_hero_background_transparent_117: 2058379813
+      detective_tileset_hero_background_transparent_118: -945802664
+      detective_tileset_hero_background_transparent_119: -1586577296
+      detective_tileset_hero_background_transparent_12: -2079896921
+      detective_tileset_hero_background_transparent_120: -309349394
+      detective_tileset_hero_background_transparent_121: -1095193928
+      detective_tileset_hero_background_transparent_122: 1261121040
+      detective_tileset_hero_background_transparent_123: 522996091
+      detective_tileset_hero_background_transparent_124: 1341174191
+      detective_tileset_hero_background_transparent_125: 1088686137
+      detective_tileset_hero_background_transparent_126: 2136940584
+      detective_tileset_hero_background_transparent_127: 96225649
+      detective_tileset_hero_background_transparent_128: -1782630397
+      detective_tileset_hero_background_transparent_129: -152041906
+      detective_tileset_hero_background_transparent_13: 1018341974
+      detective_tileset_hero_background_transparent_130: 131403693
+      detective_tileset_hero_background_transparent_131: 1482395804
+      detective_tileset_hero_background_transparent_132: 1591585845
+      detective_tileset_hero_background_transparent_133: 1773840646
+      detective_tileset_hero_background_transparent_134: -196874818
+      detective_tileset_hero_background_transparent_135: 73171688
+      detective_tileset_hero_background_transparent_136: 39556530
+      detective_tileset_hero_background_transparent_137: -447294221
+      detective_tileset_hero_background_transparent_138: 1603904320
+      detective_tileset_hero_background_transparent_139: 16980238
+      detective_tileset_hero_background_transparent_14: 89233462
+      detective_tileset_hero_background_transparent_140: -1128001443
+      detective_tileset_hero_background_transparent_141: -981043975
+      detective_tileset_hero_background_transparent_142: 829808749
+      detective_tileset_hero_background_transparent_143: -1138920669
+      detective_tileset_hero_background_transparent_144: 1240136957
+      detective_tileset_hero_background_transparent_145: 1586303166
+      detective_tileset_hero_background_transparent_146: 142858969
+      detective_tileset_hero_background_transparent_15: 1145019835
+      detective_tileset_hero_background_transparent_16: -508266591
+      detective_tileset_hero_background_transparent_17: 310715641
+      detective_tileset_hero_background_transparent_18: 476038080
+      detective_tileset_hero_background_transparent_19: 492680390
+      detective_tileset_hero_background_transparent_2: -179018766
+      detective_tileset_hero_background_transparent_20: 1946097985
+      detective_tileset_hero_background_transparent_21: 358583083
+      detective_tileset_hero_background_transparent_22: 1999353102
+      detective_tileset_hero_background_transparent_23: 1604016482
+      detective_tileset_hero_background_transparent_24: 1300246692
+      detective_tileset_hero_background_transparent_25: -195932296
+      detective_tileset_hero_background_transparent_26: 1574301440
+      detective_tileset_hero_background_transparent_27: 933192121
+      detective_tileset_hero_background_transparent_28: 342853012
+      detective_tileset_hero_background_transparent_29: -62750805
+      detective_tileset_hero_background_transparent_3: -1907336849
+      detective_tileset_hero_background_transparent_30: -986354799
+      detective_tileset_hero_background_transparent_31: -1770976163
+      detective_tileset_hero_background_transparent_32: 723879710
+      detective_tileset_hero_background_transparent_33: -1247768372
+      detective_tileset_hero_background_transparent_34: 144559337
+      detective_tileset_hero_background_transparent_35: -1525611784
+      detective_tileset_hero_background_transparent_36: 1100243757
+      detective_tileset_hero_background_transparent_37: -1728761832
+      detective_tileset_hero_background_transparent_38: 379041955
+      detective_tileset_hero_background_transparent_39: -152662798
+      detective_tileset_hero_background_transparent_4: -1314220041
+      detective_tileset_hero_background_transparent_40: 1872441484
+      detective_tileset_hero_background_transparent_41: -314192876
+      detective_tileset_hero_background_transparent_42: 1225184439
+      detective_tileset_hero_background_transparent_43: 783085675
+      detective_tileset_hero_background_transparent_44: 737734744
+      detective_tileset_hero_background_transparent_45: 91879127
+      detective_tileset_hero_background_transparent_46: -1484014424
+      detective_tileset_hero_background_transparent_47: 271130383
+      detective_tileset_hero_background_transparent_48: 1223989516
+      detective_tileset_hero_background_transparent_49: 1572272110
+      detective_tileset_hero_background_transparent_5: -1130488050
+      detective_tileset_hero_background_transparent_50: 480203491
+      detective_tileset_hero_background_transparent_51: 697039579
+      detective_tileset_hero_background_transparent_52: -354925814
+      detective_tileset_hero_background_transparent_53: -1958901191
+      detective_tileset_hero_background_transparent_54: -2024536079
+      detective_tileset_hero_background_transparent_55: -827674444
+      detective_tileset_hero_background_transparent_56: -219245407
+      detective_tileset_hero_background_transparent_57: -1767424710
+      detective_tileset_hero_background_transparent_58: 2088842097
+      detective_tileset_hero_background_transparent_59: 1077010915
+      detective_tileset_hero_background_transparent_6: -812564390
+      detective_tileset_hero_background_transparent_60: -635276627
+      detective_tileset_hero_background_transparent_61: -306603810
+      detective_tileset_hero_background_transparent_62: -778955009
+      detective_tileset_hero_background_transparent_63: -1171212199
+      detective_tileset_hero_background_transparent_64: -1700880102
+      detective_tileset_hero_background_transparent_65: 2001575244
+      detective_tileset_hero_background_transparent_66: 348989706
+      detective_tileset_hero_background_transparent_67: -587785589
+      detective_tileset_hero_background_transparent_68: 212148613
+      detective_tileset_hero_background_transparent_69: -267287862
+      detective_tileset_hero_background_transparent_7: 53926375
+      detective_tileset_hero_background_transparent_70: -987501708
+      detective_tileset_hero_background_transparent_71: 929311535
+      detective_tileset_hero_background_transparent_72: -1889916459
+      detective_tileset_hero_background_transparent_73: -585563368
+      detective_tileset_hero_background_transparent_74: 634032676
+      detective_tileset_hero_background_transparent_75: -1430397222
+      detective_tileset_hero_background_transparent_76: -621808484
+      detective_tileset_hero_background_transparent_77: 938173558
+      detective_tileset_hero_background_transparent_78: 1678143679
+      detective_tileset_hero_background_transparent_79: 1475906325
+      detective_tileset_hero_background_transparent_8: 1142784850
+      detective_tileset_hero_background_transparent_80: 1735325938
+      detective_tileset_hero_background_transparent_81: -1527720134
+      detective_tileset_hero_background_transparent_82: 1345425937
+      detective_tileset_hero_background_transparent_83: -568806330
+      detective_tileset_hero_background_transparent_84: 652196637
+      detective_tileset_hero_background_transparent_85: 1713813791
+      detective_tileset_hero_background_transparent_86: -1418435095
+      detective_tileset_hero_background_transparent_87: 1045868698
+      detective_tileset_hero_background_transparent_88: 1434673526
+      detective_tileset_hero_background_transparent_89: 1092632551
+      detective_tileset_hero_background_transparent_9: -601663484
+      detective_tileset_hero_background_transparent_90: 747447552
+      detective_tileset_hero_background_transparent_91: -362521527
+      detective_tileset_hero_background_transparent_92: 400931113
+      detective_tileset_hero_background_transparent_93: -174790936
+      detective_tileset_hero_background_transparent_94: -530157249
+      detective_tileset_hero_background_transparent_95: -2073684540
+      detective_tileset_hero_background_transparent_96: 787764915
+      detective_tileset_hero_background_transparent_97: 2077408302
+      detective_tileset_hero_background_transparent_98: -1964793271
+      detective_tileset_hero_background_transparent_99: 454571783
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
