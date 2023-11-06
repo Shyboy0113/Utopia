@@ -11334,8 +11334,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\uC0AC\uC81C\uB2D8, \uB2E4\uC2DC \uB9D0\uC500 \uB4DC\uB9AC\uC9C0\uB9CC...\uC81C
-          \uBCF4\uD638\uC790\uB294 \uC548 \uACC4\uC2E0\uB2E4\uACE0\u3147..."
+        value: "\uC0AC\uC81C\uB2D8, \uC81C \uBCF4\uD638\uC790\uB294 \uC548 \uACC4\uC2E0\uB2E4\uACE0
+          \uB300\uCCB4 \uBA87 \uBC88\uC744 \uB9D0\uC500\uB4DC\uB9AC\uB294\uAC70\uC5D0..."
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -11493,9 +11493,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\uB2E4\uC2DC \uD55C \uBC88 \uB9D0\uD558\uC9C0\uB9CC, \uC9C0\uAE08
-          \uC6B0\uB9AC\uB3C4 \uC0AC\uC815\uC774 \uAE09\uD574\uC11C \uB124 \uB9D0\uC744
-          \uB4E4\uC5B4\uC904 \uC5EC\uC720\uAC00 \uC5C6\uB2E8 \uB9D0\uC774\uB2E4."
+        value: "\uC9C0\uAE08 \uB124 \uB4A4\uB97C \uBD10\uB77C."
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -11574,7 +11572,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\uC9C0\uAE08 \uB124 \uB4A4\uB97C \uBD10."
+        value: "\uB108 \uD558\uB098 \uB54C\uBB38\uC5D0 \uB4A4\uC5D0 \uC788\uB294
+          \uC2E0\uB3C4\uB4E4\uC774 \uBB3C\uC790\uB97C \uBABB \uBC1B\uB294 \uAC74
+          \uC54C\uACE0\uC788\uB294\uAC70\uB0D0?"
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -11653,9 +11653,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "\uB108 \uD558\uB098 \uB54C\uBB38\uC5D0 \uB4A4\uC5D0 \uC788\uB294
-          \uC2E0\uB3C4\uB4E4\uC774 \uBB3C\uC790\uB97C \uBABB \uBC1B\uB294 \uAC74
-          \uC54C\uACE0\uC788\uB294\uAC70\uB0D0?"
+        value: "\uC6B0\uB9AC\uB3C4 \uB2F9\uC7A5 \uAE09\uD558\uB2C8\uAE4C, \uB124
+          \uB9D0\uC744 \uB4E4\uC5B4\uC904 \uC5EC\uC720\uAC00 \uC5C6\uB2E8 \uB9D0\uC774\uC57C."
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -11693,7 +11692,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 12
+        originDialogueID: 10
+        destinationConversationID: 12
+        destinationDialogueID: 13
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -11865,9 +11870,83 @@ MonoBehaviour:
         y: 468.7931
         width: 160
         height: 30
+    - id: 13
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 6
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 13
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: "\uC815 \uBC1B\uC544\uC57C\uACA0\uB2E4\uBA74 \uC804\uBD80\uB2E4 \uB05D\uB098\uACE0
+          \uB098\uC11C \uB2E4\uC2DC \uCC3E\uC544\uC624\uB3C4\uB85D \uD558\uB834."
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: ja
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: en
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: canvasRect
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Guid
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      - title: Menu Text ko
+        value: 
+        type: 4
+        typeString: CustomFieldType_Localization
+      conversationID: 12
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 161.27481
+        y: 969.0707
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.49000046
+    canvasScrollPosition: {x: 42.4657, y: 523.0975}
+    canvasZoom: 0.7300004
   syncInfo:
     syncActors: 0
     syncItems: 0
