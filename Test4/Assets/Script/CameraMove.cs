@@ -5,10 +5,21 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     
-    public float moveTime = 5f;
+    public float moveTime = 2f;
+    public float moveDistance = 25f;
     
     private Coroutine currentCoroutine;
-    
+
+    public void SetToLeft()
+    {
+        transform.position = new Vector3(3f - moveDistance, 0, 0);
+    }
+
+    public void SetToRight()
+    {
+        transform.position = new Vector3(3f,0f,0f);
+    }
+
     public void MoveToLeft()
     {
         if (currentCoroutine != null)
@@ -17,7 +28,7 @@ public class CameraMove : MonoBehaviour
             StopCoroutine(currentCoroutine);
         }
 
-        currentCoroutine = StartCoroutine(MoveCamera(-5f));
+        currentCoroutine = StartCoroutine(MoveCamera(-moveDistance));
         
     }
 
@@ -29,7 +40,7 @@ public class CameraMove : MonoBehaviour
             StopCoroutine(currentCoroutine);
         }
 
-        currentCoroutine = StartCoroutine(MoveCamera(+5f));
+        currentCoroutine = StartCoroutine(MoveCamera(moveDistance));
         
     }
 
