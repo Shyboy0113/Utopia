@@ -12,12 +12,28 @@ public class CameraMove : MonoBehaviour
 
     public void SetToLeft()
     {
-        transform.position = new Vector3(3f - moveDistance, 0, 0);
+        transform.position = new Vector3(3f - moveDistance, 0f, -10f);
     }
 
     public void SetToRight()
     {
-        transform.position = new Vector3(3f,0f,0f);
+        transform.position = new Vector3(3f,0f,-10f);
+    }
+    
+    public void SetToRight2()
+    {
+        transform.position = new Vector3(7f,0f,-10f);
+    }
+    
+    public void MoveToRight2()
+    {
+        if (currentCoroutine != null)
+        {
+            // If the narrow coroutine is already running, stop it
+            StopCoroutine(currentCoroutine);
+        }
+
+        currentCoroutine = StartCoroutine(MoveCamera(4));
     }
 
     public void MoveToLeft()

@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 4790289333504511400}
   - component: {fileID: 4790289333504511402}
   - component: {fileID: 4790289333504511376}
-  - component: {fileID: 701068528}
   - component: {fileID: 701068529}
   - component: {fileID: 701068530}
   - component: {fileID: 701068531}
@@ -451,29 +450,6 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 0}
---- !u!114 &701068528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4790289333504501311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a2840b06cde3b479416623b4d15788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startMessage: Press Escape for Menu
-  menuKey: 127
-  guiSkin: {fileID: 0}
-  closeWhenQuestLogOpen: 1
-  lockCursorDuringPlay: 0
-  onOpen:
-    m_PersistentCalls:
-      m_Calls: []
-  onClose:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &701068529
 MonoBehaviour:
   m_ObjectHideFlags: 0

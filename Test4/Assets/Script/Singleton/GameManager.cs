@@ -9,12 +9,22 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
+    //체력 관련
     public int _playerHp;
+    public int MaxHp = 3;
+    
+    //스태미나 관련
     public float _playerStamina;
-
     public float _staminaMax = 5.0f;
     private float _staminaVector = 1f;
 
+    //게임 플레이 도중 참고할 데이터들
+    public int HpPotion = 0;
+    public int Gold = 0;
+
+    //포션 중독 관련 게이지
+    public float PotionAddiction = 0f;
+    
     //Guard(경계 자세) 이벤트
     public UnityEvent OnGuardPostureActivated;
     public UnityEvent OnGuardPostureDeactivated;
@@ -26,7 +36,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        _playerHp = 5;
+        _playerHp = MaxHp;
         _playerStamina = _staminaMax;
 
     }
@@ -62,6 +72,7 @@ public class GameManager : Singleton<GameManager>
 
         }
 
+        //스태미나 채움 관련 이벤트
         _playerStamina += _staminaVector * Time.deltaTime;
         if (_playerStamina >= _staminaMax) _playerStamina = _staminaMax;
         
@@ -78,6 +89,12 @@ public class GameManager : Singleton<GameManager>
             _playerStamina = 0.00000000001f;
 
         }
+        
+        //포션 중독 관련 게이지
+        if (PotionAddiction >= 5.0f)
+        {
+            Debug.Log("포션에 중독되었다.");
+        } 
 
     }
     
