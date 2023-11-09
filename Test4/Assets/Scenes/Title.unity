@@ -6621,6 +6621,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 701068531, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
+      propertyPath: enterSceneTransition.animationDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 701068531, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
+      propertyPath: leaveSceneTransition.animationDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790289333494961339, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
+      propertyPath: displaySettings.subtitleSettings.continueButton
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790289333494961339, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
+      propertyPath: displaySettings.subtitleSettings.minSubtitleSeconds
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4790289333504501311, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
       propertyPath: m_Name
       value: Dialogue Manager

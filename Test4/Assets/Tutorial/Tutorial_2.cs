@@ -14,7 +14,12 @@ public class Tutorial_2 : MonoBehaviour
 
     public void PlayerFall()
     {
-        playerAnimation.Play("Player_Falldown");
+        playerAnimation.Play("Player_FallDown");
+    }
+
+    public void PlayerIdle()
+    {
+        playerAnimation.Play("Player_Idle");
     }
 
     public void Flip(int repeat)
