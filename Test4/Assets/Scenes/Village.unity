@@ -12465,7 +12465,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -12478,6 +12478,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &642085620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642085606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e23b9e1eea654f4dbb0eff1afe41e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessingVolume: {fileID: 2119234830}
 --- !u!1 &807072514
 GameObject:
   m_ObjectHideFlags: 0
@@ -12756,9 +12769,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 888888446639464209, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 888888447708242837, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 888888447708242837, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 888888447708242839, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
       propertyPath: orthographic
@@ -12820,7 +12841,19 @@ PrefabInstance:
       propertyPath: volumeLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 888888447708242843, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 888888447708242843, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+      propertyPath: postProcessVolume
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 888888447708242842, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+    - {fileID: 888888446639464210, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+    - {fileID: 888888446639464211, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+    - {fileID: 888888447708242843, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
 --- !u!1 &1446418290
 GameObject:
@@ -33876,3 +33909,25 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &2119234826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 888888446639464209, guid: de097a9dd2e1abc42b18b340dbfa9cbc, type: 3}
+  m_PrefabInstance: {fileID: 1272833584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2119234830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119234826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 4445df1634f09bc4da1453c53104e2bf, type: 2}
