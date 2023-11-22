@@ -45,30 +45,30 @@ public class Tutorial_2 : MonoBehaviour
     {
         float count = 0f;
 
-        // ÀÌµ¿ ¹æÇâ °è»ê
+        // ì´ë™ ë°©í–¥ ê³„ì‚°
         float moveDirection = Mathf.Sign(distance);
 
-        // Ä³¸¯ÅÍ°¡ ÀÌµ¿ÇÏ´Â ¹æÇâ¿¡ µû¶ó ½ºÇÁ¶óÀÌÆ® µÚÁı±â
+        // ìºë¦­í„°ê°€ ì´ë™í•˜ëŠ” ë°©í–¥ì— ë”°ë¼ ìŠ¤í”„ë¼ì´íŠ¸ ë’¤ì§‘ê¸°
         spriteRenderer.flipX = moveDirection > 0;
 
-        // ÀÌµ¿ Áß ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+        // ì´ë™ ì¤‘ í”Œë ˆì´ì–´ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
         playerAnimation.Play("Player_Move");
 
         while (count <= Mathf.Abs(distance))
         {
-            // Rigidbody¿¡ ¼Óµµ ¼³Á¤
+            // Rigidbodyì— ì†ë„ ì„¤ì •
             player.velocity = new Vector2(moveDirection * 3f, player.velocity.y);
 
-            // ÀÌµ¿ °Å¸® °»½Å
+            // ì´ë™ ê±°ë¦¬ ê°±ì‹ 
             count += Mathf.Abs(player.velocity.x) * Time.deltaTime;
 
             yield return null;
         }
 
-        // ÀÌµ¿ ¿Ï·á ÈÄ ¼Óµµ¸¦ 0À¸·Î ¼³Á¤
+        // ì´ë™ ì™„ë£Œ í›„ ì†ë„ë¥¼ 0ìœ¼ë¡œ ì„¤ì •
         player.velocity = Vector2.zero;
 
-        // ÀÌµ¿ ¿Ï·á ÈÄ ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Idle·Î º¯°æ
+        // ì´ë™ ì™„ë£Œ í›„ í”Œë ˆì´ì–´ ì• ë‹ˆë©”ì´ì…˜ì„ Idleë¡œ ë³€ê²½
         playerAnimation.Play("Player_Idle");
     }
 

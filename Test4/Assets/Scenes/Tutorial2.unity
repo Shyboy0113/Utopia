@@ -170,7 +170,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.7
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 5
   m_LightVolumeIntensity: 1
@@ -891,19 +891,7 @@ MonoBehaviour:
   - guid: 60247d12-cc8d-4b5e-bc1c-711319332366
     onExecute:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 391261315}
-          m_TargetAssemblyTypeName: Tutorial_2, Assembly-CSharp
-          m_MethodName: PlayerFall
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - guid: 4edfd13a-30d6-4a57-9c61-c4074cf7afea
     onExecute:
       m_PersistentCalls:
@@ -917,6 +905,22 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 3
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 6712e0b0-2f72-4b06-a0e8-14a36fc4ae02
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 391261315}
+          m_TargetAssemblyTypeName: Tutorial_2, Assembly-CSharp
+          m_MethodName: PlayerFall
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1041,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4790289333494961339, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
       propertyPath: displaySettings.subtitleSettings.continueButton
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4790289333494961339, guid: 21514c94cc2e2db42955eda73968ec32, type: 3}
       propertyPath: displaySettings.subtitleSettings.minSubtitleSeconds
