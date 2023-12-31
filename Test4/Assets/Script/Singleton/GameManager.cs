@@ -9,6 +9,9 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    public string enemyName;
+    
     //체력 관련
     public int _playerHp;
     public int MaxHp = 3;
