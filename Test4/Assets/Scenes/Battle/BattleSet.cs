@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleSet : MonoBehaviour
 {
@@ -15,16 +16,40 @@ public class BattleSet : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D playerRigidbody;
 
+    public Image dummyHpBar;
+    public Image hpBar;
+
+    public float fillTime = 0.5f;
+
+    public GameObject enemy;
+
+    public int enemyCurrentHp;
+    public int enemyMaxHp;
+
+
     void Awake()
     {
         // player¿« RectTransform¿ª ∞°¡Æø»
         playerRigidbody = player.GetComponent<Rigidbody2D>();
         playerTransform = player.GetComponent<Transform>();
+
+        enemy = GameObject.FindWithTag("Enemy");
+
+        if (enemy is not null)
+        {
+            
+        }
+
     }
 
     void Start()
     {
+        hpBar.fillAmount = 0f;
+
         _enemyName = GameManager.Instance.enemyName;
+
+        StopAllCoroutines();
+        StartCoroutine(FillHp());
 
         if (_enemyName is not null)
         {
@@ -32,6 +57,23 @@ public class BattleSet : MonoBehaviour
         }
 
     }
+    IEnumerator FillHp()
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < fillTime)
+        {
+            dummyHpBar.fillAmount = Mathf.Lerp(0f, 1f, elapsedTime / fillTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        dummyHpBar.fillAmount = 1f;
+        hpBar.gameObject.SetActive(true);
+        dummyHpBar.gameObject.SetActive(false);
+
+    }
+
 
     private void Update()
     {
