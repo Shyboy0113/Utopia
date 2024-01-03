@@ -10,20 +10,34 @@ using UnityEngine.Events;
 public class GameManager : Singleton<GameManager>
 {
 
-    public string enemyName;
-    
+    //적 스폰 코드
+    public string enemyCode;
+
+    public void SetEnemyInfo(string code)
+    {
+        enemyCode = code;
+    }
+
     //체력 관련
     public int _playerHp;
     public int MaxHp = 3;
-    
+
+    //공격력 관련
+    public int Atk;
+
     //스태미나 관련
     public float _playerStamina;
     public float _staminaMax = 5.0f;
     private float _staminaVector = 1f;
-
+    
     //게임 플레이 도중 참고할 데이터들
     public int HpPotion = 0;
     public int Gold = 0;
+
+    public void GetGold(int gold)
+    {
+        Gold += gold;
+    }
 
     //포션 중독 관련 게이지
     public float PotionAddiction = 0f;
@@ -31,6 +45,9 @@ public class GameManager : Singleton<GameManager>
     //Guard(경계 자세) 이벤트
     public UnityEvent OnGuardPostureActivated;
     public UnityEvent OnGuardPostureDeactivated;
+
+    //전투가 끝났을 때 (플레이어가 죽거나, 적이 죽음)
+    public bool isBattle = false;
 
     //스토리 및 컷신 연출 중일 때
     public bool isStory = false;

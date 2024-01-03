@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Ground
   - Boss
+  - Pistol
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Boss
   - PostProcessing
   - Enemy
-  - 
+  - Pistol
   - 
   - 
   - 

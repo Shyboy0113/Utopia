@@ -4,20 +4,25 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [SerializeField]
-    private string enemyName;
+    private string _name;
 
     [SerializeField]
-    private int power = 1;
+    private int _power;
 
     [SerializeField]
-    private int defence = 0;
+    private int _defence;
 
     [SerializeField]
-    private int maxHp = 30;
+    private int _maxHp;
 
-    public string EnemyName { get { return enemyName; } }   
-    public int Power { get { return power; } }
-    public int Defence { get { return defence; } }    
-    public int MaxHp { get { return maxHp; } }
-    
+    [SerializeField]
+    private int _haveGold;
+
+    public string Name { get { return _name; } }   
+    public int Power { get { return _power; } }
+    public int Defence { get { return _defence; } }    
+    public int MaxHp { get { return _maxHp; } }
+
+    public int Gold { get { return _haveGold; } }
+
 }

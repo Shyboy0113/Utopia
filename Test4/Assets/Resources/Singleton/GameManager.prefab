@@ -44,14 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cef231f622e51428680aece00840cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyCode: 0001
   _playerHp: 0
+  MaxHp: 3
+  Atk: 1
   _playerStamina: 0
   _staminaMax: 5
+  HpPotion: 0
+  Gold: 0
+  PotionAddiction: 0
   OnGuardPostureActivated:
     m_PersistentCalls:
       m_Calls: []
   OnGuardPostureDeactivated:
     m_PersistentCalls:
       m_Calls: []
+  isBattle: 0
   isStory: 0
   isPause: 0

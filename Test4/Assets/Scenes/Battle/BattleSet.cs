@@ -5,23 +5,27 @@ using UnityEngine.UI;
 
 public class BattleSet : MonoBehaviour
 {
-    private string _enemyName;
+    private string _enemyCode;
+
+    public Transform spawnPoint;
 
     public GameObject pistolPrefab; // 피스톨 프리팹
     public GameObject player;
     
     public float moveSpeed = 5f; // 플레이어 이동 속도
-    public float pistolSpeed = 20f; // 피스톨 이동 속도
 
     private Transform playerTransform;
     private Rigidbody2D playerRigidbody;
 
-    public Image dummyHpBar;
+    //배틀 시작시 Hp차는 이펙트 구현
     public Image hpBar;
+    public AnimationCurve easeOutCurve;
+    private bool isBattle = false;
 
-    public float fillTime = 0.5f;
+    public float fillTime = 3f;
 
     public GameObject enemy;
+    EnemyState enemyState;
 
     public int enemyCurrentHp;
     public int enemyMaxHp;
@@ -33,58 +37,77 @@ public class BattleSet : MonoBehaviour
         playerRigidbody = player.GetComponent<Rigidbody2D>();
         playerTransform = player.GetComponent<Transform>();
 
-        enemy = GameObject.FindWithTag("Enemy");
+        GetEnemyInfo();
 
-        if (enemy is not null)
+        GameManager.Instance.isBattle = false;
+
+        if (_enemyCode is not null)
         {
-            
+            spawnEnemy();
         }
+
+        enemy = GameObject.FindWithTag("Enemy");
 
     }
 
     void Start()
     {
-        hpBar.fillAmount = 0f;
 
-        _enemyName = GameManager.Instance.enemyName;
-
-        StopAllCoroutines();
-        StartCoroutine(FillHp());
-
-        if (_enemyName is not null)
+        if (enemy is not null)
         {
-            spawnEnemy();
+            enemyState = enemy.GetComponent<EnemyState>();
+
+            enemyMaxHp = enemyState.currentHp;
+            enemyCurrentHp = enemyMaxHp;
         }
 
+        hpBar.fillAmount = 0f;
+
+        StopAllCoroutines();
+        StartCoroutine(FillImageWithCurve(hpBar, fillTime));
+
+
     }
-    IEnumerator FillHp()
+
+    IEnumerator FillImageWithCurve(Image image, float time)
     {
         float elapsedTime = 0;
 
-        while (elapsedTime < fillTime)
+        while (elapsedTime < time)
         {
-            dummyHpBar.fillAmount = Mathf.Lerp(0f, 1f, elapsedTime / fillTime);
+            float curveProgress = elapsedTime / time;
+            float curveValue = easeOutCurve.Evaluate(curveProgress);
+            image.fillAmount = curveValue;
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        dummyHpBar.fillAmount = 1f;
-        hpBar.gameObject.SetActive(true);
-        dummyHpBar.gameObject.SetActive(false);
+        image.fillAmount = 1.0f;
+        GameManager.Instance.isBattle = true;
 
     }
 
-
     private void Update()
     {
-        MovePlayer();
-        
-        // Z키 입력 감지
-        if (Input.GetKeyDown(KeyCode.Z))
+        isBattle = GameManager.Instance.isBattle;
+
+        if (isBattle is true)
         {
-            Debug.Log("빵");
-            FirePistol();
+            MovePlayer();        
+
+            // Z키 입력 감지
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Debug.Log("빵");
+                FirePistol();
+            }
+
+            enemyCurrentHp = enemyState.currentHp;
+
+            hpBar.fillAmount = (float)enemyCurrentHp / enemyMaxHp;
+            
         }
+
     }
 
     void MovePlayer()
@@ -103,24 +126,23 @@ public class BattleSet : MonoBehaviour
     {
         // 플레이어 위치에서 피스톨 생성
         GameObject newPistol = Instantiate(pistolPrefab, playerTransform.position, Quaternion.identity, transform);
-        StartCoroutine(MovePistol(newPistol.transform));
+        
     }
 
-    IEnumerator MovePistol(Transform pistolTransform)
+    public void GetEnemyInfo()
     {
-        while (pistolTransform.position.y < Screen.height)
-        {
-            // 위로 이동
-            pistolTransform.position += Vector3.up * pistolSpeed * Time.deltaTime;
-            yield return null;
-        }
-
-        // 화면 밖으로 나가면 소멸
-        Destroy(pistolTransform.gameObject);
+        _enemyCode = GameManager.Instance.enemyCode;
     }
-
     public void spawnEnemy()
     {
-        // 적 생성 로직
+        // 해당 몬스터 프리팹 로드
+        GameObject enemyPrefab = Resources.Load<GameObject>("Prefabs/Monsters/" + _enemyCode);
+
+        if (enemyPrefab != null)
+        {
+            // 몬스터 인스턴스화
+            Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        }
     }
+
 }
