@@ -13,6 +13,10 @@ public class GameManager : Singleton<GameManager>
     //적 스폰 코드
     public string enemyCode;
 
+    //배틀이 끝나고 스토리로 넘어가게
+    public string storyCode;
+    
+
     public void SetEnemyInfo(string code)
     {
         enemyCode = code;
@@ -20,7 +24,7 @@ public class GameManager : Singleton<GameManager>
 
     //체력 관련
     public int _playerHp;
-    public int MaxHp = 3;
+    public int MaxHp = 5;
 
     //공격력 관련
     public int Atk;

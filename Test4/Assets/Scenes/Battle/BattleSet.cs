@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BattleSet : MonoBehaviour
 {
+    //적 소환 코드
     private string _enemyCode;
 
+    //적 소환 위치
     public Transform spawnPoint;
-
+    
     public GameObject pistolPrefab; // 피스톨 프리팹
     public GameObject player;
     
@@ -27,8 +30,23 @@ public class BattleSet : MonoBehaviour
     public GameObject enemy;
     EnemyState enemyState;
 
+    //적 체력
     public int enemyCurrentHp;
     public int enemyMaxHp;
+
+    //플레이어 체력
+    public int playerCurrentHp;
+    public int playerMaxHp;
+
+    //플레이어 체력 UI
+    public TMP_Text playerName;
+    public TMP_Text playerHp;
+    public Image playerHpBar;
+
+    //텍스트 모음
+    public GameObject textBox; // 조작 키 설명
+
+
 
 
     void Awake()
@@ -61,6 +79,9 @@ public class BattleSet : MonoBehaviour
             enemyCurrentHp = enemyMaxHp;
         }
 
+        playerMaxHp = GameManager.Instance.MaxHp;
+        playerCurrentHp = playerMaxHp;
+
         hpBar.fillAmount = 0f;
 
         StopAllCoroutines();
@@ -85,11 +106,19 @@ public class BattleSet : MonoBehaviour
         image.fillAmount = 1.0f;
         GameManager.Instance.isBattle = true;
 
+        yield return new WaitForSeconds(5f);
+
+        textBox.SetActive(false);
+
     }
 
     private void Update()
     {
         isBattle = GameManager.Instance.isBattle;
+
+        //플레이어 Hp바 텍스트 조정
+        playerHp.text = $"HP : {playerCurrentHp}/{playerMaxHp}";
+        playerHpBar.fillAmount = (float)playerCurrentHp / playerMaxHp;
 
         if (isBattle is true)
         {

@@ -16,4 +16,5 @@ MonoBehaviour:
   _power: 1
   _defence: 0
   _maxHp: 30
-  _haveGold: 1
+  _gold: 1
+  _exp: 1
