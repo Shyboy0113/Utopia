@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Boss
   - Pistol
+  - NPC
   layers:
   - Default
   - TransparentFX

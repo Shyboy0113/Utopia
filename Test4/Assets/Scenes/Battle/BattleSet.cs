@@ -47,8 +47,6 @@ public class BattleSet : MonoBehaviour
     public GameObject textBox; // 조작 키 설명
 
 
-
-
     void Awake()
     {
         // player의 RectTransform을 가져옴
@@ -135,6 +133,10 @@ public class BattleSet : MonoBehaviour
 
             hpBar.fillAmount = (float)enemyCurrentHp / enemyMaxHp;
             
+        }
+        else
+        {
+            playerRigidbody.velocity = Vector2.zero;
         }
 
     }
