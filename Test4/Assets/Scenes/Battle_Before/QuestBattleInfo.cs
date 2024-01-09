@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestBattleInfo : MonoBehaviour
 {
@@ -26,9 +27,24 @@ public class QuestBattleInfo : MonoBehaviour
             _fade.FadeOut();
         }
 
+        StartCoroutine(Wait());
+        
+    }
+    
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        
+        
         GameManager.Instance.storyCode = storyCode;
         GameManager.Instance.enemyCode = enemyCode;
+        
+        SceneManager.LoadScene("BattleScene");
+
+        yield return null;
+
 
     }
+
 
 }

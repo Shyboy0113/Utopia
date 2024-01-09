@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Village.unity
     guid: e147992acad316f47a3ad35bf4d26563
+  - enabled: 1
+    path: Assets/Scenes/Battle/BattleScene.unity
+    guid: 6728fb1a6d9a9f448876b007b1c82496
+  - enabled: 1
+    path: Assets/Scenes/Battle_Before/Battle_Before.unity
+    guid: e243e06b5af86c74aa5c9f7d105ce2df
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: bfb63474ce1691849b47825afd4d44e0, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 02d39f821c128074689ef687d31b236d, type: 2}
