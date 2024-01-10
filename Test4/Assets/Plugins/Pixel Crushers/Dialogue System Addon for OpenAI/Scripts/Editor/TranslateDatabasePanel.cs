@@ -32,15 +32,12 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
         }
 
-        private const float RequestRate = 1.1f; // Limit requests to 1 per this many seconds.
-
         private List<string> languages = new List<string>();
         private List<string> languageNames = new List<string>();
         private List<bool> translate = new List<bool>();
         private Queue<TranslationRequest> translationRequestQueue = new Queue<TranslationRequest>();
         private bool retranslateAll = false;
         private bool cancel = false;
-        private float progress;
         private float timeNextRequestAllowed;
         private Field currentField;
 

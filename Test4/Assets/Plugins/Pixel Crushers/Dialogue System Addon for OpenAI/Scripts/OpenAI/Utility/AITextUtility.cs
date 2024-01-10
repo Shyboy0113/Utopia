@@ -24,6 +24,30 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         }
 
         /// <summary>
+        /// Removes "speaker:", "speaker says:", or surrounding quotes around lines.
+        /// </summary>
+        public static string RemoveSpeaker(string speaker, string line)
+        {
+            if (line.StartsWith($"{speaker}:"))
+            {
+                return RemoveSurroundingQuotes(line.Substring(speaker.Length + 2));
+            }
+            else if (line.StartsWith($"{speaker} says: "))
+            {
+                return RemoveSurroundingQuotes(line.Substring(speaker.Length + 7));
+            }
+            else if (line.Contains(": \""))
+            {
+                var pos = line.IndexOf(": \"");
+                return RemoveSurroundingQuotes(line.Substring(pos + 2));
+            }
+            else
+            {
+                return line;
+            }
+        }
+
+        /// <summary>
         /// Removes double quotes around string if present.
         /// </summary>
         public static string RemoveSurroundingQuotes(string text)

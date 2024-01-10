@@ -17,11 +17,14 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
 
         protected AudioClip audioClip = null;
         protected virtual string Operation => "ElevenLabs";
+        protected string modelId;
 
         public ElevenLabsPanel(string apiKey, DialogueDatabase database,
             Asset asset, DialogueEntry entry, Field field)
             : base(apiKey, database, asset, entry, field)
         {
+            var model = (ElevenLabs.Models)EditorPrefs.GetInt(DialogueSystemOpenAIWindow.ElevenLabsModel, 0);
+            modelId = ElevenLabs.GetModelId(model);
         }
 
         ~ElevenLabsPanel()

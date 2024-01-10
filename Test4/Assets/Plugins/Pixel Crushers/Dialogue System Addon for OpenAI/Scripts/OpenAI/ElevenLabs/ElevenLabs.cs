@@ -15,12 +15,42 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
     public static class ElevenLabs
     {
 
+        public const string ModelListURL = "https://api.elevenlabs.io/v1/models";
         public const string VoiceListURL = "https://api.elevenlabs.io/v1/voices";
         public const string TextToSpeechURL = "https://api.elevenlabs.io/v1/text-to-speech";
+
+        public enum Models
+        {
+            Monolingual_v1,
+            Multilingual_v1,
+            Multilingual_v2,
+            Turbo_v2
+        }
 
         public static bool IsApiKeyValid(string apiKey)
         {
             return !string.IsNullOrEmpty(apiKey);
+        }
+
+        public static string GetDefaultModelId()
+        {
+            return GetModelId(Models.Monolingual_v1);
+        }
+
+        public static string GetModelId(Models model) 
+        {
+            switch (model)
+            {
+                default:
+                case Models.Monolingual_v1:
+                    return "eleven_monolingual_v1";
+                case Models.Multilingual_v1:
+                    return "eleven_multilingual_v1";
+                case Models.Multilingual_v2:
+                    return "eleven_multilingual_v2";
+                case Models.Turbo_v2:
+                    return "eleven_turbo_v2";
+            }
         }
 
         /// <summary>
@@ -34,6 +64,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             UnityWebRequest webRequest = UnityWebRequest.Get(VoiceListURL + "?token=" + apiKey);
             webRequest.disposeUploadHandlerOnDispose = true;
             webRequest.disposeDownloadHandlerOnDispose = true;
+            webRequest.SetRequestHeader("xi-api-key", apiKey);
 
             UnityWebRequestAsyncOperation asyncOp = webRequest.SendWebRequest();
 
@@ -67,12 +98,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
         /// <param name="text">Text to convert to speech audio.</param>
         /// <param name="callback">Resulting audio clip.</param>
         /// <returns></returns>
-        public static UnityWebRequestAsyncOperation GetTextToSpeech(string apiKey, string voice_name, string voice_id,
+        public static UnityWebRequestAsyncOperation GetTextToSpeech(string apiKey, 
+            string model_id, string voice_name, string voice_id,
             float stability, float similarity_boost, string text, Action<AudioClip> callback)
         {
             var url = $"{TextToSpeechURL}/{voice_id}";
 
-            var ttsRequest = new TextToSpeechRequest(text, new VoiceSettings(stability, similarity_boost));
+            var ttsRequest = new TextToSpeechRequest(model_id, text, new VoiceSettings(stability, similarity_boost));
             string jsonData = JsonUtility.ToJson(ttsRequest);
 
             byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);

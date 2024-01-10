@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 namespace PixelCrushers.DialogueSystem.OpenAIAddon
 {
 
-    public enum TextModelName { GPT_4, GPT_4_32K, GPT3_5_Turbo, GPT3_5_Turbo_16K, Davinci, Curie, Babbage, Ada }
+    public enum TextModelName { GPT_4_Turbo, GPT_4, GPT_4_32K, GPT3_5_Turbo, GPT3_5_Turbo_16K, Davinci, Curie, Babbage, Ada }
 
     /// <summary>
     /// Handles web requests to OpenAI API.
@@ -50,6 +50,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 case TextModelName.Curie: return Model.Curie;
                 case TextModelName.Davinci: return Model.Davinci_003;
                 case TextModelName.GPT_4: return Model.GPT4;
+                case TextModelName.GPT_4_Turbo: return Model.GPT4_Turbo;
                 case TextModelName.GPT_4_32K: return Model.GPT4_32K;
             }
         }
@@ -63,11 +64,35 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         /// <param name="maxTokens">The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.</param>
         /// <param name="prompt">The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.</param>
         /// <param name="callback">This event handler will be passed the API result.</param>
-        /// <returns></returns>
-        public static UnityWebRequestAsyncOperation SubmitCompletionAsync(string apiKey, Model model, float temperature, int maxTokens,
+        public static UnityWebRequestAsyncOperation SubmitCompletionAsync(string apiKey, Model model,
+            float temperature, int maxTokens,
             string prompt, Action<string> callback)
         {
-            var completionRequest = new CompletionRequest(model.Name, prompt, temperature, maxTokens);
+            return SubmitCompletionAsync(apiKey, model,
+                temperature, top_p: 1, frequency_penalty: 0, presence_penalty: 0,
+                maxTokens, prompt, callback);
+        }
+
+        /// <summary>
+        /// Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
+        /// </summary>
+        /// <param name="apiKey">OpenAI API key.</param>
+        /// <param name="model">Model to use.</param>
+        /// <param name="temperature">What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.</param>
+        /// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.</param>
+        /// <param name="frequency_penalty">Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</param>
+        /// <param name="presence_penalty">Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.</param>
+        /// <param name="maxTokens">The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.</param>
+        /// <param name="prompt">The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.</param>
+        /// <param name="callback">This event handler will be passed the API result.</param>
+        public static UnityWebRequestAsyncOperation SubmitCompletionAsync(string apiKey, Model model,
+            float temperature, float top_p,
+            float frequency_penalty, float presence_penalty,
+            int maxTokens,
+            string prompt, Action<string> callback)
+        {
+            var completionRequest = new CompletionRequest(model.Name, prompt, temperature, top_p,
+                frequency_penalty, presence_penalty, maxTokens);
             string jsonData = JsonUtility.ToJson(completionRequest);
 
             UnityWebRequest webRequest = WebRequestUtility.CreateWebRequest(apiKey, CompletionsURL, jsonData);
@@ -107,8 +132,34 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public static UnityWebRequestAsyncOperation SubmitEditAsync(string apiKey, Model model, float temperature, int maxTokens,
             string input, string instruction, Action<string> callback)
         {
+            return SubmitEditAsync(apiKey, model, temperature,
+                top_p: 1, frequency_penalty: 0, presence_penalty: 0,
+                maxTokens, input, instruction, callback);
+        }
+
+        /// <summary>
+        /// Given a prompt and an instruction, the model will return an edited version of the prompt.
+        /// </summary>
+        /// <param name="apiKey">OpenAI API key.</param>
+        /// <param name="model">Model to use.</param>
+        /// <param name="temperature">What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.</param>
+        /// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.</param>
+        /// <param name="frequency_penalty">Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</param>
+        /// <param name="presence_penalty">Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.</param>
+        /// <param name="maxTokens">The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.</param>
+        /// <param name="input">The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.</param>
+        /// <param name="instruction">The instruction that tells the model how to edit the prompt.</param>
+        /// <param name="callback">This event handler will be passed the API result.</param>
+        /// <returns></returns>
+        public static UnityWebRequestAsyncOperation SubmitEditAsync(string apiKey, Model model,
+            float temperature, float top_p,
+            float frequency_penalty, float presence_penalty,
+            int maxTokens,
+            string input, string instruction, Action<string> callback)
+        {
             // Note: Must use text-davinci-edit-001 for Edits.
-            var editRequest = new EditRequest(Model.Davinci_Edit_001.Name, input, instruction, temperature, maxTokens);
+            var editRequest = new EditRequest(Model.Davinci_Edit_001.Name, input, instruction,
+                temperature, top_p, frequency_penalty, presence_penalty, maxTokens);
             string jsonData = JsonUtility.ToJson(editRequest);
 
             UnityWebRequest webRequest = WebRequestUtility.CreateWebRequest(apiKey, EditsURL, jsonData);
@@ -147,7 +198,32 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public static UnityWebRequestAsyncOperation SubmitChatAsync(string apiKey, Model model, float temperature, int maxTokens,
             List<ChatMessage> messages, Action<string> callback)
         {
-            var chatRequest = new ChatRequest(model.Name, messages, temperature, maxTokens);
+            return SubmitChatAsync(apiKey, model, temperature,
+                top_p: 1, frequency_penalty: 0, presence_penalty: 0, maxTokens, messages, callback);
+        }
+
+        /// <summary>
+        /// Given a list of messages comprising a conversation, the model will return a response.
+        /// </summary>
+        /// 
+        /// <param name="apiKey">OpenAI API key.</param>
+        /// <param name="model">Model to use.</param>
+        /// <param name="temperature">What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.</param>
+        /// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.</param>
+        /// <param name="frequency_penalty">Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</param>
+        /// <param name="presence_penalty">Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.</param>
+        /// <param name="maxTokens">The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length.</param>
+        /// <param name="messages">A list of messages comprising the conversation so far.</param>
+        /// <param name="callback">This event handler will be passed the API result.</param>
+        public static UnityWebRequestAsyncOperation SubmitChatAsync(string apiKey, Model model, 
+            float temperature, float top_p,
+            float frequency_penalty, float presence_penalty, 
+            int maxTokens,
+            List<ChatMessage> messages, Action<string> callback)
+        {
+            var chatRequest = new ChatRequest(model.Name, messages, 
+                temperature, top_p, frequency_penalty, presence_penalty,
+                maxTokens);
             string jsonData = JsonUtility.ToJson(chatRequest);
 
             UnityWebRequest webRequest = WebRequestUtility.CreateWebRequest(apiKey, ChatURL, jsonData);

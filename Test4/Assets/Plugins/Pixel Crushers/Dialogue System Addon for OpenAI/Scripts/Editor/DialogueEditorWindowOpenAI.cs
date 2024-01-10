@@ -5,8 +5,6 @@
 using UnityEngine;
 using UnityEditor;
 using PixelCrushers.DialogueSystem.OpenAIAddon;
-using static UnityEngine.EventSystems.EventTrigger;
-using UnityEditor.VersionControl;
 
 namespace PixelCrushers.DialogueSystem.DialogueEditor
 {

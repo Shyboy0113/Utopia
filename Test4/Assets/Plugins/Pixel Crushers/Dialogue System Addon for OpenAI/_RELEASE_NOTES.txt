@@ -3,12 +3,50 @@ Copyright © Pixel Crushers
 RELEASE NOTES
 -------------
 
+Version 1.0.9.1:
+[January 7, 2024]
+- Fixed: Can build for WebGL again. (WebGL doesn't currently support Microphone.)
+
+
+Version 1.0.9:
+[December 26, 2023]
+- Improved: Runtime dialogue now gets field info from Lua so you can change it at runtime.
+- Overtone: Added integration.
+
+
+Version 1.0.8.1:
+[November 18, 2023]
+- Fixed: ElevenLabs voice selection dropdown wasn't showing custom voices.
+
+
+Version 1.0.8:
+[November 7, 2023]
+- Added: Support for GPT-4 Turbo (model currently in preview).
+- Added: Support for ElevenLabs v2 models.
+- Improved: Added top_p, frequency_penalty, and presence_penalty to editor windows, runtime settings, and API.
+- Improved: Generate Voice section can now add sequencer command, remembers last folder audio files were saved into.
+- Improved: Select Voice section now has button to generate all voice lines for an actor.
+
+
+Version 1.0.7:
+[October 17, 2023]
+- Fixed: Runtime dialogue strips "<speaker> says:" from text if present.
+- Improved: Actor and location descriptions are now parsed for [var] and [lua] tags in runtime generation.
+
+
+Version 1.0.6:
+[September 26, 2023]
+- Added ChatGPT-like AI Assistant Window.
+- Added backward compatibility with Unity 2020.
+- Fixed issue in case where Dialogue Smith returns no text for a dialogue entry.
+
+
 Version 1.0.5:
 [August 2, 2023]
 - Context now supports Actor Knowledge & Goals fields in addition to Description.
 - Can now incorporate Location Descriptions in context.
 - RuntimeAIConversation.StartFreeformTextInputConversation() now sends OnConversationStart message.
-- DialogueSmith uses new UnityWebRequest.PostWwwForm() in Unity 2022+.
+- Dialogue Smith uses new UnityWebRequest.PostWwwForm() in Unity 2022+.
 
 
 Version 1.0.4:

@@ -60,11 +60,20 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
     [Serializable]
     public class TextToSpeechRequest
     {
+        public string model_id;
         public string text;
         public VoiceSettings voice_settings;
 
         public TextToSpeechRequest(string text, VoiceSettings voice_settings)
         {
+            this.model_id = ElevenLabs.GetDefaultModelId();
+            this.text = text;
+            this.voice_settings = voice_settings;
+        }
+
+        public TextToSpeechRequest(string model_id, string text, VoiceSettings voice_settings)
+        {
+            this.model_id = model_id;
             this.text = text;
             this.voice_settings = voice_settings;
         }

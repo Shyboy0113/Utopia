@@ -126,9 +126,9 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         {
             if (variants == null && !string.IsNullOrEmpty(ResultText) && !IsAwaitingReply)
             {
-                var isNumbered = ResultText.StartsWith('1');
+                var isNumbered = ResultText.StartsWith("1");
                 variants = new List<string>();
-                var texts = ResultText.Split("\n");
+                var texts = ResultText.Split('\n');
                 foreach (var text in texts)
                 {
                     if (string.IsNullOrWhiteSpace(text)) continue;

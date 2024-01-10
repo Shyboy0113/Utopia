@@ -16,12 +16,28 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public string model;
         public string prompt;
         public float temperature;
+        public float top_p;
+        public float frequency_penalty;
+        public float presence_penalty;
         public int max_tokens;
-        public int top_p;
-        public int frequency_penalty;
-        public int presence_penalty;
 
-        public CompletionRequest(string modelName, string prompt, float temperature, int maxTokens)
+        public CompletionRequest(string modelName, string prompt, 
+            float temperature, float top_p, 
+            float frequency_penalty, float presence_penalty,
+            int maxTokens)
+        {
+            this.model = modelName;
+            this.prompt = prompt;
+            this.temperature = temperature;
+            this.max_tokens = maxTokens;
+            this.top_p = top_p;
+            this.frequency_penalty = frequency_penalty;
+            this.presence_penalty = presence_penalty;
+        }
+
+        public CompletionRequest(string modelName, string prompt,
+            float temperature, 
+            int maxTokens)
         {
             this.model = modelName;
             this.prompt = prompt;
@@ -68,22 +84,39 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public string model;
         public string input;
         public string instruction;
-        //public float temperature;
-        //public int max_tokens;
-        //public int top_p;
-        //public int frequency_penalty;
-        //public int presence_penalty;
+        public float temperature;
+        public float top_p;
+        public float frequency_penalty;
+        public float presence_penalty;
+        public int max_tokens;
 
-        public EditRequest(string modelName, string input, string instruction, float temperature, int maxTokens)
+        public EditRequest(string modelName, string input, string instruction, 
+            float temperature, float top_p,
+            float frequency_penalty, float presence_penalty, 
+            int maxTokens)
         {
             this.model = modelName;
             this.input = input;
             this.instruction = instruction;
-            //this.temperature = temperature;
-            //this.max_tokens = maxTokens;
-            //this.top_p = 1;
-            //this.frequency_penalty = 0;
-            //this.presence_penalty = 0;
+            this.temperature = temperature;
+            this.max_tokens = maxTokens;
+            this.top_p = top_p;
+            this.frequency_penalty = frequency_penalty;
+            this.presence_penalty = presence_penalty;
+        }
+
+        public EditRequest(string modelName, string input, string instruction,
+            float temperature, 
+            int maxTokens)
+        {
+            this.model = modelName;
+            this.input = input;
+            this.instruction = instruction;
+            this.temperature = temperature;
+            this.max_tokens = maxTokens;
+            this.top_p = 1;
+            this.frequency_penalty = 0;
+            this.presence_penalty = 0;
         }
     }
 
@@ -102,12 +135,27 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public string model;
         public List<ChatMessage> messages;
         public float temperature;
+        public float top_p;
+        public float frequency_penalty;
+        public float presence_penalty;
         public int max_tokens;
-        public int top_p;
-        public int frequency_penalty;
-        public int presence_penalty;
 
-        public ChatRequest(string modelName, List<ChatMessage> messages, float temperature, int maxTokens)
+        public ChatRequest(string modelName, List<ChatMessage> messages, 
+            float temperature, float top_p,
+            float frequency_penalty, float presence_penalty, 
+            int maxTokens)
+        {
+            this.model = modelName;
+            this.messages = messages;
+            this.temperature = temperature;
+            this.max_tokens = maxTokens;
+            this.top_p = top_p;
+            this.frequency_penalty = frequency_penalty;
+            this.presence_penalty = presence_penalty;
+        }
+
+        public ChatRequest(string modelName, List<ChatMessage> messages,
+            float temperature, int maxTokens)
         {
             this.model = modelName;
             this.messages = messages;

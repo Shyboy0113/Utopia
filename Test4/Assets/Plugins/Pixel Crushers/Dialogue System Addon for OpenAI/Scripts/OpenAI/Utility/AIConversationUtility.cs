@@ -3,6 +3,7 @@
 #if USE_OPENAI
 
 using System.Diagnostics;
+using UnityEngine;
 
 namespace PixelCrushers.DialogueSystem.OpenAIAddon
 {
@@ -37,9 +38,18 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             return prompt;
         }
 
-        public static string AddAssetInfo(string prompt, Asset actor, string fieldTitle)
+        public static string AddAssetInfo(string prompt, Asset asset, string fieldTitle)
         {
-            var fieldValue = actor.LookupValue(fieldTitle);
+            var fieldValue = string.Empty;
+            if (Application.isPlaying)
+            {
+                if (asset is Actor) fieldValue = DialogueLua.GetActorField(asset.Name, fieldTitle).asString;
+                if (asset is Location) fieldValue = DialogueLua.GetLocationField(asset.Name, fieldTitle).asString;
+            }
+            if (string.IsNullOrEmpty(fieldValue))
+            {
+                fieldValue = asset.LookupValue(fieldTitle);
+            }
             if (string.IsNullOrEmpty(fieldValue))
             {
                 return prompt;

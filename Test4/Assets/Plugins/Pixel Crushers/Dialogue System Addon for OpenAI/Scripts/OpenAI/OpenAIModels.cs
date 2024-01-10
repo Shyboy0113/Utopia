@@ -21,6 +21,11 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         }
 
         /// <summary>
+        /// The latest GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Returns a maximum of 4,096 output tokens. This preview model is not yet suited for production traffic.
+        /// </summary>
+        public static Model GPT4_Turbo { get; } = new Model("gpt-4-1106-preview", ModelType.Chat, 128000);
+
+        /// <summary>
         /// More capable than any GPT-3.5 model, able to do more complex tasks, and optimized for chat. Will be updated with our latest model iteration.
         /// </summary>
         public static Model GPT4 { get; } = new Model("gpt-4", ModelType.Chat, 8192);

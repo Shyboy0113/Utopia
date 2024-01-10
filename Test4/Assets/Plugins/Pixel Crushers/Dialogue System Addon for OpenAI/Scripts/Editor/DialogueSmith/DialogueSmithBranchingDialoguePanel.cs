@@ -55,7 +55,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.DialogueSmith
         public override void Draw()
         {
             base.Draw();
-            DrawHeading(HeadingLabel, "Generate dialogue for a branching conversation whose Title fields are filled in.");
+            DrawHeading(HeadingLabel, "Use Dialogue Smith to generate dialogue for a branching conversation whose Title fields are filled in.");
             if (conversation == null)
             {
                 EditorGUILayout.LabelField("Select a conversation in the Dialogue Editor and click the 'AI' button.");
@@ -124,7 +124,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.DialogueSmith
                 {
                     if (node.accept[i]) isAnySelected = true;
                 }
-                if (!isAnySelected) node.accept[0] = true;
+                if (!isAnySelected && node.accept != null && node.accept.Count > 0) node.accept[0] = true;
                 EditorGUI.indentLevel--;
             }
         }
@@ -195,6 +195,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.DialogueSmith
         private void OnDialogueReceived(BranchingDialogueData response)
         {
             IsAwaitingReply = false;
+            Debug.Log($"Received from Dialogue Smith: {JsonUtility.ToJson(response)}");
             data = response;
             if (data == null) return;
             foreach (var node in data.user_message.conversation[0].nodes)
@@ -227,7 +228,11 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.DialogueSmith
 
                 var entry = conversation.GetDialogueEntry(node.id);
 
-                if (node.text.Count == 1 || node.accept.FindAll(x => x == true).Count == 1)
+                if (node.text.Count == 0)
+                {
+                    // If no text, skip it.
+                }
+                else if (node.text.Count == 1 || node.accept.FindAll(x => x == true).Count == 1)
                 {
                     // If only one text option, or only one selected, set entry's text:
                     for (int i = 0; i < node.text.Count; i++)

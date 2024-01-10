@@ -33,7 +33,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         [Tooltip("Include Description fields of Locations in dialogue database in prompt.")]
         [SerializeField] private bool includeLocationDescriptions;
 
-        [Tooltip("Optional guidance to send to OpenaI.")]
+        [Tooltip("Optional guidance to send to OpenAI.")]
         [SerializeField] private string assistantPrompt = "Keep lines of dialogue succinct.";
 
         [SerializeField] private RuntimeAIConversationMode mode;
@@ -70,7 +70,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         protected virtual int ConversationID => 9999;
         protected virtual string ConversationTitle => "AI Conversation";
 
+        protected IVoiceService VoiceService => Settings.VoiceService;
         protected bool IsElevenLabsEnabled => !string.IsNullOrEmpty(Settings.ElevenLabsApiKey);
+        protected bool IsVoiceEnabled => IsElevenLabsEnabled || VoiceService != null;
+        protected string VoiceServiceName => (VoiceService != null) ? VoiceService.Name
+            : IsElevenLabsEnabled ? "ElevenLabs"
+            : "No Voice Service";
+
         protected string CurrentLineText { get; set; }
         protected AudioClip CurrentAudioClip { get; set; }
         protected Sprite CurrentSprite { get; set; }
@@ -139,10 +145,12 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             if (Settings.MicrophoneDevicesDropdown != null)
             {
                 Settings.MicrophoneDevicesDropdown.ClearOptions();
+#if !UNITY_WEBGL
                 foreach (var device in Microphone.devices)
                 {
                     Settings.MicrophoneDevicesDropdown.AddOption(device);
                 }
+#endif
             }
             if (Settings.RecordButton != null)
             {
@@ -188,16 +196,21 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         protected virtual void StartRecording()
         {
+#if UNITY_WEBGL
+            recordedClip = null;
+#else
             var deviceName = (Microphone.devices.Length >= 1)
                 ? (Settings.MicrophoneDevicesDropdown != null && 0 <= Settings.MicrophoneDevicesDropdown.value && Settings.MicrophoneDevicesDropdown.value < Microphone.devices.Length)
                     ? Microphone.devices[Settings.MicrophoneDevicesDropdown.value]
                     : Microphone.devices[0]
                 : "";
             recordedClip = Microphone.Start(deviceName, false, Settings.MaxRecordingLength, Settings.RecordingFrequency);
+#endif
         }
 
         protected virtual void StopRecordingAndSubmit()
         {
+            if (recordedClip == null) return;
             SetWaitingIcon(true);
             SetRecordingButtons(false);
             OpenAI.SubmitAudioTranscriptionAsync(Settings.APIKey, recordedClip, string.Empty, AudioResponseFormat.Json, 0,
@@ -242,6 +255,25 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
         }
 
+#endregion
+
+        #region Voice Shared Methods
+
+        private void InvokeTextToSpeech(string voiceName, string voiceID,
+            string text, Action<AudioClip> callback)
+        {
+            if (VoiceService != null)
+            {
+                VoiceService.GenerateTextToSpeech(voiceName, voiceID, text, callback);
+            }
+            else
+            {
+                ElevenLabs.ElevenLabs.GetTextToSpeech(Settings.ElevenLabsApiKey,
+                    Settings.ElevenLabsModelId, voiceName, voiceID, 0, 0,
+                    text, callback);
+            }
+        }
+
         #endregion
 
         #region UI
@@ -283,10 +315,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             SpeakerInfo = GetCharacterInfo(conversant);
             ListenerInfo = GetCharacterInfo(actor);
 
-            var parsedTopic = FormattedText.ParseCode(topic);
-            var prompt = GetLocationDescriptions() + 
-                AIConversationUtility.GetActorDescriptions(DialogueManager.masterDatabase, actor, conversant, "") +                
-                $"Write an initial line of dialogue spoken by {conversant} to {actor} {parsedTopic}.";
+            var prompt = GetLocationDescriptions() +
+                AIConversationUtility.GetActorDescriptions(DialogueManager.masterDatabase, actor, conversant, "") +
+                $"Write an initial line of dialogue spoken by {conversant} to {actor} {topic}.";
+            prompt = FormattedText.ParseCode(prompt);
             if (DialogueDebug.logInfo) Debug.Log($"Dialogue System: Sending to OpenAI: {prompt}", this);
 
             messages = new List<ChatMessage>
@@ -300,7 +332,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 messages.Add(new ChatMessage("assistant", assistantPrompt));
                 approximateTokenCount += assistantPrompt.Length / ApproximateCharactersPerToken;
             }
-            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model,
+                Settings.Temperature, Settings.TopP,
+                Settings.FrequencyPenalty, Settings.PresencePenalty,
+                Settings.MaxTokens,
                 messages, OnReceivedLine);
 
             // Send OnConversationStart message:
@@ -337,7 +372,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 approximateTokenCount += line.Length / ApproximateCharactersPerToken;
                 line = RemoveConversant(line);
                 messages.Add(new ChatMessage("user", $"{conversant} says: {line}"));
-                if (IsElevenLabsEnabled)
+                if (IsVoiceEnabled)
                 {
                     GenerateVoice(line);
                 }
@@ -350,19 +385,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         protected virtual string RemoveConversant(string line)
         {
-            if (line.StartsWith($"{conversant}:"))
-            {
-                return line.Substring(conversant.Length + 2);
-            }
-            else if (line.Contains(": \""))
-            {
-                var pos = line.IndexOf(": \"");
-                return AITextUtility.RemoveSurroundingQuotes(line.Substring(pos + 2));
-            }
-            else
-            {
-                return line;
-            }
+            return AITextUtility.RemoveSpeaker(conversant, line);
         }
 
         protected virtual void GenerateVoice(string line)
@@ -373,13 +396,12 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             var voiceID = (actor != null) ? actor.LookupValue(DialogueSystemFields.VoiceID) : null;
             if (string.IsNullOrEmpty(voiceName) || string.IsNullOrEmpty(voiceID))
             {
-                if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: No ElevenLabs voice has been selected for {SpeakerInfo.nameInDatabase}. Not playing audio.");
+                if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: No {VoiceServiceName} voice has been selected for {SpeakerInfo.nameInDatabase}. Not playing audio.");
                 ShowSubtitle(line, null);
             }
             else
             {
-                ElevenLabs.ElevenLabs.GetTextToSpeech(Settings.ElevenLabsApiKey, voiceName, voiceID, 0, 0,
-                    RemoveActorPrefix(line), OnReceivedTextToSpeech);
+                InvokeTextToSpeech(voiceName, voiceID, RemoveActorPrefix(line), OnReceivedTextToSpeech);
             }
         }
 
@@ -398,6 +420,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
             else
             {
+                Destroy(audioSource.clip);
                 audioSource.clip = audioClip;
                 audioSource.Play();
             }
@@ -428,7 +451,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         protected virtual string RemoveActorPrefix(string line)
         {
-            return AITextUtility.RemoveSurroundingQuotes(line.Substring(line.IndexOf(':') + 1).Trim()); 
+            return AITextUtility.RemoveSurroundingQuotes(line.Substring(line.IndexOf(':') + 1).Trim());
         }
 
         protected virtual void OnAcceptedTextInput(string text)
@@ -446,7 +469,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 if (DialogueDebug.logInfo) Debug.Log($"Dialogue System: Sending to OpenAI: Wrap up conversation. (Approaching max tokens.)", this);
                 messages.Add(new ChatMessage("user", $"Say a final line of dialogue."));
             }
-            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model,
+                Settings.Temperature, Settings.TopP,
+                Settings.FrequencyPenalty, Settings.PresencePenalty,
+                Settings.MaxTokens,
                 messages, OnReceivedLine);
         }
 
@@ -459,10 +485,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             DialogueUI.Open();
             SetWaitingIcon(true);
 
-            var parsedTopic = FormattedText.ParseCode(topic);
-            var prompt = GetLocationDescriptions() + 
-                AIConversationUtility.GetActorDescriptions(DialogueManager.masterDatabase, actor, conversant, "") +                
-                $"Write a dialogue between {conversant} and {actor} {parsedTopic}.";
+            var prompt = GetLocationDescriptions() +
+                AIConversationUtility.GetActorDescriptions(DialogueManager.masterDatabase, actor, conversant, "") +
+                $"Write a dialogue between {conversant} and {actor} {topic}.";
+            prompt = FormattedText.ParseCode(prompt);
             if (DialogueDebug.logInfo) Debug.Log($"Dialogue System: Sending to OpenAI: {prompt}", this);
 
             if (Settings.Model.ModelType == ModelType.Chat)
@@ -472,12 +498,18 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                     new ChatMessage("user", prompt)
                 };
                 if (!string.IsNullOrEmpty(assistantPrompt)) messages.Add(new ChatMessage("assistant", assistantPrompt));
-                OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+                OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model,
+                    Settings.Temperature, Settings.TopP,
+                    Settings.FrequencyPenalty, Settings.PresencePenalty,
+                    Settings.MaxTokens,
                     messages, OnReceivedConversation);
             }
             else
             {
-                OpenAI.SubmitCompletionAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+                OpenAI.SubmitCompletionAsync(Settings.APIKey, Settings.Model,
+                    Settings.Temperature, Settings.TopP,
+                    Settings.FrequencyPenalty, Settings.PresencePenalty,
+                    Settings.MaxTokens,
                     prompt, OnReceivedConversation);
             }
         }
@@ -504,12 +536,15 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 actor, conversant, fullConversationText, ConversationID);
 
             // Add audio:
-            if (IsElevenLabsEnabled)
+            if (IsVoiceEnabled)
             {
+                var command = (VoiceService != null) ? VoiceService.SequencerCommand 
+                    : IsElevenLabsEnabled ? "GenerateVoice()" 
+                    : "None()";
                 foreach (var entry in conversation.dialogueEntries)
                 {
                     if (string.IsNullOrEmpty(entry.DialogueText)) continue;
-                    entry.Sequence = "GenerateVoice()";
+                    entry.Sequence = command;
                 }
             }
 
@@ -522,14 +557,14 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         #region Bark
 
-        protected virtual void StartBark() 
+        protected virtual void StartBark()
         {
-            var parsedTopic = FormattedText.ParseCode(topic);
-            var prompt = GetLocationDescriptions() + 
-                AIConversationUtility.GetActorDescriptions(DialogueManager.masterDatabase, actor, conversant, "") +                
+            var prompt = GetLocationDescriptions() +
+                AIConversationUtility.GetActorDescriptions(DialogueManager.masterDatabase, actor, conversant, "") +
                 (string.IsNullOrEmpty(conversant)
                     ? $"Write a bark spoken by {actor} {topic}."
-                    : $"Write a bark spoken by {actor} to {conversant} {parsedTopic}.");
+                    : $"Write a bark spoken by {actor} to {conversant} {topic}.");
+            prompt = FormattedText.ParseCode(prompt);
             if (DialogueDebug.logInfo) Debug.Log($"Dialogue System: Sending to OpenAI: {prompt}", this);
 
             if (Settings.Model.ModelType == ModelType.Chat)
@@ -539,12 +574,18 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                     new ChatMessage("user", prompt)
                 };
                 if (!string.IsNullOrEmpty(assistantPrompt)) messages.Add(new ChatMessage("assistant", assistantPrompt));
-                OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+                OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, 
+                    Settings.Temperature, Settings.TopP,
+                    Settings.FrequencyPenalty, Settings.PresencePenalty, 
+                    Settings.MaxTokens,
                     messages, OnReceiveBark);
             }
             else
             {
-                OpenAI.SubmitCompletionAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+                OpenAI.SubmitCompletionAsync(Settings.APIKey, Settings.Model, 
+                    Settings.Temperature, Settings.TopP,
+                    Settings.FrequencyPenalty, Settings.PresencePenalty, 
+                    Settings.MaxTokens,
                     prompt, OnReceiveBark);
             }
         }
@@ -582,12 +623,12 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             Destroy(CurrentSprite); CurrentSprite = null;
             if (Settings.Image != null) Settings.Image.enabled = false;
 
-            var parsedTopic = FormattedText.ParseCode(topic);
-            var prompt = 
+            var prompt =
                 "I want you to act as a text based adventure game. I will type commands and you will " +
                 "reply with a description of what the player character sees. I want you to only reply " +
                 "with the game output and nothing else. Do not write explanations. " +
-                $"{parsedTopic}.";
+                $"{topic}.";
+            prompt = FormattedText.ParseCode(prompt);
             if (DialogueDebug.logInfo) Debug.Log($"Dialogue System: Sending to OpenAI: {prompt}", this);
 
             messages = new List<ChatMessage>
@@ -601,7 +642,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 messages.Add(new ChatMessage("assistant", assistantPrompt));
                 approximateTokenCount += assistantPrompt.Length / ApproximateCharactersPerToken;
             }
-            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, 
+                Settings.Temperature, Settings.TopP,
+                Settings.FrequencyPenalty, Settings.PresencePenalty,
+                Settings.MaxTokens,
                 messages, OnReceivedStoryDescription);
 
         }
@@ -620,7 +664,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 approximateTokenCount += line.Length / ApproximateCharactersPerToken;
                 line = RemoveConversant(line);
                 messages.Add(new ChatMessage("user", line));
-                if (IsElevenLabsEnabled)
+                if (IsVoiceEnabled)
                 {
                     GenerateStoryVoice(line);
                 }
@@ -631,7 +675,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 else
                 {
                     ShowStoryDescription(line, null);
-                }                
+                }
             }
         }
 
@@ -642,7 +686,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             var voiceID = (actor != null) ? actor.LookupValue(DialogueSystemFields.VoiceID) : null;
             if (string.IsNullOrEmpty(voiceName) || string.IsNullOrEmpty(voiceID))
             {
-                if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: No ElevenLabs voice has been selected for {SpeakerInfo.nameInDatabase}. Not playing audio.");
+                if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: No {VoiceServiceName} voice has been selected for {SpeakerInfo.nameInDatabase}. Not playing audio.");
                 if (Settings.Image != null)
                 {
                     GenerateStoryImage(line, null);
@@ -654,8 +698,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
             else
             {
-                ElevenLabs.ElevenLabs.GetTextToSpeech(Settings.ElevenLabsApiKey, voiceName, voiceID, 0, 0,
-                    RemoveActorPrefix(line), OnReceivedStoryVoice);
+                InvokeTextToSpeech(voiceName, voiceID, RemoveActorPrefix(line), OnReceivedStoryVoice);
             }
         }
 
@@ -669,7 +712,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
             else
             {
-                ShowStoryDescription(CurrentLineText, audioClip); 
+                ShowStoryDescription(CurrentLineText, audioClip);
             }
         }
 
@@ -694,7 +737,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             var texture2D = new Texture2D(Settings.ImageSizeValue, Settings.ImageSizeValue);
             texture2D.LoadImage(bytes);
             var sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), (Vector2.one / 0.5f), 100);
-            Destroy(CurrentSprite); 
+            Destroy(CurrentSprite);
             CurrentSprite = sprite;
             Settings.Image.enabled = true;
             Settings.Image.sprite = sprite;
@@ -738,7 +781,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 if (DialogueDebug.logInfo) Debug.Log($"Dialogue System: Sending to OpenAI: Wrap up conversation. (Approaching max tokens.)", this);
                 messages.Add(new ChatMessage("user", $"Say a final line of dialogue."));
             }
-            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, Settings.Temperature, Settings.MaxTokens,
+            OpenAI.SubmitChatAsync(Settings.APIKey, Settings.Model, 
+                Settings.Temperature, Settings.TopP,
+                Settings.FrequencyPenalty, Settings.PresencePenalty,
+                Settings.MaxTokens,
                 messages, OnReceivedStoryDescription);
         }
 

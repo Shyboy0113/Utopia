@@ -15,8 +15,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         private const string ShowOnStartEditorPrefsKey = "PixelCrushers.DialogueSystemOpenAIAddon.ShowWelcomeOnStart";
         private const string USE_OPENAI = "USE_OPENAI";
+        private const string USE_OVERTONE = "USE_OVERTONE";
 
         private static WelcomeWindow instance;
+
+        private static GUIContent MainWindowButtonLabel = new GUIContent("OpenAI Addon Window", "Open main OpenAI Addon window.");
+        private static GUIContent AssistantWindowButtonLabel = new GUIContent("Assistant Window", "Open AI Assistant window.");
+        private static GUIContent OvertoneLabel = new GUIContent("Overtone", "Enable support for Least Squares' Overtone asset.");
 
         private static bool showOnStartPrefs
         {
@@ -59,6 +64,9 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         private bool showOnStart = true;
         private string openAIKey;
         private string elevenLabsKey;
+#if USE_OPENAI
+        private ElevenLabs.ElevenLabs.Models elevenLabsModel;
+#endif
         private string dialogueSmithKey;
         private GUIStyle heading;
         private GUIStyle labelWordWrapped;
@@ -71,6 +79,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 #if USE_OPENAI
             openAIKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.OpenAIKey);
             elevenLabsKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.ElevenLabsKey);
+            elevenLabsModel = (ElevenLabs.ElevenLabs.Models)EditorPrefs.GetInt(DialogueSystemOpenAIWindow.ElevenLabsModel, 0);
             dialogueSmithKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.DialogueSmithKey);
 #endif
         }
@@ -91,6 +100,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             DrawOpenButton();
             DrawElevenLabsSection();
             DrawDialogueSmithSection();
+            DrawIntegrationsSection();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.LabelField(string.Empty, GUILayout.Height(EditorGUIUtility.singleLineHeight + 8f));
             DrawFooter();
@@ -204,10 +214,16 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 #else
             EditorGUI.BeginDisabledGroup(true);
 #endif
-            if (GUILayout.Button("OpenAI Addon Window"))
+            if (GUILayout.Button(MainWindowButtonLabel))
             {
 #if USE_OPENAI
                 DialogueSystemOpenAIWindow.OpenMain();
+#endif
+            }
+            if (GUILayout.Button(AssistantWindowButtonLabel))
+            {
+#if USE_OPENAI
+                AssistantWindow.Open();
 #endif
             }
             EditorGUI.EndDisabledGroup();
@@ -237,7 +253,16 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             elevenLabsKey = EditorGUILayout.TextField("ElevenLabs API Key", elevenLabsKey);
             if (EditorGUI.EndChangeCheck())
             {
-                EditorPrefs.SetString(DialogueSystemOpenAIWindow.ElevenLabsKey, elevenLabsKey); 
+                EditorPrefs.SetString(DialogueSystemOpenAIWindow.ElevenLabsKey, elevenLabsKey);
+            }
+            if (ElevenLabs.ElevenLabs.IsApiKeyValid(elevenLabsKey))
+            {
+                EditorGUI.BeginChangeCheck();
+                elevenLabsModel = (ElevenLabs.ElevenLabs.Models)EditorGUILayout.EnumPopup("Model", elevenLabsModel);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    EditorPrefs.SetInt(DialogueSystemOpenAIWindow.ElevenLabsModel, (int)elevenLabsModel);
+                }
             }
 #endif
         }
@@ -268,6 +293,36 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             {
                 EditorPrefs.SetString(DialogueSystemOpenAIWindow.DialogueSmithKey, dialogueSmithKey);
             }
+#endif
+        }
+
+        private void DrawIntegrationsSection()
+        {
+#if USE_OPENAI
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Other Integrations", EditorStyles.boldLabel);
+#if USE_OVERTONE
+            var toggle = EditorGUILayout.Toggle(OvertoneLabel, true);
+            if (!toggle)
+            {
+                MoreEditorUtility.TryRemoveScriptingDefineSymbols(USE_OVERTONE);
+                EditorUtility.DisplayDialog("Disabling Overtone Integration", "Removing Scripting Define Symbol USE_OVERTONE.", "OK");
+                EditorTools.ReimportScripts();
+                Repaint();
+                GUIUtility.ExitGUI();
+            }
+#else
+            var toggle = EditorGUILayout.Toggle(OvertoneLabel, false);
+            if (toggle)
+            {
+                MoreEditorUtility.TryAddScriptingDefineSymbols(USE_OVERTONE);
+                EditorUtility.DisplayDialog("Enable Overtone Integration", "Setting Scripting Define Symbol USE_OVERTONE to " +
+                    "enable the Overtone integration.", "OK");
+                EditorTools.ReimportScripts();
+                Repaint();
+                GUIUtility.ExitGUI();
+            }
+#endif
 #endif
         }
 

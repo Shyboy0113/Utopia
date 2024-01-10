@@ -42,7 +42,9 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             else
             {
                 CancelInvoke();
-                ElevenLabs.GetTextToSpeech(RuntimeAIConversationSettings.Instance.ElevenLabsApiKey, voiceName, voiceID, 0, 0, dialogueText, OnReceivedTextToSpeech);
+                ElevenLabs.GetTextToSpeech(RuntimeAIConversationSettings.Instance.ElevenLabsApiKey,
+                    RuntimeAIConversationSettings.Instance.ElevenLabsModelId,
+                    voiceName, voiceID, 0, 0, dialogueText, OnReceivedTextToSpeech);
             }
         }
 

@@ -40,7 +40,8 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
             var guiEvent = UnityEngine.Event.current;
-            if (!IsAwaitingReply && guiEvent.isKey && guiEvent.keyCode == KeyCode.Return &&
+            if (!IsAwaitingReply && guiEvent.isKey && guiEvent.type == EventType.KeyUp && 
+                guiEvent.keyCode == KeyCode.Return &&
                 GUI.GetNameOfFocusedControl() == "FreeformPrompt")
             {
                 guiEvent.Use();

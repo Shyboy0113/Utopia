@@ -19,12 +19,21 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         [Header("OpenAI Settings")]
         [SerializeField] private string apiKey;
         [SerializeField] private TextModelName textModelName = TextModelName.GPT3_5_Turbo;
+        [Tooltip("Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.")]
         [SerializeField] private float temperature = 0.4f;
+        [Tooltip("An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.")]
+        [SerializeField][Range(0, 1)] private float top_p = 1f;
+        [Tooltip("The total length of input tokens and generated tokens is limited by the model's context length.")]
         [SerializeField] private int maxTokens = 4097;
+        [Tooltip("Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.")]
+        [SerializeField][Range(-2, 2)] private float frequencyPenalty = 0;
+        [Tooltip("Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.")]
+        [SerializeField][Range(-2, 2)] private float presencePenalty = 0;
 
         [Header("ElevenLabs Settings")]
         [Tooltip("If you want to generate text to speech, set your ElevenLabs API key here.")]
         [SerializeField] private string elevenLabsApiKey;
+        [SerializeField] private ElevenLabs.ElevenLabs.Models elevenLabsModel;
 
         [Header("UI Elements")]
         [Tooltip("Runtime conversations show this icon while waiting for OpenAI responses.")]
@@ -61,8 +70,15 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public Model Model => OpenAI.NameToModel(textModelName);
         public bool IsChatModel => Model.ModelType == ModelType.Chat;
         public float Temperature { get => temperature; set => temperature = value; }
+        public float TopP { get => top_p; set => top_p = value; }
         public int MaxTokens { get => maxTokens; set => maxTokens = value; }
+        public float FrequencyPenalty { get => frequencyPenalty; set => frequencyPenalty = value; }
+        public float PresencePenalty { get => presencePenalty; set => presencePenalty = value; }
         public string ElevenLabsApiKey { get => elevenLabsApiKey; set => elevenLabsApiKey = value; }
+        public ElevenLabs.ElevenLabs.Models ElevenLabsModel { get => elevenLabsModel; set => elevenLabsModel = value; } 
+        public string ElevenLabsModelId => ElevenLabs.ElevenLabs.GetModelId(elevenLabsModel);
+
+        public IVoiceService VoiceService { get; set; } = null;
 
         public string ImageSizeString
         {

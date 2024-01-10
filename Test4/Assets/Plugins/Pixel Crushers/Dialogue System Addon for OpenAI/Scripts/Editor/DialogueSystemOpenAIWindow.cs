@@ -22,6 +22,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         public const string OpenAIKey = "PixelCrushers.OpenAIKey"; // OpenAI API key stored in EditorPrefs.
         public const string ElevenLabsKey = "PixelCrushers.ElevenLabsKey"; // ElevenLabs API key stored in EditorPrefs.
+        public const string ElevenLabsModel = "PixelCrushers.ElevenLabsModel"; // ElevenLabs model stored in EditorPrefs.
         public const string DialogueSmithKey = "PixelCrushers.DialogueSmithKey"; // Dialogue Smith API key stored in EditorPrefs.
 
         [MenuItem("Tools/Pixel Crushers/Dialogue System/Addon for OpenAI/Main Window")]
@@ -84,8 +85,8 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                     return new ElevenLabs.GenerateVoicePanel(elevenLabsKey, database, asset, entry, field);
 
                 case AIRequestType.GeneratePortraits:
-                    return (asset is Actor) ? new GeneratePortraitsPanel(apiKey, database, asset)
-                        : new GeneralPanel(apiKey, database);
+                    if (asset is Actor) return new GeneratePortraitsPanel(apiKey, database, asset);
+                    else return new GeneralPanel(apiKey, database);
 
                 case AIRequestType.BranchingDialogue:
                     return new BranchingDialoguePanel(dialogueSmithKey, database, asset as Conversation);
