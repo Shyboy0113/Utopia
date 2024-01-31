@@ -35,7 +35,7 @@ public class HpManager : MonoBehaviour
     {
         if (heartImages.Count != GameManager.Instance._playerHp) UpdateHearts();
 
-        staminaGauge.fillAmount = GameManager.Instance._playerStamina / GameManager.Instance._staminaMax;
+        //staminaGauge.fillAmount = GameManager.Instance._playerStamina / GameManager.Instance._staminaMax;
 
         if (camera is null)
         {

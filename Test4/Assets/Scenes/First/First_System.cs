@@ -32,7 +32,7 @@ public class First_System : MonoBehaviour
     private IEnumerator AppearCharacter()
     {
 
-        yield return new WaitForSeconds(4.8f);
+        yield return new WaitForSeconds(4.95f);
 
         hero.SetActive(true);
 

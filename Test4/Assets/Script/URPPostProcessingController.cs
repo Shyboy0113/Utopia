@@ -27,8 +27,8 @@ public class URPPostProcessingController : MonoBehaviour
 
         postProcessingVolume.profile.TryGet(out _vignette);
 
-        GameManager.Instance.OnGuardPostureActivated.AddListener(EnablePostProcessing);
-        GameManager.Instance.OnGuardPostureDeactivated.AddListener(DisablePostProcessing);
+        //GameManager.Instance.OnGuardPostureActivated.AddListener(EnablePostProcessing);
+        //GameManager.Instance.OnGuardPostureDeactivated.AddListener(DisablePostProcessing);
     }
 
 

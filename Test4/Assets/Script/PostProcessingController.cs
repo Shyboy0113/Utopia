@@ -18,8 +18,8 @@ public class PostProcessingController : MonoBehaviour
     private void Start()
     {
         postProcessVolume.enabled = false;
-        GameManager.Instance.OnGuardPostureActivated.AddListener(EnablePostProcessing);
-        GameManager.Instance.OnGuardPostureDeactivated.AddListener(DisablePostProcessing);
+        //GameManager.Instance.OnGuardPostureActivated.AddListener(EnablePostProcessing);
+        //GameManager.Instance.OnGuardPostureDeactivated.AddListener(DisablePostProcessing);
     }
 
     private void EnablePostProcessing()

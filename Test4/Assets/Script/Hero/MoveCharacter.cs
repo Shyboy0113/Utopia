@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using PixelCrushers;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Animations;
 
 
 public class MoveCharacter : MonoBehaviour
@@ -19,10 +12,6 @@ public class MoveCharacter : MonoBehaviour
     private float inputX = 0f;
     
     private bool jump = false;
-    public static bool crouch = false;
-    public static bool isGroggy = false;
-    
-    private bool isGuard = false;
 
     private void Start()
     {
@@ -32,85 +21,24 @@ public class MoveCharacter : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("IsGroggy is " + isGroggy);
-        
-        if (!isGroggy && !GameManager.Instance.isStory)
-        {
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                // Assuming a guard posture
-                GameManager.Instance.OnGuardPostureActivated.Invoke();
-                isGuard = true;
-
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                // Exiting guard posture
-                GameManager.Instance.OnGuardPostureDeactivated.Invoke();
-                isGuard = false;
-            }
-
-            inputX = Input.GetAxisRaw("Horizontal") * speed;
-
-            if (Input.GetButtonDown("Jump")) jump = true;
-
-            if (Input.GetButton("Crouch"))
-            {
-                // Only set crouch to true if the character is grounded
-                if (controller.m_Grounded)
-                {
-                    crouch = true;
-                }
-            }
-            else
-            {
-                if (controller.IsReachedCeiling() is false)
-                {
-                    crouch = false;
-                }
-                else
-                {
-                    crouch = true;
-                }
-            }
-        }
-
+        inputX = Input.GetAxisRaw("Horizontal") * speed;
+        if (Input.GetButtonDown("Jump")) jump = true;
     }
 
     private void FixedUpdate()
     {
-        if (!isGroggy)
+        if (!GameManager.Instance.isStory)
         {
-            controller.Move(inputX * Time.fixedDeltaTime, crouch, jump);
+            controller.Move(inputX * Time.fixedDeltaTime, jump);
             jump = false;
+
             // 애니메이션 조절
             UpdateAnimator();
         }
         else
         {
-            controller.Move(0f,false,false);
+            controller.Move(0f,false);
         }
-    }
-
-    public IEnumerator StartGroggy(float duration)
-    {
-        isGroggy = true;
-        isGuard = false;
-        GameManager.Instance.OnGuardPostureDeactivated.Invoke();
-        
-        animator.SetBool("IsGroggy", true);
-        animator.SetBool("IsGuard", false);
-
-        yield return new WaitForSeconds(duration);
-
-        // After the specified duration, set isGroggy to false and play idle animation
-        
-        animator.SetBool("IsGroggy", false);
-        isGroggy = false;
-        
-        yield return null;
-        
     }
 
     // 애니메이션을 조절하는 함수
@@ -120,7 +48,7 @@ public class MoveCharacter : MonoBehaviour
         float verticalVelocity = controller.GetVerticalVelocity();
         float HorizontalVelocity = controller.GetHorizontalVelocity();
         
-        bool isGrounded = controller.m_Grounded;
+        bool isGrounded = controller._grounded;
 
         // 높은 곳에서 떨어져서 y 속도가 음수이거나, 점프를 한 뒤 y 속도가 0 이하로 떨어졌을 경우 "떨어지는 애니메이션" 실행
         bool isFalling = !isGrounded && verticalVelocity < 0;
@@ -135,19 +63,9 @@ public class MoveCharacter : MonoBehaviour
         // 점프 상태를 결정
         animator.SetBool("IsJumping", !isGrounded && !isFalling);
         
-        animator.SetBool("IsMoving", !crouch && isMoving);
+        animator.SetBool("IsMoving", isMoving);
         
-        // 웅크리는 상태를 Animator에 전달
-        animator.SetBool("IsCrouching", crouch);
-        animator.SetBool("IsCrouchMoving", crouch && isMoving);
-        
-        animator.SetBool("IsGuard", isGuard);
 
     }
 
-    private void OnDestroy()
-    {
-        isGroggy = false;
-        crouch = false;
-    }
 }
