@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 
 public class MoveCharacter : MonoBehaviour
 {
@@ -8,10 +8,12 @@ public class MoveCharacter : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator; // 애니메이터에 대한 참조 추가
     
-    public float speed = 40f;
+    public float speed = 20f;
     private float inputX = 0f;
     
     private bool jump = false;
+
+    private bool isPlayingExhausted = false;
 
     private void Start()
     {
@@ -21,13 +23,37 @@ public class MoveCharacter : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.playerStamina <= 0f)
+        {
+            if(!isPlayingExhausted)
+            {
+                StartCoroutine(PlayExhausted());
+            }
+        }
+
         inputX = Input.GetAxisRaw("Horizontal") * speed;
-        if (Input.GetButtonDown("Jump")) jump = true;
+        if (Input.GetButtonDown("Jump") && !isPlayingExhausted) jump = true;
+
+        if (!isPlayingExhausted)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                GameManager.Instance.staminaVector = -1;
+                speed = 40f;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                GameManager.Instance.staminaVector = 1;
+                speed = 20f;
+            }
+        }
+
     }
 
+    
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.isStory)
+        if (!GameManager.Instance.isStory && !GameManager.Instance.isExhausted)
         {
             controller.Move(inputX * Time.fixedDeltaTime, jump);
             jump = false;
@@ -39,6 +65,29 @@ public class MoveCharacter : MonoBehaviour
         {
             controller.Move(0f,false);
         }
+    }
+
+    private IEnumerator PlayExhausted()
+    {
+
+        //애니메이터에서 탈진 상태 구현해놔야 함
+        animator.SetBool("IsExhausted", true);
+
+        isPlayingExhausted = true;
+        GameManager.Instance.isExhausted = true;
+
+        GameManager.Instance.staminaVector = 0;
+        GameManager.Instance.playerStamina = 0.001f;
+
+        yield return new WaitForSeconds(3f);
+
+        isPlayingExhausted = false;
+        GameManager.Instance.isExhausted = false;
+        GameManager.Instance.staminaVector = 1;
+
+        animator.SetBool("IsExhausted", false);
+        speed = 20f;
+
     }
 
     // 애니메이션을 조절하는 함수

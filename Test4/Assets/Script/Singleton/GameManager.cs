@@ -22,6 +22,11 @@ public class GameManager : Singleton<GameManager>
     // 체력 관련
     public int _playerHp;
     public int MaxHp = 5;
+    
+    //스태미나 관련
+    public float playerStamina;
+    public float maxStamina = 2.0f;
+    public int staminaVector = 1;
 
     // 공격력 관련
     public int Atk;
@@ -41,18 +46,30 @@ public class GameManager : Singleton<GameManager>
     // 전투가 끝났을 때 (플레이어가 죽거나, 적이 죽음)
     public bool isBattle = false;
 
+    public bool isExhausted = false;
+
     // 스토리 및 컷신 연출 중일 때
     public bool isStory = false;
     // 일시 정지
     public bool isPause = false;
 
+
     private void Start()
     {
         _playerHp = MaxHp;
-    }
+        playerStamina = maxStamina;
+        staminaVector = 1;
+}
 
     private void Update()
     {
+        //스태미나 관련
+        if (!isExhausted)
+        {
+            if (playerStamina >= maxStamina) playerStamina = maxStamina;
+            playerStamina += staminaVector * Time.deltaTime;
+        }
+
         if (!isStory)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
