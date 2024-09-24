@@ -58,12 +58,31 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             EditorGUILayout.LabelField("Translate all database content.");
             EditorGUILayout.EndHorizontal();
 
+
+            EditorGUILayout.BeginHorizontal();
+            //EditorGUI.BeginDisabledGroup(textTable == null);
+            if (GUILayout.Button("Translate Text Table", GUILayout.Width(200)))
+            {
+                DialogueSystemOpenAIWindow.Open(AIRequestType.LocalizeTextTable, null, null, null, null);
+            }
+            //EditorGUI.EndDisabledGroup();
+            EditorGUILayout.LabelField("Translate text table.");
+            EditorGUILayout.EndHorizontal();
+
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Freeform Chat", GUILayout.Width(200)))
             {
                 DialogueSystemOpenAIWindow.Open(AIRequestType.Freeform, database, asset, entry, field);
             }
             EditorGUILayout.LabelField("Talk with OpenAI.");
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Fine-Tuned Models", GUILayout.Width(200)))
+            {
+                DialogueSystemOpenAIWindow.Open(AIRequestType.FineTunedModels, database, asset, entry, field);
+            }
+            EditorGUILayout.LabelField("Add your fine-tuned models.");
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space();

@@ -17,7 +17,9 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         ReviseText,
         LocalizeField,
         LocalizeDatabase,
+        LocalizeTextTable,
         Freeform,
+        FineTunedModels,
 
         // DALL-E
         GeneratePortraits,

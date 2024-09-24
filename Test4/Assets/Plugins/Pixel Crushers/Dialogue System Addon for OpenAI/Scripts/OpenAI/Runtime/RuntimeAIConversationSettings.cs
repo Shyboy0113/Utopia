@@ -19,6 +19,8 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         [Header("OpenAI Settings")]
         [SerializeField] private string apiKey;
         [SerializeField] private TextModelName textModelName = TextModelName.GPT3_5_Turbo;
+        [Tooltip("Fine-Tuned Model is only applicable if Text Model Name is set to Fine-Tuned.")]
+        [SerializeField] private string fineTunedModelName;
         [Tooltip("Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or top_p but not both.")]
         [SerializeField] private float temperature = 0.4f;
         [Tooltip("An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.")]
@@ -29,6 +31,8 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         [SerializeField][Range(-2, 2)] private float frequencyPenalty = 0;
         [Tooltip("Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.")]
         [SerializeField][Range(-2, 2)] private float presencePenalty = 0;
+        [Tooltip("Use OpenAI for text to speech voice generation.")]
+        [SerializeField] private bool useOpenAIVoiceGeneration = true;
 
         [Header("ElevenLabs Settings")]
         [Tooltip("If you want to generate text to speech, set your ElevenLabs API key here.")]
@@ -67,13 +71,14 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public int RecordingFrequency => recordingFrequency;
 
         public string APIKey { get => apiKey; set => apiKey = value; }
-        public Model Model => OpenAI.NameToModel(textModelName);
+        public Model Model => GetModel();
         public bool IsChatModel => Model.ModelType == ModelType.Chat;
         public float Temperature { get => temperature; set => temperature = value; }
         public float TopP { get => top_p; set => top_p = value; }
         public int MaxTokens { get => maxTokens; set => maxTokens = value; }
         public float FrequencyPenalty { get => frequencyPenalty; set => frequencyPenalty = value; }
         public float PresencePenalty { get => presencePenalty; set => presencePenalty = value; }
+        public bool UseOpenAIVoiceGeneration { get => useOpenAIVoiceGeneration; set => useOpenAIVoiceGeneration = value; }
         public string ElevenLabsApiKey { get => elevenLabsApiKey; set => elevenLabsApiKey = value; }
         public ElevenLabs.ElevenLabs.Models ElevenLabsModel { get => elevenLabsModel; set => elevenLabsModel = value; } 
         public string ElevenLabsModelId => ElevenLabs.ElevenLabs.GetModelId(elevenLabsModel);
@@ -108,13 +113,31 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
         }
 
-        private void Awake()
+        private Model fineTunedModel = null;
+
+        protected virtual Model GetModel()
+        {
+            if (textModelName == TextModelName.FineTune)
+            { 
+                if (fineTunedModel == null)
+                {
+                    fineTunedModel = new Model(fineTunedModelName, ModelType.Chat, MaxTokens);
+                }
+                return fineTunedModel;
+            }
+            else
+            {
+                return OpenAI.NameToModel(textModelName);
+            }
+        }
+
+        protected virtual void Awake()
         {
             Instance = this;
             HideExtraUIElements();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             var dialogueUI = GetComponent<StandardDialogueUI>();
             if (dialogueUI == null) return;
@@ -124,7 +147,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
         }
 
-        private void HideExtraUIElements()
+        protected virtual void HideExtraUIElements()
         {
             if (waitingIcon != null) waitingIcon.SetActive(false);
             if (goodbyeButton != null) goodbyeButton.gameObject.SetActive(false);

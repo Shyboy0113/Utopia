@@ -123,6 +123,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         public void Repaint()
         {
+            if (DialogueSystemOpenAIWindow.Instance == null) return;
             DialogueSystemOpenAIWindow.Instance.Repaint();
         }
 

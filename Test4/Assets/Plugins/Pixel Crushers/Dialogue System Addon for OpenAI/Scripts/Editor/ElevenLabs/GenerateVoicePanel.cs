@@ -9,6 +9,9 @@ using PixelCrushers.DialogueSystem.DialogueEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
 #endif
+#if USE_DEEPVOICE
+using PixelCrushers.DialogueSystem.OpenAIAddon.DeepVoice;
+#endif
 
 namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
 {
@@ -21,10 +24,16 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
     public class GenerateVoicePanel : ElevenLabsPanel
     {
 
-        private string dialogueText;
+        private string textForVoiceover;
         private Actor actor;
         private string voiceName;
         private string voiceID;
+        private bool isLocalizationField;
+
+#if USE_DEEPVOICE
+        private float variability = 0.3f;
+        private float clarity = 0.75f;
+#endif
 
         private static string lastFilename;
         private static AudioSequencerCommands sequencerCommand = AudioSequencerCommands.None;
@@ -39,10 +48,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             Asset asset, DialogueEntry entry, Field field)
             : base(apiKey, database, asset, entry, field)
         {
-            dialogueText = (entry != null) ? entry.DialogueText : string.Empty;
+            textForVoiceover = (field != null && field.type == FieldType.Localization) ? field.value
+                : (entry != null) ? entry.DialogueText : string.Empty;
             actor = (entry != null) ? database.GetActor(entry.ActorID) : null;
             voiceName = (actor != null) ? actor.LookupValue(DialogueSystemFields.Voice) : null;
             voiceID = (actor != null) ? actor.LookupValue(DialogueSystemFields.VoiceID) : null;
+            lastFilename = EditorPrefs.GetString(DialogueSystemOpenAIWindow.ElevenLabsLastFilename);
+            isLocalizationField = field != null && field.type == FieldType.Localization;
         }
 
         ~GenerateVoicePanel()
@@ -53,7 +65,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
         public override void Draw()
         {
             base.Draw();
-            DrawHeading(HeadingLabel, "Generate voiceover for this line using the actor's ElevenLabs voice.");
+            DrawHeading(HeadingLabel, "Generate voiceover for this line using the actor's selected voice.");
             if (actor == null)
             {
                 EditorGUILayout.LabelField("Assign an actor to this dialogue entry first.");
@@ -73,21 +85,30 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 DrawPreviewButton();
                 DrawAcceptButton();
             }
+            DrawStatus();
         }
 
         private void DrawGenerateButton()
         {
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.LabelField("Dialogue Text");
-            EditorGUILayout.TextArea(dialogueText);
+            EditorGUILayout.TextArea(textForVoiceover);
             EditorGUILayout.TextField("Voice", voiceName);
             EditorGUI.EndDisabledGroup();
+
+#if USE_DEEPVOICE
+            variability = EditorGUILayout.Slider("Variability", variability, 0, 1);
+            clarity = EditorGUILayout.Slider("Clarity", clarity, 0, 1);
+#endif
+
+            EditorGUI.BeginDisabledGroup(isLocalizationField);
             sequencerCommand = (AudioSequencerCommands)EditorGUILayout.EnumPopup(SequencerCommandLabel, sequencerCommand);
             if (sequencerCommand == AudioSequencerCommands.Other)
             {
                 otherSequencerCommand = EditorGUILayout.TextField("Command", otherSequencerCommand);
             }
             var needToInputSequencerCommand = sequencerCommand == AudioSequencerCommands.Other && string.IsNullOrEmpty(otherSequencerCommand);
+            EditorGUI.EndDisabledGroup();
             EditorGUI.BeginDisabledGroup(IsAwaitingReply || needToInputSequencerCommand);
             if (GUILayout.Button("Generate"))
             {
@@ -110,9 +131,27 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
         {
             DestroyAudioClip();
             IsAwaitingReply = true;
-            ProgressText = $"Generating voiceover: {dialogueText}.";
-            Debug.Log($"Generating voiceover for: {dialogueText}.");
-            ElevenLabs.GetTextToSpeech(apiKey, modelId, voiceName, voiceID, 0, 0, dialogueText, OnReceivedTextToSpeech);
+            ProgressText = $"Generating voiceover: {textForVoiceover}";
+
+            if (voiceID == "OpenAI")
+            {
+                var openAIVoice = System.Enum.Parse<Voices>(voiceName);
+                OpenAI.SubmitVoiceGenerationAsync(openAIKey, TTSModel.TTSModel1HD, openAIVoice,
+                    VoiceOutputFormat.MP3, 1, textForVoiceover, OnReceivedTextToSpeech);
+                return;
+            }
+
+#if USE_DEEPVOICE
+            if (voiceID.StartsWith("DeepVoice"))
+            {
+                Debug.Log($"Generating DeepVoice voiceover for: {textForVoiceover}");
+                DeepVoiceAPI.GetTextToSpeech(DeepVoiceAPI.GetDeepVoiceModel(voiceID), voiceName, 
+                    textForVoiceover, variability, clarity, OnReceivedTextToSpeech);
+                return;
+            }
+#endif
+            Debug.Log($"Generating voiceover for: {textForVoiceover}");
+            ElevenLabs.GetTextToSpeech(apiKey, modelId, voiceName, voiceID, 0, 0, textForVoiceover, OnReceivedTextToSpeech);
         }
 
         private void OnReceivedTextToSpeech(AudioClip audioClip)
@@ -120,8 +159,9 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             IsAwaitingReply = false;
             if (audioClip == null) return;
             this.audioClip = audioClip;
-            Debug.Log($"Playing: {dialogueText}.");
+            Debug.Log($"Playing: {textForVoiceover}");
             EditorAudioUtility.PlayAudioClip(audioClip);
+            Repaint();
         }
 
         private void DrawAcceptButton()
@@ -133,7 +173,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 var filename = SaveAudioClip();
                 if (!string.IsNullOrEmpty(filename))
                 {
-                    AddSelectedSequencerCommand(sequencerCommand, System.IO.Path.GetFileNameWithoutExtension(filename), entry);
+                    if (!isLocalizationField)
+                    {
+                        AddSelectedSequencerCommand(sequencerCommand, System.IO.Path.GetFileNameWithoutExtension(filename), database, entry);
+                    }
                     SaveDatabaseChanges();
                     RefreshEditor();
                     CloseWindow();
@@ -148,21 +191,21 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             EditorGUILayout.EndHorizontal();
         }
 
-        public static void AddSelectedSequencerCommand(AudioSequencerCommands sequencerCommand, string entrytag, DialogueEntry entry)
+        public static void AddSelectedSequencerCommand(AudioSequencerCommands sequencerCommand, string entrytag, DialogueDatabase database, DialogueEntry entry)
         {
             switch (sequencerCommand)
             {
                 case AudioSequencerCommands.AudioWait:
                 case AudioSequencerCommands.SALSA:
-                    AddSequencerCommand(sequencerCommand.ToString(), entrytag, entry);
+                    AddSequencerCommand(sequencerCommand.ToString(), entrytag, database, entry);
                     break;
                 case AudioSequencerCommands.Other:
-                    AddSequencerCommand(otherSequencerCommand, entrytag, entry);
+                    AddSequencerCommand(otherSequencerCommand, entrytag, database, entry);
                     break;
             }
         }
 
-        public static void AddSequencerCommand(string command, string entrytag, DialogueEntry entry)
+        public static void AddSequencerCommand(string command, string entrytag, DialogueDatabase database, DialogueEntry entry)
         {
             var sequence = entry.Sequence;
             if (!(string.IsNullOrEmpty(sequence) || sequence.EndsWith(";")))
@@ -171,6 +214,11 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             }
             sequence += $"{command}({entrytag})";
             entry.Sequence = sequence;
+            PrefabUtility.RecordPrefabInstancePropertyModifications(database);
+            EditorUtility.SetDirty(database);
+            AssetDatabase.SaveAssetIfDirty(database);
+            AssetDatabase.Refresh();
+            Debug.Log($"Sequence: {entry.Sequence}");
         }
 
         private string SaveAudioClip()
@@ -178,6 +226,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             if (audioClip == null) return string.Empty;
             var conversation = database.GetConversation(entry.conversationID);
             var defaultName = database.GetEntrytag(conversation, entry, GetEntrytagFormat());
+            if (isLocalizationField) defaultName += "_" + field.title;
             var path = "Assets";
             if (!string.IsNullOrEmpty(lastFilename))
             {
@@ -191,6 +240,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             var filename = EditorUtility.SaveFilePanelInProject(title, defaultName, "wav", "", path);
             if (string.IsNullOrEmpty(filename)) return string.Empty;
             lastFilename = filename;
+            EditorPrefs.SetString(DialogueSystemOpenAIWindow.ElevenLabsLastFilename, lastFilename);
             // Remove extra Assets/ & extension:
             var fullPath = Application.dataPath + "/" + filename.Substring("Assets/".Length); 
             Debug.Log($"Saving audio clip to {filename}");

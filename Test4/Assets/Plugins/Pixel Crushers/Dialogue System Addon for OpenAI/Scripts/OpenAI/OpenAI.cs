@@ -11,7 +11,13 @@ using UnityEngine.Networking;
 namespace PixelCrushers.DialogueSystem.OpenAIAddon
 {
 
-    public enum TextModelName { GPT_4_Turbo, GPT_4, GPT_4_32K, GPT3_5_Turbo, GPT3_5_Turbo_16K, Davinci, Curie, Babbage, Ada }
+    public enum TextModelName 
+    { 
+        GPT_4o, GPT_4o_mini, GPT_4_Turbo, GPT_4, GPT_4_32K, 
+        GPT3_5_Turbo, GPT3_5_Turbo_16K, 
+        Davinci, Curie, Babbage, Ada,
+        FineTune
+    }
 
     /// <summary>
     /// Handles web requests to OpenAI API.
@@ -19,15 +25,28 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
     public static class OpenAI
     {
 
-        public const string CompletionsURL = "https://api.openai.com/v1/completions";
-        public const string ChatURL = "https://api.openai.com/v1/chat/completions";
-        public const string EditsURL = "https://api.openai.com/v1/edits";
-        public const string FineTunesURL = "https://api.openai.com/v1/fine-tunes";
-        public const string AudioTranscriptionsURL = "https://api.openai.com/v1/audio/transcriptions";
-        public const string AudioTranslationsURL = "https://api.openai.com/v1/translations";
-        public const string ImageGenerationsURL = "https://api.openai.com/v1/images/generations";
-        public const string ImageEditsURL = "https://api.openai.com/v1/images/edits";
-        public const string ImageVariationsURL = "https://api.openai.com/v1/images/variations";
+        /// <summary>
+        /// If you want to use a different base URL that conforms to the same API,
+        /// change BaseURL.
+        /// </summary>
+        public static string BaseURL { get; set; } = "https://api.openai.com/v1/";
+
+        public const string OpenAIURL = "https://api.openai.com/v1/";
+
+        public static string CompletionsURL => $"{BaseURL}/completions";
+        public static string ChatURL => $"{BaseURL}/chat/completions";
+        public static string EditsURL => $"{BaseURL}/edits";
+        public static string FineTunesURL => $"{BaseURL}/fine-tunes";
+        public static string FineTuningURL => $"{BaseURL}/fine_tuning";
+        public static string AudioTranscriptionsURL => $"{BaseURL}/audio/transcriptions";
+        public static string AudioTranslationsURL => $"{BaseURL}/translations";
+        public static string AudioSpeechURL => $"{BaseURL}/audio/speech";
+        public static string ImageGenerationsURL => $"{BaseURL}/images/generations";
+        public static string ImageEditsURL => $"{BaseURL}/images/edits";
+        public static string ImageVariationsURL => $"{BaseURL}/images/variations";
+
+        public static string TTSModel1 = "tts-1";
+        public static string TTSModel1HD = "tts-1-hd";
 
         public const string ResponseFormatURL = "url";
         public const string ResponseFormatB64JSON = "b64_json";
@@ -50,8 +69,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 case TextModelName.Curie: return Model.Curie;
                 case TextModelName.Davinci: return Model.Davinci_003;
                 case TextModelName.GPT_4: return Model.GPT4;
-                case TextModelName.GPT_4_Turbo: return Model.GPT4_Turbo;
                 case TextModelName.GPT_4_32K: return Model.GPT4_32K;
+                case TextModelName.GPT_4_Turbo: return Model.GPT4_Turbo;
+                case TextModelName.GPT_4o: return Model.GPT4o;
+                case TextModelName.GPT_4o_mini: return Model.GPT4o_mini;
             }
         }
 
@@ -374,6 +395,33 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         #region Audio
 
+        public static string TTSModelToString(TTSModel model)
+        {
+            switch (model)
+            {
+                default:
+                    return TTSModel1;
+                case TTSModel.TTSModel1HD:
+                    return TTSModel1HD;
+            }
+        }
+
+        public static string VoiceOutputFormatToString(VoiceOutputFormat format)
+        {
+            return format.ToString().ToLower();
+        }
+
+        public static AudioType VoiceOutputFormatToAudioType(VoiceOutputFormat format)
+        {
+            switch (format)
+            {
+                default:
+                    return AudioType.WAV;
+                case VoiceOutputFormat.MP3:
+                    return AudioType.MPEG;
+            }
+        }
+
         /// <summary>
         /// Transcribes audio into the input language.
         /// </summary>
@@ -436,6 +484,141 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                     text = string.Empty;
                 }
                 callback?.Invoke(text);
+            };
+
+            return asyncOp;
+        }
+
+        /// <summary>
+        /// Generates voice acting audio from text. A DownloadHandlerAudioClip bug in some 
+        /// Unity versions makes it unable to handle some WAV files. This method variant
+        /// returns the raw bytes of the generated audio in case the AudioClip isn't valid.
+        /// If DownloadHandlerAudioClip wasn't able to load the audio clip, the length will be 0.
+        /// </summary>
+        /// <param name="apiKey">OpenAI API key.</param>
+        /// <param name="model">TTS model to use.</param>
+        /// <param name="voice">Voice actor to use.</param>
+        /// <param name="outputFormat">Audio clip output format.</param>
+        /// <param name="speed">Speed from 0.25 to 4.0.</param>
+        /// <param name="input">Text to generate voice acting from.</param>
+        /// <param name="callback">The audio clip and bytes returned by the API call, or null on failure.</param>
+        /// <returns></returns>
+        public static UnityWebRequestAsyncOperation SubmitVoiceGenerationAsync(string apiKey, 
+            TTSModel model, Voices voice, VoiceOutputFormat outputFormat, float speed, string input,
+            Action<AudioClip, byte[]> callback)
+        {
+            var voiceRequest = new AudioSpeechRequest(TTSModelToString(model), input, 
+                voice.ToString().ToLower(), VoiceOutputFormatToString(outputFormat), speed);
+            string jsonData = JsonUtility.ToJson(voiceRequest);
+
+            UnityWebRequest webRequest = WebRequestUtility.CreateWebRequest(apiKey, AudioSpeechURL, jsonData);
+            webRequest.disposeUploadHandlerOnDispose = true;
+            webRequest.disposeDownloadHandlerOnDispose = true;
+            UnityWebRequestAsyncOperation asyncOp = webRequest.SendWebRequest();
+
+            asyncOp.completed += (op) =>
+            {
+                var success = webRequest.result == UnityWebRequest.Result.Success;
+                if (!success) Debug.Log(webRequest.error);
+
+                if (success)
+                {
+                    var bytes = webRequest.downloadHandler.data;
+                    var ext = VoiceOutputFormatToString(outputFormat);
+                    var filePath = Path.Combine(Application.persistentDataPath, $"audio.{ext}");
+                    filePath = filePath.Replace("/", "\\");
+                    File.WriteAllBytes(filePath, bytes);
+                    var url = "file://" + filePath.Replace("\\", "/");
+                    UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(url, VoiceOutputFormatToAudioType(outputFormat));
+                    var wwwOp = www.SendWebRequest();
+                    wwwOp.completed += (op2) =>
+                    {
+                        if (www.result == UnityWebRequest.Result.Success)
+                        {
+                            var audioClip = DownloadHandlerAudioClip.GetContent(www);
+                            callback?.Invoke(audioClip, bytes);
+                        }
+                        else
+                        {
+                            callback?.Invoke(null, bytes);
+                        }
+                        File.Delete(filePath);
+                        www.Dispose();
+                        www = null;
+                    };
+                }
+                else
+                {
+                    callback?.Invoke(null, null);
+                }
+                webRequest.Dispose();
+                webRequest = null;
+            };
+
+            return asyncOp;
+        }
+
+        /// <summary>
+        /// Generates voice acting audio from text.
+        /// </summary>
+        /// <param name="apiKey">OpenAI API key.</param>
+        /// <param name="model">TTS model to use.</param>
+        /// <param name="voice">Voice actor to use.</param>
+        /// <param name="outputFormat">Audio clip output format.</param>
+        /// <param name="speed">Speed from 0.25 to 4.0.</param>
+        /// <param name="input">Text to generate voice acting from.</param>
+        /// <param name="callback">The audio clip returned by the API call, or null on failure.</param>
+        /// <returns></returns>
+        public static UnityWebRequestAsyncOperation SubmitVoiceGenerationAsync(string apiKey,
+            TTSModel model, Voices voice, VoiceOutputFormat outputFormat, float speed, string input,
+            Action<AudioClip> callback)
+        {
+            var voiceRequest = new AudioSpeechRequest(TTSModelToString(model), input,
+                voice.ToString().ToLower(), VoiceOutputFormatToString(outputFormat), speed);
+            string jsonData = JsonUtility.ToJson(voiceRequest);
+
+            UnityWebRequest webRequest = WebRequestUtility.CreateWebRequest(apiKey, AudioSpeechURL, jsonData);
+            webRequest.disposeUploadHandlerOnDispose = true;
+            webRequest.disposeDownloadHandlerOnDispose = true;
+            UnityWebRequestAsyncOperation asyncOp = webRequest.SendWebRequest();
+
+            asyncOp.completed += (op) =>
+            {
+                var success = webRequest.result == UnityWebRequest.Result.Success;
+                if (!success) Debug.Log(webRequest.error);
+
+                if (success)
+                {
+                    var bytes = webRequest.downloadHandler.data;
+                    var ext = VoiceOutputFormatToString(outputFormat);
+                    var filePath = Path.Combine(Application.persistentDataPath, $"audio.{ext}");
+                    filePath = filePath.Replace("/", "\\");
+                    File.WriteAllBytes(filePath, bytes);
+                    var url = "file://" + filePath.Replace("\\", "/");
+                    UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(url, VoiceOutputFormatToAudioType(outputFormat));
+                    var wwwOp = www.SendWebRequest();
+                    wwwOp.completed += (op2) =>
+                    {
+                        if (www.result == UnityWebRequest.Result.Success)
+                        {
+                            var audioClip = DownloadHandlerAudioClip.GetContent(www);
+                            callback?.Invoke(audioClip);
+                        }
+                        else
+                        {
+                            callback?.Invoke(null);
+                        }
+                        File.Delete(filePath);
+                        www.Dispose();
+                        www = null;
+                    };
+                }
+                else
+                {
+                    callback?.Invoke(null);
+                }
+                webRequest.Dispose();
+                webRequest = null;
             };
 
             return asyncOp;

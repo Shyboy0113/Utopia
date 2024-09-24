@@ -271,6 +271,31 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public string text;
     }
 
+    public enum TTSModel { TTSModel1, TTSModel1HD }
+
+    public enum Voices { Alloy, Echo, Fable, Onyx, Nova, Shimmer }
+
+    public enum VoiceOutputFormat { MP3, WAV } // Opus, AAC, FLAC, PCM not supported.
+
+    [Serializable] 
+    public class AudioSpeechRequest
+    {
+        public string model;
+        public string input;
+        public string voice;
+        public string response_format;
+        public float speed;
+
+        public AudioSpeechRequest(string model, string input, string voice, string responseFormat, float speed)
+        {
+            this.model = model;
+            this.input = input;
+            this.voice = voice;
+            this.response_format = responseFormat;
+            this.speed = speed;
+        }
+    }
+
     #endregion
 
 }

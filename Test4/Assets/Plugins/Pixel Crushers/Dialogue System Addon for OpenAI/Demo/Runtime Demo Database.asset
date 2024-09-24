@@ -71,7 +71,7 @@ MonoBehaviour:
     - title: Name
       value: Private Hart
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Pictures
       value: '[]'
       type: 3
@@ -80,19 +80,19 @@ MonoBehaviour:
       value: Private Hart is a kind-hearted soldier who offers the quest to hack
         the emperor's computer to get the launch codes.
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: IsPlayer
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
     - title: Voice
-      value: Josh
+      value: Echo
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Voice ID
-      value: TxGEqnHWrfWFTfGW9XjX
+      value: OpenAI
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     portrait: {fileID: 2800000, guid: e63e2479a8b2dc54ea311a230ce6c979, type: 3}
     spritePortrait: {fileID: 0}
     alternatePortraits: []
@@ -111,17 +111,17 @@ MonoBehaviour:
       value: Sergeant Graves is a warlike soldier offers the quest to hold back enemy
         forces.
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: IsPlayer
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
     - title: Voice
-      value: Antoni
+      value: Onyx
       type: 0
       typeString: 
     - title: Voice ID
-      value: ErXwobaYiN019PkySvjV
+      value: OpenAI
       type: 0
       typeString: 
     portrait: {fileID: 0}

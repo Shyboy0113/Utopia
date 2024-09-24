@@ -14,14 +14,19 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
     {
 
         private const string ShowOnStartEditorPrefsKey = "PixelCrushers.DialogueSystemOpenAIAddon.ShowWelcomeOnStart";
+        private const string SettingsPrefsKey = "PixelCrushers.DialogueSystemOpenAIAddon.Settings";
         private const string USE_OPENAI = "USE_OPENAI";
         private const string USE_OVERTONE = "USE_OVERTONE";
+        private const string USE_DEEPVOICE = "USE_DEEPVOICE";
 
         private static WelcomeWindow instance;
 
         private static GUIContent MainWindowButtonLabel = new GUIContent("OpenAI Addon Window", "Open main OpenAI Addon window.");
         private static GUIContent AssistantWindowButtonLabel = new GUIContent("Assistant Window", "Open AI Assistant window.");
-        private static GUIContent OvertoneLabel = new GUIContent("Overtone", "Enable support for Least Squares' Overtone asset.");
+        private static GUIContent OvertoneLabel = new GUIContent("Overtone", "Enable support for Least Squares' Overtone asset. You must also import the 'Overtone Support' unitypackage from the Third Party Support folder.");
+        private static GUIContent DeepVoiceLabel = new GUIContent("DeepVoice", "Enable support for AiKodex's DeepVoice asset. You must also import the 'DeepVoice Support' unitypackage from the Third Party Support folder.");
+        private static GUIContent OverrideBaseUrlLabel = new GUIContent("Override Base URL", "Use a different URL than api.openai.com.");
+        private static GUIContent BaseUrlLabel = new GUIContent("Base URL", "Use this URL instead of api.openai.com.");
 
         private static bool showOnStartPrefs
         {
@@ -67,7 +72,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 #if USE_OPENAI
         private ElevenLabs.ElevenLabs.Models elevenLabsModel;
 #endif
-        private string dialogueSmithKey;
+        private AddonSettings settings;
         private GUIStyle heading;
         private GUIStyle labelWordWrapped;
         private GUIStyle labelHyperlink;
@@ -80,13 +85,31 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             openAIKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.OpenAIKey);
             elevenLabsKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.ElevenLabsKey);
             elevenLabsModel = (ElevenLabs.ElevenLabs.Models)EditorPrefs.GetInt(DialogueSystemOpenAIWindow.ElevenLabsModel, 0);
-            dialogueSmithKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.DialogueSmithKey);
 #endif
+            LoadSettings();
         }
 
         private void OnDisable()
         {
             instance = null;
+            SaveSettings();
+        }
+
+        private void LoadSettings()
+        {
+            if (EditorPrefs.HasKey(SettingsPrefsKey))
+            {
+                settings = JsonUtility.FromJson<AddonSettings>(EditorPrefs.GetString(SettingsPrefsKey));
+            }
+            if (settings == null) settings = new AddonSettings();
+#if USE_OPENAI
+            if (!string.IsNullOrEmpty(settings.baseURL)) OpenAI.BaseURL = settings.baseURL;
+#endif
+        }
+
+        private void SaveSettings()
+        {
+            EditorPrefs.SetString(SettingsPrefsKey, JsonUtility.ToJson(settings));
         }
 
         private void OnGUI()
@@ -99,7 +122,6 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             DrawKeySection();
             DrawOpenButton();
             DrawElevenLabsSection();
-            DrawDialogueSmithSection();
             DrawIntegrationsSection();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.LabelField(string.Empty, GUILayout.Height(EditorGUIUtility.singleLineHeight + 8f));
@@ -166,7 +188,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 {
                     MoreEditorUtility.TryAddScriptingDefineSymbols(USE_OPENAI);
                     EditorUtility.DisplayDialog("Enable Addon", "Setting Scripting Define Symbol USE_OPENAI to " +
-                        "enable the Dialogue System Addon for OpenAI.", "OK");
+                        "enable the Dialogue System Addon for OpenAI.\n\n" +
+                        "If you've imported the Dialogue System's assembly definition files, " +
+                        "you'll need to import the addon's AddonAssemblyDefinitions unitypackage " +
+                        "and possibly update them to account for any other asmdef references you've added.", "OK");
                     EditorTools.ReimportScripts();
                     Repaint();
                     GUIUtility.ExitGUI();
@@ -196,13 +221,26 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
             EditorGUILayout.BeginHorizontal();
             openAIKey = EditorGUILayout.TextField("Open API Key", openAIKey);
-            EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(openAIKey) || !openAIKey.StartsWith("sk-"));
+            EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(openAIKey) || !openAIKey.StartsWith("sk-") || settings.overrideBaseURL);
             var connectButtonWidth = GUI.skin.button.CalcSize(new GUIContent("Connect")).x;
             if (GUILayout.Button("Connect", GUILayout.Width(connectButtonWidth)))
             {
                 EditorPrefs.SetString(DialogueSystemOpenAIWindow.OpenAIKey, openAIKey);
             }
+            EditorGUI.EndDisabledGroup();
+            EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(openAIKey));
             EditorGUILayout.EndHorizontal();
+
+            settings.overrideBaseURL = EditorGUILayout.Toggle(OverrideBaseUrlLabel, settings.overrideBaseURL);
+            if (settings.overrideBaseURL)
+            {
+                EditorGUI.BeginChangeCheck();
+                settings.baseURL = EditorGUILayout.TextField(BaseUrlLabel, settings.baseURL);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    OpenAI.BaseURL = settings.baseURL;
+                }
+            }
 #endif
         }
 
@@ -267,43 +305,16 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 #endif
         }
 
-        private void DrawDialogueSmithSection()
-        {
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Configure Dialogue Smith Access (Optional)", EditorStyles.boldLabel);
-#if !USE_OPENAI
-            EditorGUILayout.LabelField("Enable Addon first.", labelWordWrapped);
-#else
-            if (!DialogueSmith.DialogueSmith.IsApiKeyValid(dialogueSmithKey))
-            {
-                EditorGUILayout.LabelField("If you want to use Dialogue Smith for branching dialogue and don't have a Dialogue Smith API key, click here:", labelWordWrapped);
-            }
-            else
-            {
-                EditorGUILayout.LabelField("✓ Dialogue Smith Key Accepted.", labelSuccess);
-            }
-            if (GUILayout.Button("Create Dialogue Smith API Key"))
-            {
-                Application.OpenURL("https://dialoguesmith.com/");
-            }
-
-            EditorGUI.BeginChangeCheck();
-            dialogueSmithKey = EditorGUILayout.TextField("Dialogue Smith API Key", dialogueSmithKey);
-            if (EditorGUI.EndChangeCheck())
-            {
-                EditorPrefs.SetString(DialogueSystemOpenAIWindow.DialogueSmithKey, dialogueSmithKey);
-            }
-#endif
-        }
-
         private void DrawIntegrationsSection()
         {
 #if USE_OPENAI
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Other Integrations", EditorStyles.boldLabel);
+            EditorGUI.BeginChangeCheck();
 #if USE_OVERTONE
+            EditorGUI.BeginChangeCheck();
             var toggle = EditorGUILayout.Toggle(OvertoneLabel, true);
-            if (!toggle)
+            if (EditorGUI.EndChangeCheck() && !toggle)
             {
                 MoreEditorUtility.TryRemoveScriptingDefineSymbols(USE_OVERTONE);
                 EditorUtility.DisplayDialog("Disabling Overtone Integration", "Removing Scripting Define Symbol USE_OVERTONE.", "OK");
@@ -312,12 +323,37 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 GUIUtility.ExitGUI();
             }
 #else
+            EditorGUI.BeginChangeCheck();
             var toggle = EditorGUILayout.Toggle(OvertoneLabel, false);
-            if (toggle)
+            if (EditorGUI.EndChangeCheck() && toggle)
             {
                 MoreEditorUtility.TryAddScriptingDefineSymbols(USE_OVERTONE);
                 EditorUtility.DisplayDialog("Enable Overtone Integration", "Setting Scripting Define Symbol USE_OVERTONE to " +
                     "enable the Overtone integration.", "OK");
+                EditorTools.ReimportScripts();
+                Repaint();
+                GUIUtility.ExitGUI();
+            }
+#endif
+#if USE_DEEPVOICE
+            EditorGUI.BeginChangeCheck();
+            toggle = EditorGUILayout.Toggle(DeepVoiceLabel, true);
+            if (EditorGUI.EndChangeCheck() && !toggle)
+            {
+                MoreEditorUtility.TryRemoveScriptingDefineSymbols(USE_DEEPVOICE);
+                EditorUtility.DisplayDialog("Disabling DeepVoice Integration", "Removing Scripting Define Symbol USE_DEEPVOICE.", "OK");
+                EditorTools.ReimportScripts();
+                Repaint();
+                GUIUtility.ExitGUI();
+            }
+#else
+            EditorGUI.BeginChangeCheck();
+            toggle = EditorGUILayout.Toggle(DeepVoiceLabel, false);
+            if (EditorGUI.EndChangeCheck() && toggle)
+            {
+                MoreEditorUtility.TryAddScriptingDefineSymbols(USE_DEEPVOICE);
+                EditorUtility.DisplayDialog("Enable DeepVoice Integration", "Setting Scripting Define Symbol USE_DEEPVOICE to " +
+                    "enable the DeepVoice integration.", "OK");
                 EditorTools.ReimportScripts();
                 Repaint();
                 GUIUtility.ExitGUI();
@@ -328,6 +364,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         private void DrawFooter()
         {
+            if (string.IsNullOrEmpty(openAIKey) || !openAIKey.StartsWith("sk-"))
+            {
+                EditorGUI.EndDisabledGroup();
+            }
             var newShowOnStart = EditorGUI.ToggleLeft(new Rect(5, position.height - 5 - EditorGUIUtility.singleLineHeight, position.width - (70 + 150), EditorGUIUtility.singleLineHeight), "Show at start", showOnStart);
             if (newShowOnStart != showOnStart)
             {

@@ -23,9 +23,9 @@ public class GameManager : Singleton<GameManager>
     public int _playerHp;
     public int MaxHp = 5;
     
-    //스태미나 관련
-    public float playerStamina;
+    //스태미나 관련    
     public float maxStamina = 2.0f;
+    public float playerStamina = 2.0f;
     public int staminaVector = 1;
 
     // 공격력 관련

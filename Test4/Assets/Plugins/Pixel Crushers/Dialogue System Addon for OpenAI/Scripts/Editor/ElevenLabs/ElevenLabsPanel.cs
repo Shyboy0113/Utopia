@@ -19,6 +19,8 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
         protected virtual string Operation => "ElevenLabs";
         protected string modelId;
 
+        protected string openAIKey = EditorPrefs.GetString(DialogueSystemOpenAIWindow.OpenAIKey);
+
         public ElevenLabsPanel(string apiKey, DialogueDatabase database,
             Asset asset, DialogueEntry entry, Field field)
             : base(apiKey, database, asset, entry, field)

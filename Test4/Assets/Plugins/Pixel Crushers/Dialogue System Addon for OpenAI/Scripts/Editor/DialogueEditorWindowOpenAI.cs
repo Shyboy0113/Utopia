@@ -69,19 +69,22 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
 
         public void DrawAIBranchingConversationButton(Conversation conversation)
         {
-            EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(EditorPrefs.GetString(DialogueSystemOpenAIWindow.DialogueSmithKey)));
-            if (GUILayout.Button(new GUIContent("AI", "Use Dialogue Smith to fill in branching dialogue using prompts in Title fields."), EditorStyles.miniButtonRight, GUILayout.Width(21)))
+            if (GUILayout.Button(new GUIContent("AI", "Generate dialogue text options for this conversation."), EditorStyles.miniButtonRight, GUILayout.Width(21)))
             {
                 DialogueSystemOpenAIWindow.Open(AIRequestType.BranchingDialogue, database, conversation, null, null);
             }
-            EditorGUI.EndDisabledGroup();
         }
 
         private void DrawAILocalizeTextButton(Asset asset, DialogueEntry entry, Field field)
         {
-            if (GUILayout.Button(new GUIContent("AI", "Localize text using OpenAI"), EditorStyles.miniButtonRight, GUILayout.Width(21)))
+            if (GUILayout.Button(new GUIContent("AI", "Localize text or generate voiceover audio."), EditorStyles.toolbarPopup, GUILayout.Width(36)))
             {
-                DialogueSystemOpenAIWindow.Open(AIRequestType.LocalizeField, database, asset, entry, field);
+                var menu = new GenericMenu();
+                menu.AddItem(new GUIContent("Translate", "Localize text using OpenAI"), false,
+                    () => { DialogueSystemOpenAIWindow.Open(AIRequestType.LocalizeField, database, asset, entry, field); });
+                menu.AddItem(new GUIContent("Voiceover", "Generate voiceover audio"), false,
+                    () => { DialogueSystemOpenAIWindow.Open(AIRequestType.GenerateVoice, database, null, entry, field); });
+                menu.ShowAsContext();
             }
         }
 

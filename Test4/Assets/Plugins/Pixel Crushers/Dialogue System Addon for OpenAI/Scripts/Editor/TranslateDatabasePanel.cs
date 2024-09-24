@@ -47,7 +47,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public TranslateDatabasePanel(string apiKey, DialogueDatabase database)
             : base(apiKey, database, null, null, null)
         {
-            SetModelByName(TextModelName.Curie);
+            SetModelByName(TextModelName.GPT3_5_Turbo_16K);
         }
 
         public void SetLanguages(List<string> languages)
@@ -87,7 +87,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
-            EditorGUI.BeginDisabledGroup(languages.Count == 0);
+            EditorGUI.BeginDisabledGroup(languages.Count == 0 || database == null);
             if (IsAwaitingReply)
             {
                 if (GUILayout.Button("Stop"))

@@ -223,6 +223,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             var conversation = AIConversationUtility.CreateConversation(database, template, conversationTitle,
                 actorName, conversantName, ResultText);
             var startNode = conversation.dialogueEntries[0];
+            EditorUtility.SetDirty(database);
 
             DialogueEditorWindow.OpenDialogueEntry(database, startNode.conversationID, startNode.id);
         }
@@ -273,6 +274,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                 var link = new Link(conversation.id, startNode.id, conversation.id, node.id);
                 startNode.outgoingLinks.Add(link);
             }
+            EditorUtility.SetDirty(database);
 
             DialogueEditorWindow.OpenDialogueEntry(database, startNode.conversationID, startNode.id);
         }

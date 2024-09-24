@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 936722038454483957}
   - component: {fileID: 923543779}
   - component: {fileID: 923543780}
-  - component: {fileID: 923543781}
   m_Layer: 3
   m_Name: "\uC624\uC988"
   m_TagString: Player
@@ -58,7 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5800213213809559987}
   animator: {fileID: 0}
-  speed: 40
+  speed: 20
 --- !u!114 &5800213213809559987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,14 +71,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  _jumpForce: 500
+  _jumpForce: 600
   _movementSmoothing: 0.05
-  _airControl: 0
+  _airControl: 1
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  _groundCheck: {fileID: 0}
-  _grounded: 0
+    m_Bits: 64
+  _groundCheck: {fileID: 5800213213937367152}
+  _grounded: 1
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -111,7 +110,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5800213213809559976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -404,25 +403,6 @@ MonoBehaviour:
   onDeselectedUsable:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &923543781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5800213213809559976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af33a602e20a3d4ca46c8a6ef942618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_key: 
-  m_appendSaverTypeToKey: 1
-  m_saveAcrossSceneChanges: 1
-  m_restoreStateOnStart: 0
-  m_target: {fileID: 5800213213809559979}
-  m_usePlayerSpawnpoint: 1
-  m_multiscene: 0
 --- !u!1 &5800213213937367153
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,8 +59,8 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public int MaxTextInputLength { get => maxTextInputLength; set => maxTextInputLength = value; }
 
         protected List<ChatMessage> Messages { get => messages; set => messages = value; }
-        protected int ApproximateTokenCount => approximateTokenCount;
-        protected bool ApproachedMaxTokens => approachedMaxTokens;
+        protected int ApproximateTokenCount { get => approximateTokenCount; set => approximateTokenCount = value; }
+        protected bool ApproachedMaxTokens { get => approachedMaxTokens; set => approachedMaxTokens = value; }
         protected RuntimeAIConversationSettings Settings { get; set; }
         protected StandardDialogueUI DialogueUI { get; set; }
         protected DialogueDatabase Database { get => database; set => database = value; }
@@ -72,14 +72,16 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         protected IVoiceService VoiceService => Settings.VoiceService;
         protected bool IsElevenLabsEnabled => !string.IsNullOrEmpty(Settings.ElevenLabsApiKey);
-        protected bool IsVoiceEnabled => IsElevenLabsEnabled || VoiceService != null;
+        protected bool IsBuiltInVoiceEnabled => Settings.UseOpenAIVoiceGeneration || IsElevenLabsEnabled;
+        protected bool IsVoiceEnabled => IsBuiltInVoiceEnabled || VoiceService != null;
         protected string VoiceServiceName => (VoiceService != null) ? VoiceService.Name
-            : IsElevenLabsEnabled ? "ElevenLabs"
+            : IsBuiltInVoiceEnabled ? "ElevenLabs"
             : "No Voice Service";
 
         protected string CurrentLineText { get; set; }
         protected AudioClip CurrentAudioClip { get; set; }
         protected Sprite CurrentSprite { get; set; }
+        protected bool EndConversationOnReceivedLine { get; set; } = false;
 
         protected AcceptedTextDelegate acceptedTextHandler = null;
         protected AudioClip recordedClip;
@@ -266,6 +268,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             {
                 VoiceService.GenerateTextToSpeech(voiceName, voiceID, text, callback);
             }
+            else if (voiceID == "OpenAI")
+            {
+                var openAIVoice = System.Enum.Parse<Voices>(voiceName);
+                OpenAI.SubmitVoiceGenerationAsync(Settings.APIKey, TTSModel.TTSModel1HD, openAIVoice,
+                    VoiceOutputFormat.MP3, 1, text, callback);
+
+            }
             else
             {
                 ElevenLabs.ElevenLabs.GetTextToSpeech(Settings.ElevenLabsApiKey,
@@ -327,6 +336,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             };
             approximateTokenCount = prompt.Length / ApproximateCharactersPerToken;
             approachedMaxTokens = false;
+            EndConversationOnReceivedLine = false;
             if (!string.IsNullOrEmpty(assistantPrompt))
             {
                 messages.Add(new ChatMessage("assistant", assistantPrompt));
@@ -394,14 +404,14 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             var actor = DialogueManager.masterDatabase.GetActor(SpeakerInfo.id);
             var voiceName = (actor != null) ? actor.LookupValue(DialogueSystemFields.Voice) : null;
             var voiceID = (actor != null) ? actor.LookupValue(DialogueSystemFields.VoiceID) : null;
-            if (string.IsNullOrEmpty(voiceName) || string.IsNullOrEmpty(voiceID))
+            if (string.IsNullOrEmpty(voiceName) && string.IsNullOrEmpty(voiceID))
             {
                 if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: No {VoiceServiceName} voice has been selected for {SpeakerInfo.nameInDatabase}. Not playing audio.");
                 ShowSubtitle(line, null);
             }
             else
             {
-                InvokeTextToSpeech(voiceName, voiceID, RemoveActorPrefix(line), OnReceivedTextToSpeech);
+                InvokeTextToSpeech(voiceName, voiceID, line, OnReceivedTextToSpeech);
             }
         }
 
@@ -432,14 +442,19 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             Destroy(CurrentAudioClip);
             CurrentAudioClip = audioClip;
             var sequence = (audioClip != null) ? $"Delay({audioClip.length}); {{default}}" : "";
-            var dialogueText = RemoveActorPrefix(line);
+            var dialogueText = line;
             var formattedText = FormattedText.Parse(dialogueText);
             var subtitle = new Subtitle(SpeakerInfo, ListenerInfo, formattedText, sequence, "", null);
             InformParticipants<Subtitle>(DialogueSystemMessages.OnConversationLine, subtitle);
             DialogueUI.ShowSubtitle(subtitle);
             SetGoodbyeButton(true);
 
-            if (approachedMaxTokens)
+            if (EndConversationOnReceivedLine)
+            {
+                var duration = (audioClip != null) ? audioClip.length : ConversationView.GetDefaultSubtitleDurationInSeconds(line);
+                Invoke(nameof(OnClickedGoodbye), duration);
+            }
+            else if (approachedMaxTokens)
             {
                 Settings.ChatInputField.Close();
             }
@@ -447,11 +462,6 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             {
                 StartTextInput(OnAcceptedTextInput);
             }
-        }
-
-        protected virtual string RemoveActorPrefix(string line)
-        {
-            return AITextUtility.RemoveSurroundingQuotes(line.Substring(line.IndexOf(':') + 1).Trim());
         }
 
         protected virtual void OnAcceptedTextInput(string text)
@@ -539,7 +549,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             if (IsVoiceEnabled)
             {
                 var command = (VoiceService != null) ? VoiceService.SequencerCommand 
-                    : IsElevenLabsEnabled ? "GenerateVoice()" 
+                    : IsBuiltInVoiceEnabled ? "GenerateVoice()" 
                     : "None()";
                 foreach (var entry in conversation.dialogueEntries)
                 {
@@ -698,7 +708,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
             else
             {
-                InvokeTextToSpeech(voiceName, voiceID, RemoveActorPrefix(line), OnReceivedStoryVoice);
+                InvokeTextToSpeech(voiceName, voiceID, line, OnReceivedStoryVoice);
             }
         }
 
@@ -748,7 +758,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         {
             SetWaitingIcon(false);
             var sequence = (audioClip != null) ? $"Delay({audioClip.length}); {{default}}" : "";
-            var dialogueText = RemoveActorPrefix(line);
+            var dialogueText = line;
             var formattedText = FormattedText.Parse(dialogueText);
             var subtitle = new Subtitle(SpeakerInfo, ListenerInfo, formattedText, sequence, "", null);
             InformParticipants<Subtitle>(DialogueSystemMessages.OnConversationLine, subtitle);

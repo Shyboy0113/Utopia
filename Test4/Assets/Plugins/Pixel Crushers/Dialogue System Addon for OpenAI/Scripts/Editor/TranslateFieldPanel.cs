@@ -29,7 +29,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             Asset asset, DialogueEntry entry, Field field)
             : base(apiKey, database, asset, entry, field)
         {
-            SetModelByName(TextModelName.Curie);
+            SetModelByName(TextModelName.GPT3_5_Turbo_16K);
         }
 
         public override void Draw()

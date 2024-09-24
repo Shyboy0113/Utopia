@@ -1,16 +1,17 @@
 #if USE_OPENAI
 
 using UnityEngine;
-using PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs;
 using PixelCrushers.DialogueSystem.OpenAIAddon;
+using PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs;
 
 namespace PixelCrushers.DialogueSystem.SequencerCommands
 {
+    using OpenAI = PixelCrushers.DialogueSystem.OpenAIAddon.OpenAI;
 
     /// <summary>
     /// Sequencer command: GenerateVoice()
-    /// Generates and plays voice audio. If unable to generate audio,
-    /// delays for the value of {{end}}.
+    /// Generates and plays voice audio through OpenAI or ElevenLabs.
+    /// If unable to generate audio, delays for the value of {{end}}.
     /// </summary>
     public class SequencerCommandGenerateVoice : SequencerCommand
     {
@@ -31,13 +32,21 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             {
                 if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: Sequencer: GenerateVoice(): No Runtime AI Conversation Settings component in scene. Not playing audio.");
             }
+            else if (string.IsNullOrEmpty(voiceName) || string.IsNullOrEmpty(voiceID))
+            {
+                if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: Sequencer: GenerateVoice(): No voice has been selected for {speakerInfo.nameInDatabase}. Not playing audio.");
+            }
+            else if (voiceID == "OpenAI")
+            {
+                CancelInvoke();
+                var openAIVoice = System.Enum.Parse<Voices>(voiceName);
+                OpenAI.SubmitVoiceGenerationAsync(RuntimeAIConversationSettings.Instance.APIKey, 
+                    TTSModel.TTSModel1HD, openAIVoice,
+                    VoiceOutputFormat.MP3, 1, dialogueText, OnReceivedOpenAITextToSpeech);
+            }
             else if (string.IsNullOrEmpty(RuntimeAIConversationSettings.Instance.ElevenLabsApiKey))
             {
                 if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: Sequencer: GenerateVoice(): ElevenLabs API key is not set on Runtime AI Conversation Settings component. Not playing audio.");
-            }
-            else if (string.IsNullOrEmpty(voiceName) || string.IsNullOrEmpty(voiceID))
-            {
-                if (DialogueDebug.logWarnings) Debug.LogWarning($"Dialogue System: Sequencer: GenerateVoice(): No ElevenLabs voice has been selected for {speakerInfo.nameInDatabase}. Not playing audio.");
             }
             else
             {
@@ -51,6 +60,11 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
         protected virtual void InvokeStopAfterDelay()
         {
             Invoke(nameof(Stop), ConversationView.GetDefaultSubtitleDurationInSeconds(DialogueManager.currentConversationState.subtitle.formattedText.text));
+        }
+
+        protected virtual void OnReceivedOpenAITextToSpeech(AudioClip audioClip, byte[] bytes)
+        {
+            OnReceivedTextToSpeech(audioClip);
         }
 
         protected virtual void OnReceivedTextToSpeech(AudioClip audioClip)

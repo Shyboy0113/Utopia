@@ -115,11 +115,19 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             var lines = fullConversationText.Split('\n');
             foreach (var line in lines)
             {
-                var s = line.Trim();
-                if (string.IsNullOrWhiteSpace(s)) continue;
-                var pos = s.IndexOf(": ");
-                var speakerName = (pos >= 0) ? s.Substring(0, pos) : "NPC";
-                var text = AITextUtility.RemoveSurroundingQuotes((pos >= 0) ? s.Substring(pos + 2): s);
+                var text = line.Trim();
+                if (string.IsNullOrWhiteSpace(text)) continue;
+                string speakerName = AITextUtility.ExtractSpeaker(ref text, database);
+
+                //var pos = s.IndexOf(": ");
+                //var speakerName = (pos >= 0) ? s.Substring(0, pos) : "NPC";
+                //if (database.GetActor(speakerName) == null)
+                //{
+                //    // If no actor has this name, the colon is probably part of the text.
+                //    pos = -1;
+                //    speakerName = "NPC";
+                //}
+                //var text = AITextUtility.RemoveSurroundingQuotes((pos >= 0) ? s.Substring(pos + 2): s);
 
                 var speakerID = (speakerName == actorName) ? actorID
                     : (speakerName == conversantName) ? conversantID

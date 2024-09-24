@@ -27,14 +27,15 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         private const string PromptControlName = "AssistantPrompt";
         private const float ChatHistoryWidth = 128;
-        private static string[] GPTToolbarContents = new string[] { "GPT-3.5", "GPT-4" };
+        //private static string[] GPTToolbarContents = new string[] { "GPT-3.5", "GPT-4" };
         private GUIContent TemperatureLabel = new GUIContent("Temperature", "Randomness, where 0=predictable, 1=very random.");
         private GUIContent MaxTokensLabel = new GUIContent("Max Tokens", "Max tokens to spend on request. Fewer tokens will result in shorter responses.");
         private int BottomTokenRange = 128;
 
         private Vector2 chatScrollPosition = Vector2.zero;
         private Vector2 historyScrollPosition = Vector2.zero;
-        private int gptToolbarIndex = 0;
+        //private int gptToolbarIndex = 0;
+        private TextModelName selectedModel = TextModelName.GPT_4o_mini;
         private float temperature = 0.5f;
         private int maxTokens = 1024;
         private List<Chat> chats = new List<Chat>();
@@ -69,23 +70,26 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
 
         private Model GetModel()
         {
-            return (gptToolbarIndex == 1) ? Model.GPT4_32K : Model.GPT3_5_Turbo_16K;
+            //return (gptToolbarIndex == 1) ? Model.GPT4_32K : Model.GPT3_5_Turbo_16K;
+            return OpenAI.NameToModel(selectedModel);
         }
 
-        private int GetTopTokenRange()
+        private int GetTopTokenRange(Model model)
         {
-            return (gptToolbarIndex == 1) ? 32768 : 16384;
+            return model.MaxTokens;
+            //return (gptToolbarIndex == 1) ? 32768 : 16384;
         }
 
         private void DrawChats()
         {
             GUILayout.BeginArea(new Rect(0, 0, ChatHistoryWidth, position.height), EditorStyles.helpBox);
 
-            gptToolbarIndex = GUILayout.Toolbar(gptToolbarIndex, GPTToolbarContents);
+            //gptToolbarIndex = GUILayout.Toolbar(gptToolbarIndex, GPTToolbarContents);
+            selectedModel = (TextModelName)EditorGUILayout.EnumPopup(selectedModel);
             EditorGUILayout.LabelField(TemperatureLabel);
             temperature = EditorGUILayout.Slider(temperature, 0, 1);
             EditorGUILayout.LabelField(MaxTokensLabel);
-            maxTokens = EditorGUILayout.IntSlider(maxTokens, BottomTokenRange, GetTopTokenRange());
+            maxTokens = EditorGUILayout.IntSlider(maxTokens, BottomTokenRange, GetTopTokenRange(GetModel()));
             chatScrollPosition = EditorGUILayout.BeginScrollView(chatScrollPosition);
             EditorGUI.BeginDisabledGroup(isAwaitingReply);
             if (GUILayout.Button("New Chat"))
@@ -177,7 +181,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             float progress = 0.5f, bool debug = true)
         {
             var prompt = string.IsNullOrEmpty(assistantPrompt) ? userPrompt : $"{userPrompt} {assistantPrompt}";
-            if (debug) Debug.Log($"Sending to OpenAI: {prompt}");
+            if (debug) Debug.Log($"Sending to OpenAI ({selectedModel}): {prompt}");
             try
             {
                 isAwaitingReply = true;

@@ -22,9 +22,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         private const int BottomTokenRange = 16;
         private const int DefaultMaxTokens = 1024;
 
-        protected TextModelName ModelName { get; private set; } = TextModelName.GPT3_5_Turbo_16K;
-        protected Model Model { get; private set; } = Model.GPT3_5_Turbo_16K;
-        protected bool IsChatModel => Model.ModelType == ModelType.Chat;
+        protected TextModelName ModelName { get; private set; } = TextModelName.GPT_4o_mini;
+        protected Model Model { get; private set; } = Model.GPT4o_mini;
+#if UNITY_2021_3_OR_NEWER
+        protected bool IsChatModel => Model.ModelType == ModelType.Chat || Model.Name.Contains("gpt", System.StringComparison.OrdinalIgnoreCase);
+#else
+        protected bool IsChatModel => Model.ModelType == ModelType.Chat || Model.Name.ToLower().Contains("gpt");
+#endif
         protected float Temperature { get; private set; } = DefaultTemperature;
         protected float TopP { get; private set; } = DefaultTopP;
         protected float FrequencyPenalty { get; private set; } = DefaultFrequencyPenalty;
@@ -37,28 +41,56 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         protected bool IsDialogueEntry => asset == null;
         protected bool NeedsRepaint { get; set; }
 
-        private GUIContent ModelLabel = new GUIContent("Model", "Text generation model to use.\n- GPT_4: Best for most cases but limited availability and higher cost than GPT_3_5.\n- GPT_4_32K: GPT-4 with larger context window for longer responses, but more expensive.\n- GPT_3_5_Turbo: Best for most cases. Similar performance to Davinci at 10% of the price.\nGPT_3_5_Turbo_16K: Same as GPT_3_5_Turbo but with 4x the context.\n- Davinci: Powerful model but slow. Good at complex intent and cause & effect.\n- Curie: Second most powerful model. Good at language translation.\n- Babbage: Second fastest model. Good at classification.\n- Ada: Smallest, fastest, and least expensive model, but results may be poor.");
+        private GUIContent ModelLabel = new GUIContent("Model", "Text generation model to use.\nSee https://platform.openai.com/docs/models for descriptions of models.");
+        private GUIContent FineTuneLabel = new GUIContent("Fine Tune Model", "Fine-tuned model to use.");
         private GUIContent TemperatureLabel = new GUIContent("Temperature", "Randomness, where 0=predictable, 1=very random.");
         private GUIContent TopPLabel = new GUIContent("Top P", "Alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.\nWe generally recommend altering this or temperature but not both.");
         private GUIContent FrequencyPenaltyLabel = new GUIContent("Frequency Penalty", "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.");
         private GUIContent PresencePenaltyLabel = new GUIContent("Presence Penalty", "Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.");
         private GUIContent MaxTokensLabel = new GUIContent("Max Tokens", "Max tokens to spend on request. Fewer tokens will result in shorter responses.");
         private GUIContent AssistantPromptLabel = new GUIContent("Assistant Prompt", "(Optional) Additional instructions to guide text generation.");
+        private string[] fineTunedModelNames;
 
         public TextGenerationPanel(string apiKey, DialogueDatabase database, Asset asset, DialogueEntry entry, Field field)
             : base(apiKey, database, asset, entry, field)
-        { }
+        {
+            fineTunedModelNames = DialogueSystemOpenAIWindow.fineTunedModelInfo.models.ToArray();
+        }
 
         public void DrawModelSettings()
         {
             EditorGUI.BeginChangeCheck();
             ModelName = (TextModelName)EditorGUILayout.EnumPopup(ModelLabel, ModelName);
-            if (EditorGUI.EndChangeCheck()) Model = OpenAI.NameToModel(ModelName);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Model = OpenAI.NameToModel(ModelName);
+                if (ModelName == TextModelName.FineTune) SetModelNameToFineTuneSelection();
+            }
+
+            if (ModelName == TextModelName.FineTune)
+            {
+                EditorGUI.BeginChangeCheck();
+                DialogueSystemOpenAIWindow.fineTunedModelInfo.lastIndex = EditorGUILayout.Popup(FineTuneLabel,
+                    DialogueSystemOpenAIWindow.fineTunedModelInfo.lastIndex, fineTunedModelNames);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    SetModelNameToFineTuneSelection();
+                }
+            }
+
             Temperature = EditorGUILayout.Slider(TemperatureLabel, Temperature, 0, 1);
             TopP = EditorGUILayout.Slider(TopPLabel, TopP, 0, 1);
             FrequencyPenalty = EditorGUILayout.Slider(FrequencyPenaltyLabel, FrequencyPenalty, -2, 2);
             PresencePenalty = EditorGUILayout.Slider(PresencePenaltyLabel, PresencePenalty, -2, 2);
             MaxTokens = EditorGUILayout.IntSlider(MaxTokensLabel, MaxTokens, BottomTokenRange, TopTokenRange);
+        }
+
+        protected void SetModelNameToFineTuneSelection()
+        {
+            if (ModelName != TextModelName.FineTune) return;
+            if (!(0 <= DialogueSystemOpenAIWindow.fineTunedModelInfo.lastIndex &&
+                DialogueSystemOpenAIWindow.fineTunedModelInfo.lastIndex < fineTunedModelNames.Length)) return;
+            Model.Name = fineTunedModelNames[DialogueSystemOpenAIWindow.fineTunedModelInfo.lastIndex];
         }
 
         protected void SetModelByName(TextModelName newModelName)

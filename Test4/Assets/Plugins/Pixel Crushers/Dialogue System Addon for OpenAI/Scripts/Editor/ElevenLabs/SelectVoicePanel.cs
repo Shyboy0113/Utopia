@@ -9,6 +9,9 @@ using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
 #endif
+#if USE_DEEPVOICE
+using PixelCrushers.DialogueSystem.OpenAIAddon.DeepVoice;
+#endif
 
 namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
 {
@@ -23,11 +26,21 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
         private string[] voiceNames = null;
         private int voiceIndex = -1;
         private string previewText = "Hello, world.";
+        private string voiceName;
         private bool isGeneratingAllLines = false;
+
+        // OpenAI voices:
+        private Voices openAIVoice;
+        private bool isOpenAIVoiceSelected;
 
 #if USE_OVERTONE
         private static string[] overtoneVoiceNames = null;
         private int overtoneVoiceIndex = -1;
+#endif
+
+#if USE_DEEPVOICE
+        private DeepVoiceModel deepVoiceModel = DeepVoiceModel.DeepVoice_Mono;
+        private int deepVoiceInt = 0;
 #endif
 
         private static GUIContent HeadingLabel = new GUIContent("Select Voice Actor");
@@ -35,7 +48,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
 
         protected override string Operation => "Select Voice";
         private Actor Actor => (asset is Actor) ? asset as Actor : null;
-        private bool IsVoiceSelected => voiceNames != null && (0 <= voiceIndex && voiceIndex < voiceNames.Length);
+        private bool IsElevenLabsVoiceSelected => voiceNames != null && (0 <= voiceIndex && voiceIndex < voiceNames.Length);
 
         private static AudioSequencerCommands sequencerCommand = AudioSequencerCommands.None;
         private static string otherSequencerCommand = "";
@@ -68,9 +81,14 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             Asset asset, DialogueEntry entry, Field field)
             : base(apiKey, database, asset, entry, field)
         {
-            RefreshVoiceList();
+            RetrieveOpenAIVoice();
+            RefreshElevenLabsVoiceList();
 #if USE_OVERTONE
             overtoneVoiceIndex = GetOvertoneVoiceIndex();
+#endif
+#if USE_DEEPVOICE
+            deepVoiceModel = GetDeepVoiceModel();
+            deepVoiceInt = GetDeepVoiceInt();
 #endif
         }
 
@@ -83,54 +101,143 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
         {
             base.Draw();
             DrawHeading(HeadingLabel, "Select an ElevenLabs voice actor.");
-            DrawVoiceActorDropdown();
-            DrawPreviewButton();
-            DrawAcceptButton();
-            DrawGenerateAllLinesButton();
+
+            EditorGUI.BeginDisabledGroup(IsAwaitingReply && !isGeneratingAllLines);
+            previewText = EditorGUILayout.TextField("Preview Text", previewText);
+            DrawSequencerCommandSection();
+            GUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawOpenAISection();
+            GUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawElevenLabsSection();
 #if USE_OVERTONE
+            GUILayout.Space(EditorGUIUtility.singleLineHeight);
             DrawOvertoneSection();
 #endif
+#if USE_DEEPVOICE
+            GUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawDeepVoiceSection();
+#endif
+            EditorGUI.EndDisabledGroup();
+            DrawStatus();
+            if (isGeneratingAllLines && GUILayout.Button("Cancel")) CancelGenerateAllLines();
         }
 
-        private void DrawVoiceActorDropdown()
+        #region OpenAI Voice
+
+        private void RetrieveOpenAIVoice()
         {
-            if (IsAwaitingReply && !isGeneratingAllLines)
+            var voice = Actor.LookupValue(DialogueSystemFields.Voice);
+            isOpenAIVoiceSelected = Actor.LookupValue(DialogueSystemFields.VoiceID) == "OpenAI";
+            System.Enum.TryParse<Voices>(voice, out openAIVoice);
+        }
+
+        private void DrawOpenAISection()
+        {
+            EditorGUILayout.LabelField("OpenAI Voices", EditorStyles.boldLabel);
+            EditorGUI.BeginDisabledGroup(IsAwaitingReply);
+            EditorGUILayout.BeginHorizontal();
+            openAIVoice = (Voices)EditorGUILayout.EnumPopup("OpenAI Actor", openAIVoice);
+            if (GUILayout.Button("Preview", GUILayout.Width(60)))
             {
-                DrawStatus();
+                PreviewSelectedOpenAIVoice();
             }
-            else if (voiceNames == null)
+            EditorGUILayout.EndHorizontal();
+            EditorGUI.EndDisabledGroup();
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Accept"))
+            {
+                Field.SetValue(Actor.fields, DialogueSystemFields.Voice, openAIVoice.ToString());
+                Field.SetValue(Actor.fields, DialogueSystemFields.VoiceID, "OpenAI");
+                RefreshEditor();
+                CloseWindow();
+            }
+            if (GUILayout.Button("Generate All Lines"))
+            {
+                if (EditorUtility.DisplayDialog("Generate All Lines (OpenAI)",
+                        "This may take a long time to complete. Proceed?", "OK", "Cancel"))
+                {
+                    path = EditorUtility.OpenFolderPanel("Generate All Lines", path, "");
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        GenerateAllOpenAILines();
+                    }
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private void PreviewSelectedOpenAIVoice()
+        {
+            DestroyAudioClip();
+            IsAwaitingReply = true;
+            ProgressText = $"Retrieving preview sample for {openAIVoice}.";
+            OpenAI.SubmitVoiceGenerationAsync(openAIKey, TTSModel.TTSModel1HD, openAIVoice,
+                VoiceOutputFormat.MP3, 1, previewText, OnReceivedOpenAITextToSpeech);
+        }
+
+        private void OnReceivedOpenAITextToSpeech(AudioClip audioClip, byte[] bytes)
+        {
+            IsAwaitingReply = false;
+            if (audioClip == null) return;
+            this.audioClip = audioClip;
+            Debug.Log($"Playing voice sample for {openAIVoice}.");
+            EditorAudioUtility.PlayAudioClip(audioClip);
+            Repaint();
+        }
+
+        private void GenerateAllOpenAILines()
+        {
+            GenerateAllLines();
+        }
+
+        #endregion
+
+        #region ElevenLabs
+
+        private void DrawElevenLabsSection()
+        {
+            if (IsAwaitingReply && !isGeneratingAllLines) return;
+            EditorGUILayout.LabelField("ElevenLabs Voices", EditorStyles.boldLabel);
+            if (voiceNames == null)
             {
                 EditorGUILayout.HelpBox("Error retrieving voice actor list.", MessageType.Warning);
             }
             else
             {
-                voiceIndex = EditorGUILayout.Popup("Voice Actor", voiceIndex, voiceNames);
-            }
-        }
-
-        private void DrawPreviewButton()
-        {
-            if (IsVoiceSelected)
-            {
+                EditorGUI.BeginDisabledGroup(IsAwaitingReply);
                 EditorGUILayout.BeginHorizontal();
-                previewText = EditorGUILayout.TextField("Preview Text", previewText);
+                voiceIndex = EditorGUILayout.Popup("ElevenLabs Actor", voiceIndex, voiceNames);
                 if (GUILayout.Button("Preview", GUILayout.Width(60)))
                 {
-                    PreviewSelectedVoice();
+                    PreviewSelectedElevenLabsVoice();
                 }
                 EditorGUILayout.EndHorizontal();
+                EditorGUI.EndDisabledGroup();
             }
-            if (IsAwaitingReply) return;
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUI.BeginDisabledGroup(!(Actor != null && IsElevenLabsVoiceSelected));
+            if (GUILayout.Button("Accept"))
+            {
+                Field.SetValue(Actor.fields, DialogueSystemFields.Voice, voiceList.voices[voiceIndex].name);
+                Field.SetValue(Actor.fields, DialogueSystemFields.VoiceID, voiceList.voices[voiceIndex].voice_id);
+                RefreshEditor();
+                CloseWindow();
+            }
+            EditorGUI.EndDisabledGroup();
+            DrawGenerateAllLinesButton();
+            EditorGUILayout.EndHorizontal();
         }
 
-        private void RefreshVoiceList()
+        private void RefreshElevenLabsVoiceList()
         {
             IsAwaitingReply = true;
             ProgressText = "Retrieving ElevenLabs voice list.";
-            ElevenLabs.GetVoiceList(apiKey, OnReceivedVoiceList);
+            ElevenLabs.GetVoiceList(apiKey, OnReceivedElevenLabsVoiceList);
         }
 
-        private void OnReceivedVoiceList(VoiceList voiceList)
+        private void OnReceivedElevenLabsVoiceList(VoiceList voiceList)
         {
             IsAwaitingReply = false;
             this.voiceList = voiceList;
@@ -151,7 +258,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             Repaint();
         }
 
-        private void PreviewSelectedVoice()
+        private void PreviewSelectedElevenLabsVoice()
         {
             DestroyAudioClip();
             if (!(0 <= voiceIndex && voiceIndex < voiceList.voices.Count)) return;
@@ -161,6 +268,10 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             ElevenLabs.GetTextToSpeech(apiKey, modelId, voiceData.name, voiceData.voice_id, 0, 0, previewText, OnReceivedTextToSpeech);
         }
 
+        #endregion
+
+        #region Shared
+
         private void OnReceivedTextToSpeech(AudioClip audioClip)
         {
             IsAwaitingReply = false;
@@ -168,39 +279,24 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
             this.audioClip = audioClip;
             Debug.Log($"Playing voice sample for {voiceNames[voiceIndex]}.");
             EditorAudioUtility.PlayAudioClip(audioClip);
+            Repaint();
         }
 
-        private void DrawAcceptButton()
-        {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUI.BeginDisabledGroup(!(Actor != null && IsVoiceSelected));
-            if (GUILayout.Button("Accept"))
-            {
-                Field.SetValue(Actor.fields, DialogueSystemFields.Voice, voiceList.voices[voiceIndex].name);
-                Field.SetValue(Actor.fields, DialogueSystemFields.VoiceID, voiceList.voices[voiceIndex].voice_id);
-                RefreshEditor();
-                CloseWindow();
-            }
-            EditorGUI.EndDisabledGroup();
-
-            if (GUILayout.Button("Cancel"))
-            {
-                CloseWindow();
-            }
-            EditorGUILayout.EndHorizontal();
-        }
+        #endregion
 
         #region Generate All Lines
 
-        private void DrawGenerateAllLinesButton()
+        private void DrawSequencerCommandSection()
         {
-            GUILayout.Space(EditorGUIUtility.singleLineHeight);
-            GUILayout.Label("Generate All Lines", EditorStyles.boldLabel);
             sequencerCommand = (AudioSequencerCommands)EditorGUILayout.EnumPopup(GenerateVoicePanel.SequencerCommandLabel, sequencerCommand);
             if (sequencerCommand == AudioSequencerCommands.Other)
             {
                 otherSequencerCommand = EditorGUILayout.TextField("Command", otherSequencerCommand);
             }
+        }
+
+        private void DrawGenerateAllLinesButton()
+        {
             var needToInputSequencerCommand = sequencerCommand == AudioSequencerCommands.Other && string.IsNullOrEmpty(otherSequencerCommand);
             EditorGUI.BeginDisabledGroup(IsAwaitingReply || needToInputSequencerCommand || Actor == null || voiceIndex == -1);
             if (GUILayout.Button(GenerateAllLinesLabel))
@@ -216,14 +312,6 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 }
             }
             EditorGUI.EndDisabledGroup();
-            if (isGeneratingAllLines)
-            {
-                DrawStatus();
-                if (GUILayout.Button("Cancel"))
-                {
-                    CancelGenerateAllLines();
-                }
-            }
         }
 
         private void GenerateAllLines()
@@ -262,10 +350,20 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 var job = voiceGenerationQueue.Dequeue();
                 currentJob = job;
                 float progress = (float)job.entryQueueNum / (float)totalEntryQueueSize;
-                ProgressText = $"[{progress}%] {job.description}: {job.text}";
+                if (isOpenAIVoiceSelected)
+                {
+                    ProgressText = $"[{progress}%] OpenAI: {job.description}: {job.text}";
+                    OpenAI.SubmitVoiceGenerationAsync(openAIKey, TTSModel.TTSModel1HD, openAIVoice,
+                        VoiceOutputFormat.MP3, 1, job.text, OnReceivedLine);
+                }
+                else
+                {
+                    ProgressText = $"[{progress}%] ElevenLabs: {job.description}: {job.text}";
+                    var voiceData = voiceList.voices[voiceIndex];
+                    ElevenLabs.GetTextToSpeech(apiKey, modelId, voiceData.name, voiceData.voice_id, 0, 0,
+                        job.text, OnReceivedLine);
+                }
                 Debug.Log(ProgressText);
-                var voiceData = voiceList.voices[voiceIndex];
-                ElevenLabs.GetTextToSpeech(apiKey, modelId, voiceData.name, voiceData.voice_id, 0, 0, job.text, OnReceivedLine);
             }
             else
             {
@@ -281,7 +379,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 try
                 {
                     var filename = SaveAudioClip(audioClip);
-                    GenerateVoicePanel.AddSelectedSequencerCommand(sequencerCommand, System.IO.Path.GetFileNameWithoutExtension(filename), currentJob.entry);
+                    GenerateVoicePanel.AddSelectedSequencerCommand(sequencerCommand, System.IO.Path.GetFileNameWithoutExtension(filename), database, currentJob.entry);
                 }
                 catch (System.Exception e)
                 {
@@ -374,6 +472,7 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 CloseWindow();
             }
             EditorGUI.EndDisabledGroup();
+            DrawGenerateAllLinesButton();
             EditorGUILayout.EndHorizontal();
         }
 
@@ -435,6 +534,59 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon.ElevenLabs
                 }
                 return -1;
             }
+        }
+
+#endif
+
+        #endregion
+
+        #region DeepVoice
+
+#if USE_DEEPVOICE
+
+        private DeepVoiceModel GetDeepVoiceModel()
+        {
+            var modelName = Field.LookupValue(Actor.fields, DialogueSystemFields.VoiceID);
+            return DeepVoiceAPI.GetDeepVoiceModel(modelName);
+        }
+
+        private int GetDeepVoiceInt()
+        {
+            string actorVoice = Field.LookupValue(Actor.fields, DialogueSystemFields.Voice);
+            return DeepVoiceAPI.GetDeepVoiceInt(deepVoiceModel, actorVoice);
+        }
+
+        private static GUIContent DeepVoiceHeading = new GUIContent("DeepVoice");
+
+        private void DrawDeepVoiceSection()
+        {
+            GUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawHeading(DeepVoiceHeading, "Select a DeepVoice actor.");
+            deepVoiceModel = (DeepVoiceModel)EditorGUILayout.EnumPopup("Model", deepVoiceModel);
+            switch (deepVoiceModel)
+            {
+                case DeepVoiceModel.DeepVoice_Standard:
+                    deepVoiceInt = (int)(DeepVoiceStandard)EditorGUILayout.EnumPopup("Voice", (DeepVoiceStandard)deepVoiceInt);
+                    break;
+                case DeepVoiceModel.DeepVoice_Neural:
+                    deepVoiceInt = (int)(DeepVoiceNeural)EditorGUILayout.EnumPopup("Voice", (DeepVoiceNeural)deepVoiceInt);
+                    break;
+                default:
+                    deepVoiceInt = (int)(DeepVoiceMonoMulti)EditorGUILayout.EnumPopup("Voice", (DeepVoiceMonoMulti)deepVoiceInt);
+                    break;
+            }
+            EditorGUILayout.BeginHorizontal();
+            EditorGUI.BeginDisabledGroup(deepVoiceInt == -1);
+            if (GUILayout.Button("Accept"))
+            {
+                Field.SetValue(Actor.fields, DialogueSystemFields.VoiceID, deepVoiceModel.ToString());
+                Field.SetValue(Actor.fields, DialogueSystemFields.Voice, DeepVoiceAPI.DeepVoiceIntToName(deepVoiceModel, deepVoiceInt));
+                RefreshEditor();
+                CloseWindow();
+            }
+            EditorGUI.EndDisabledGroup();
+            DrawGenerateAllLinesButton();
+            EditorGUILayout.EndHorizontal();
         }
 
 #endif

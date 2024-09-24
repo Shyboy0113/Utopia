@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using PixelCrushers.DialogueSystem.DialogueEditor;
-using PixelCrushers.DialogueSystem.OpenAIAddon.DialogueSmith;
 
 namespace PixelCrushers.DialogueSystem.OpenAIAddon
 {
@@ -23,7 +22,9 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         public const string OpenAIKey = "PixelCrushers.OpenAIKey"; // OpenAI API key stored in EditorPrefs.
         public const string ElevenLabsKey = "PixelCrushers.ElevenLabsKey"; // ElevenLabs API key stored in EditorPrefs.
         public const string ElevenLabsModel = "PixelCrushers.ElevenLabsModel"; // ElevenLabs model stored in EditorPrefs.
-        public const string DialogueSmithKey = "PixelCrushers.DialogueSmithKey"; // Dialogue Smith API key stored in EditorPrefs.
+        public const string ElevenLabsLastFilename = "PixelCrushers.ElevenLabsLastFolder"; // Last ElevenLabs folder used for saves stored in EditorPrefs.
+        public const string TextTableAssetGuid = "PixelCrushers.OpenAI.TextTableGuid"; // Guid for most recently-selected text table.
+        public const string FineTuneInfoKey = "PixelCrushers.OpenAI.FineTuneInfo"; // Info on custom fine-tuned models.
 
         [MenuItem("Tools/Pixel Crushers/Dialogue System/Addon for OpenAI/Main Window")]
         public static void OpenMain()
@@ -38,7 +39,6 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             // Open connection to OpenAI:
             var apiKey = EditorPrefs.GetString(OpenAIKey);
             var elevenLabsKey = EditorPrefs.GetString(ElevenLabsKey);
-            var dialogueSmithKey = EditorPrefs.GetString(DialogueSmithKey);
 
             if (!OpenAI.IsApiKeyValid(apiKey))
             {
@@ -51,13 +51,13 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
             }
             else
             {
-                window.panel = GetPanel(request, apiKey, elevenLabsKey, dialogueSmithKey, database, asset, entry, field);
+                window.panel = GetPanel(request, apiKey, elevenLabsKey, database, asset, entry, field);
             }
             window.scrollPosition = Vector2.zero;
         }
 
-        private static BasePanel GetPanel(AIRequestType request, string apiKey, string elevenLabsKey, string dialogueSmithKey,
-            DialogueDatabase database, Asset asset, DialogueEntry entry, Field field)
+        private static BasePanel GetPanel(AIRequestType request, string apiKey, string elevenLabsKey, 
+            DialogueDatabase database, Asset asset, DialogueEntry entry, Field field, TextTable textTable = null)
         {
             switch (request)
             {
@@ -76,8 +76,12 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                     return new TranslateFieldPanel(apiKey, database, asset, entry, field);
                 case AIRequestType.LocalizeDatabase:
                     return new TranslateDatabasePanel(apiKey, database);
+                case AIRequestType.LocalizeTextTable:
+                    return new TranslateTextTablePanel(apiKey, textTable);
                 case AIRequestType.Freeform:
                     return new FreeformChatPanel(apiKey, database);
+                case AIRequestType.FineTunedModels:
+                    return new FineTunedModelsPanel(apiKey, database);
 
                 case AIRequestType.SelectVoice:
                     return new ElevenLabs.SelectVoicePanel(elevenLabsKey, database, asset, entry, field);
@@ -89,9 +93,11 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
                     else return new GeneralPanel(apiKey, database);
 
                 case AIRequestType.BranchingDialogue:
-                    return new BranchingDialoguePanel(dialogueSmithKey, database, asset as Conversation);
+                    return new BranchingDialoguePanel(apiKey, database, asset as Conversation);
             }
         }
+
+        public static FineTunedModelInfo fineTunedModelInfo;
 
         private static Vector2 MinWindowSize = new Vector2(400, 400);
 
@@ -103,11 +109,16 @@ namespace PixelCrushers.DialogueSystem.OpenAIAddon
         {
             Instance = this;
             minSize = MinWindowSize;
+            fineTunedModelInfo = EditorPrefs.HasKey(FineTuneInfoKey) 
+                ? JsonUtility.FromJson<FineTunedModelInfo>(EditorPrefs.GetString(FineTuneInfoKey))
+                : new FineTunedModelInfo();
+            if (fineTunedModelInfo == null) fineTunedModelInfo= new FineTunedModelInfo();
         }
 
         private void OnDisable()
         {
             Instance = null;
+            EditorPrefs.SetString(FineTuneInfoKey, JsonUtility.ToJson(fineTunedModelInfo));
         }
 
         private void OnGUI()

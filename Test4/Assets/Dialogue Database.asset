@@ -481,10 +481,10 @@ MonoBehaviour:
     spritePortrait: {fileID: 0}
     alternatePortraits: []
     spritePortraits: []
-  - id: 14
+  - id: 19
     fields:
     - title: Name
-      value: "\uC2DC\uAC00"
+      value: ???
       type: 0
       typeString: CustomFieldType_Text
     - title: Pictures
@@ -492,109 +492,9 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: IsPlayer
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Guid
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Display Name
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Display Name ko
-      value: 
-      type: 4
-      typeString: CustomFieldType_Localization
-    portrait: {fileID: 0}
-    spritePortrait: {fileID: 0}
-    alternatePortraits: []
-    spritePortraits: []
-  - id: 15
-    fields:
-    - title: Name
-      value: "\uC2DC\uAC00."
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Pictures
-      value: '[]'
-      type: 3
-      typeString: CustomFieldType_Files
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: IsPlayer
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Guid
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Display Name
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Display Name ko
-      value: 
-      type: 4
-      typeString: CustomFieldType_Localization
-    portrait: {fileID: 0}
-    spritePortrait: {fileID: 0}
-    alternatePortraits: []
-    spritePortraits: []
-  - id: 16
-    fields:
-    - title: Name
-      value: "\uC2DC\uAC00.."
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Pictures
-      value: '[]'
-      type: 3
-      typeString: CustomFieldType_Files
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: IsPlayer
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Guid
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Display Name
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Display Name ko
-      value: 
-      type: 4
-      typeString: CustomFieldType_Localization
-    portrait: {fileID: 0}
-    spritePortrait: {fileID: 0}
-    alternatePortraits: []
-    spritePortraits: []
-  - id: 17
-    fields:
-    - title: Name
-      value: Catt
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Pictures
-      value: '[]'
-      type: 3
-      typeString: CustomFieldType_Files
-    - title: Description
-      value: "\uC57C\uC639~"
+      value: "\uD29C\uD1A0\uB9AC\uC5BC\uC5D0\uC11C \uB9CC\uB098\uB294 \uBD89\uC740
+        \uBA38\uB9AC\uC758 \uC18C\uB140. \uADC0\uC5EC\uC6B4 \uACF0\uC778\uD615\uC744
+        \uB4E4\uACE0 \uC788\uB2E4."
       type: 0
       typeString: CustomFieldType_Text
     - title: IsPlayer
@@ -620,7 +520,7 @@ MonoBehaviour:
   - id: 18
     fields:
     - title: Name
-      value: 
+      value: "\uBD89\uC740 \uB9C8\uB140"
       type: 0
       typeString: CustomFieldType_Text
     - title: Pictures
@@ -628,7 +528,9 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: 
+      value: "\uC9C0\uD558 \uC131\uB2F9\uC5D0 \uBD09\uC778\uB3FC\uC788\uB294 \uC218\uC0C1\uD55C
+        \uC18C\uB140\uC774\uB2E4. \uC8FC\uC778\uACF5\uACFC \uC0DD\uAE40\uC0C8\uAC00
+        \uB611\uAC19\uB2E4."
       type: 0
       typeString: CustomFieldType_Text
     - title: IsPlayer
@@ -16541,8 +16443,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1228.2085}
-    canvasZoom: 0.64000064
+    canvasScrollPosition: {x: 26.358448, y: 959.59686}
+    canvasZoom: 0.5500007
   - id: 14
     fields:
     - title: Title
