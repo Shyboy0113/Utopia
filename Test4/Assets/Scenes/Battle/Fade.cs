@@ -16,7 +16,7 @@ public class Fade : MonoBehaviour
 
     private void Start()
     {
-        FadeIn();
+        //FadeIn();
     }
 
     public void FadeIn()

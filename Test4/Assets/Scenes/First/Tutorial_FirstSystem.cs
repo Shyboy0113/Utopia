@@ -29,8 +29,6 @@ public class Tutorial_FirstSystem : MonoBehaviour
     private void Start()
     {
         fade.fadeTime = waitingTime;
-
-        StartCoroutine(AppearCharacter());
     }
 
     private void Update()
@@ -38,8 +36,14 @@ public class Tutorial_FirstSystem : MonoBehaviour
         Camera.main.transform.position = cameraPos[(int)(_heroTransform.position.x +10) /20];
     }
 
+    public void StartAppearCharacter()
+    {
+        StartCoroutine(AppearCharacter());
+    }
     private IEnumerator AppearCharacter()
     {
+        fade.FadeIn();
+
         yield return new WaitForSeconds(waitingTime);
 
         dummyAnimator.SetTrigger("WakeUp");
