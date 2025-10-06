@@ -11,7 +11,7 @@ public class ManagerStarter : MonoBehaviour
 
     void Awake()
     {
-        GameManager.Instance.isPause = false;
+        GameManager.Instance.IsPaused = false;
     }
 
     private void Start()
@@ -23,11 +23,10 @@ public class ManagerStarter : MonoBehaviour
 
     public void Pause()
     {
-        GameManager.Instance.isStory = true;
-    }
+        GameManager.Instance.IsStory = true;    }
     public void Release()
     {
-        GameManager.Instance.isStory = false;
+        GameManager.Instance.IsStory = false;
     }
 
     private void OnDestroy()

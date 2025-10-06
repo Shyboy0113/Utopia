@@ -1,155 +1,164 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using PixelCrushers.DialogueSystem.UnityGUI.Wrappers;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    //체력 관련
-    public int _playerHp;
-    public int MaxHp = 3;
-    
-    //스태미나 관련
-    public float _playerStamina;
-    public float _staminaMax = 5.0f;
-    private float _staminaVector = 1f;
+    [Header("Player Stats")]
+    [SerializeField] private int maxHp = 3;
+    [SerializeField] private float staminaMax = 5f;
+    [SerializeField] private float staminaRecoverRate = 1f;
 
-    //게임 플레이 도중 참고할 데이터들
+    private int playerHp;
+    private float playerStamina;
+    private float staminaDelta = 1f;
+
+    [Header("Inventory / Status")]
     public int HpPotion = 0;
     public int Gold = 0;
-
-    //포션 중독 관련 게이지
     public float PotionAddiction = 0f;
-    
-    //Guard(경계 자세) 이벤트
-    public UnityEvent OnGuardPostureActivated;
-    public UnityEvent OnGuardPostureDeactivated;
 
-    //스토리 및 컷신 연출 중일 때
-    public bool isStory = false;
-    //일시 정지
-    public bool isPause = false;
+    public bool IsStory;
+    public bool IsPaused;
+    public bool IsGroggy;
+
+    [Header("Events")]
+    public UnityEvent OnGuardPostureActivated = new();
+    public UnityEvent OnGuardPostureDeactivated = new();
+    public UnityEvent OnPauseStateChanged = new();
+
+    private MoveCharacter player;
 
     private void Start()
     {
-        _playerHp = MaxHp;
-        _playerStamina = _staminaMax;
+        playerHp = maxHp;
+        playerStamina = staminaMax;
 
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.GetComponent<MoveCharacter>();
     }
 
     private void Update()
     {
-        if (!isStory)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (isPause is false) PauseGame();
-                else ResumeGame();
+        if (IsStory) return;
 
-            }
-            else if (Input.GetKeyDown(KeyCode.R))
-            {
-                //RestartGame();
-            }
-
-            if (!isPause){
-
-                if (Input.GetKeyDown(KeyCode.LeftShift) && !MoveCharacter.isGroggy)
-                {
-                    _staminaVector *= -5f;
-                    Time.timeScale = 0.2f;
-                }
-                else if (Input.GetKeyUp(KeyCode.LeftShift) && !MoveCharacter.isGroggy)
-                {
-                    _staminaVector = 1.0f;
-                    Time.timeScale = 1.0f;
-                }
-            }
-
-        }
-
-        //스태미나 채움 관련 이벤트
-        _playerStamina += _staminaVector * Time.deltaTime;
-        if (_playerStamina >= _staminaMax) _playerStamina = _staminaMax;
-        
-        if (_playerStamina <= 0 && !MoveCharacter.isGroggy) {
-            
-            StartCoroutine(GroggyCoroutine(3f));
-            var player = GameObject.FindGameObjectWithTag("Player");
-            var moveCharacter = player.GetComponent<MoveCharacter>();
-            if (moveCharacter is not null)
-            {
-                moveCharacter.StartCoroutine(moveCharacter.StartGroggy(3f));
-            }
-
-            _playerStamina = 0.00000000001f;
-
-        }
-        
-        //포션 중독 관련 게이지
-        if (PotionAddiction >= 5.0f)
-        {
-            Debug.Log("포션에 중독되었다.");
-        } 
-
+        HandlePauseInput();
+        HandleGuardInput();
+        UpdateStamina();
+        CheckPotionAddiction();
     }
-    
-    private IEnumerator GroggyCoroutine(float duration)
+
+    #region 🕹 Input Handling
+    private void HandlePauseInput()
     {
-        _staminaVector = 0.0f;
-        Time.timeScale = 1.0f;
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+        if (IsPaused) ResumeGame();
+        else PauseGame();
+    }
+
+    private void HandleGuardInput()
+    {
+        if (IsPaused || IsGroggy) return;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            staminaDelta = -5f;
+            Time.timeScale = 0.2f;
+            OnGuardPostureActivated.Invoke();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            staminaDelta = 1f;
+            Time.timeScale = 1f;
+            OnGuardPostureDeactivated.Invoke();
+        }
+    }
+    #endregion
+
+    #region 💪 Stamina / Groggy
+    private void UpdateStamina()
+    {
+        playerStamina = Mathf.Clamp(playerStamina + staminaDelta * Time.deltaTime, 0f, staminaMax);
+
+        if (playerStamina <= 0f && !IsGroggy)
+            StartCoroutine(StartGroggy(3f));
+    }
+
+    private IEnumerator StartGroggy(float duration)
+    {
+        IsGroggy = true;
+        staminaDelta = 0f;
+        Time.timeScale = 1f;
+        OnGuardPostureDeactivated.Invoke();
+
+        if (player != null)
+            player.StartCoroutine(player.StartGroggy(duration));
 
         yield return new WaitForSeconds(duration);
 
-        // After the specified duration, set isGroggy to false and play idle animation
-        MoveCharacter.isGroggy = false;
-        _staminaVector = 1.0f;
-        
+        IsGroggy = false;
+        staminaDelta = 1f;
     }
-    
-    public void ChangeStoryState()
-    {
-        isStory = !isStory;
-    }
-   
+    #endregion
 
+    #region ⚗ Potion / Story
+    private void CheckPotionAddiction()
+    {
+        if (PotionAddiction >= 5f)
+        {
+            Debug.LogWarning("⚠ 포션 중독 상태입니다!");
+        }
+    }
+
+    public void ToggleStoryMode()
+    {
+        IsStory = !IsStory;
+    }
+    #endregion
+
+    #region ⏸ Pause / Resume
     public void PauseGame()
     {
-        Time.timeScale = 0;
-        isPause = !isPause;
+        IsPaused = true;
+        Time.timeScale = 0f;
 
-        UIManager.Instance.ActivatePauseMenu(isPause);
+        UIManager.Instance?.ActivatePauseMenu(true);
+        OnPauseStateChanged.Invoke();
     }
 
     public void ResumeGame()
     {
-        isPause = false;
-        Time.timeScale = 1;
-        
-        UIManager.Instance.ActivatePauseMenu(isPause);
+        IsPaused = false;
+        Time.timeScale = 1f;
+
+        UIManager.Instance?.ActivatePauseMenu(false);
+        OnPauseStateChanged.Invoke();
     }
-    
-    //치명적인 버그 나왔을 때 진행
+    #endregion
+
+    #region 🔁 Scene / App Control
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
 
     public void GoToTitle()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Title");
     }
 
     public void QuitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
-    
-    
-    
+    #endregion
 }
