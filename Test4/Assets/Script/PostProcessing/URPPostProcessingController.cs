@@ -12,6 +12,9 @@ public class URPPostProcessingController : MonoBehaviour
     public Volume postProcessingVolume;
 
     private Vignette _vignette;
+    
+    [Header("Intensity")]
+    [SerializeField] private float settingIntensity;
 
     private float currentIntensity = 0f;
     private float _duration = 0.01f;
@@ -28,13 +31,6 @@ public class URPPostProcessingController : MonoBehaviour
 
         GameManager.Instance.OnGuardPostureActivated.AddListener(EnablePostProcessing);
         GameManager.Instance.OnGuardPostureDeactivated.AddListener(DisablePostProcessing);
-    }
-
-
-    public void SetVignette()
-    {
-        _vignette.intensity.value = 0.5f;
-
     }
 
     private void EnablePostProcessing()
@@ -77,7 +73,7 @@ public class URPPostProcessingController : MonoBehaviour
         {
             currentIntensity = _vignette.intensity.value;
 
-            float targetIntensity = 0.5f;
+            float targetIntensity = settingIntensity;
 
             while (timer <= duration)
             {
