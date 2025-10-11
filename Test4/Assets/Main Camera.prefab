@@ -48,7 +48,7 @@ MonoBehaviour:
   priority: 2
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: d9938cc84153c6244bae46d6f0380f7e, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 4445df1634f09bc4da1453c53104e2bf, type: 2}
 --- !u!1 &1804956132
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 888888447708242841}
   - component: {fileID: 642085613}
   - component: {fileID: 642085625}
-  - component: {fileID: 642085626}
+  - component: {fileID: 1349267343}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,46 +256,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeVolume: {fileID: 1804956134}
-  intensityByHour:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  colorByHour:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
+  blendWindowHours: 1
+  tintStrength: 0.8
   nightNavy: {r: 0.23137255, g: 0.24705882, b: 0.4392157, a: 1}
   peach: {r: 0.91764706, g: 0.7490196, b: 0.6156863, a: 1}
   orange: {r: 0.8666667, g: 0.41568628, b: 0.11764706, a: 1}
   red: {r: 0.64705884, g: 0.20784314, b: 0.20784314, a: 1}
---- !u!114 &642085626
+--- !u!114 &1349267343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,8 +271,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 888888447708242837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60c297374616bf4e9669c0c89649c63, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e23b9e1eea654f4dbb0eff1afe41e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guardVolume: {fileID: 0}
-  fadeTime: 0.1
+  postProcessingVolume: {fileID: 321245826}
+  settingIntensity: 0.5

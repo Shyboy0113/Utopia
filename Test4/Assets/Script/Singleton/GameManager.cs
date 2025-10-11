@@ -79,6 +79,17 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 💪 Stamina / Groggy
+
+    public float ReturnStamina()
+    {
+        return playerStamina;
+    }
+
+    public float ReturnMaxStamina()
+    {
+        return staminaMax;
+    }
+
     private void UpdateStamina()
     {
         playerStamina = Mathf.Clamp(playerStamina + staminaDelta * Time.deltaTime, 0f, staminaMax);
